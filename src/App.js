@@ -1,16 +1,28 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Home from "./Pages/home";
+import Login from "./Pages/login";
+import TimeSheet from "./Pages/timesheet";
+import Reports from "./Pages/report";
+import Profile from "./Pages/Profile";
+import Nav from "./components/NavBar/Navbar";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
-// This this the main component.
-// Any other component will have to be imported
-// from the components directory.
+// The router routes to specfic components
 
 
 function App() {
   return (
-    <div className="App">
-    
-    </div>
+    <Router>
+      <div className="main-container">
+        <Nav />
+        <Route path="/" exact component={Login} />
+        <Route path="/home" component={Home} />
+        <Route path="/timesheet" component={TimeSheet} />
+        <Route path="/report" component={Reports} />
+        <Route path="/profile" exact component={Profile} />
+      </div>
+    </Router>
   );
 }
 
