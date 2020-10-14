@@ -31,20 +31,24 @@ function Navbar() {
               onClick={navHandle}
             />
           </div>
+
           <li className="li-item">
-            <a href="/home">Home</a>
+            <Link to="/home" style={{ textDecoration: "none" }}>
+              Home
+            </Link>
+          </li>
+
+          <li className="li-item">
+            <Link href="/timesheet">Time Sheet</Link>
           </li>
           <li className="li-item">
-            <a href="/timesheet">Time Sheet</a>
+            <Link href="/report">Report</Link>
           </li>
           <li className="li-item">
-            <a href="/report">Report</a>
+            <Link href="/profile">Profile</Link>
           </li>
           <li className="li-item">
-            <a href="/profile">Profile</a>
-          </li>
-          <li className="li-item">
-            <a href="/">Sign Out</a>
+            <Link href="/">Sign Out</Link>
           </li>
         </ul>
       </nav>
