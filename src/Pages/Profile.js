@@ -1,11 +1,11 @@
 import React from 'react'
 
-function settings() {
+function Profile() {
     return (
         <div id="main-container">
-            <h1>Settings page</h1>
+            <h1>Profile page</h1>
         </div>
     )
 }
 
-export default settings
+export default Profile

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function timesheet() {
+function Timesheet() {
     return (
         <div id="main-container">
             <h1>Timesheet page</h1>
@@ -8,4 +8,4 @@ function timesheet() {
     )
 }
 
-export default timesheet
+export default Timesheet

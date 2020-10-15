@@ -1,69 +1,94 @@
-nav{
+nav {
     width: 200px;
     min-width: 200px;
     height: 100vh;
     background-color: #001233;
 }
 
-ul{
+.ul-nav {
     display: flex;
     flex-direction: column;
 }
 
-ul li{
+.li-item {
     list-style: none;
     padding: 30px 35px;
 }
 
-li a{
+.nav-link {
     text-decoration: none;
     font-size: 20px;
-    letter-spacing: 1px;  
+    letter-spacing: 1px;
     color: white;
 }
 
-
 /* Responsive menu */
-.icon{
-    display: flex;
-    flex-direction: column;
-
-}
-
-.icon-menu{
-    background-color: #001233;
-    width: 100%;
-}
-
-.active{
+.icon {
     display: none;
 }
 
-.icon-stack{
-    padding: 30px;
-    cursor: pointer;
+.icon-menu {
+    display: none;
 }
 
-.icon{
-    padding: 30px;
-    cursor: pointer;
+.icon-stack {
+    display: none;
 }
 
-.menu-close{
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 200px;
-    height: 100vh;
-    background-color: #001233;
-    transition: 800ms;
-    transform: translate(-200px);
+.icon {
+    display: none;
 }
 
-.nav-menu-active{
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translateX(0px);
-    transition: 400ms;
+.menu-close {
+    display: none;
+}
+
+.nav-menu-active {
+    display: none;
+}
+
+@media (max-width: 1030px) {
+    .icon {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .icon-menu {
+        display: block;
+        background-color: #001233;
+        width: 100%;
+    }
+
+    .icon-stack {
+        display: block;
+        padding: 30px;
+        cursor: pointer;
+    }
+
+    .icon {
+        display: block;
+        padding: 30px;
+        cursor: pointer;
+    }
+
+    .menu-close {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 200px;
+        height: 100vh;
+        background-color: #001233;
+        transition: 800ms;
+        transform: translate(-200px);
+    }
+
+    .nav-menu-active {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(0px);
+        transition: 400ms;
+    }
 }

@@ -12,6 +12,8 @@ function Navbar() {
     setNavIcon(!navIcon);
   };
 
+
+
   return (
     <IconContext.Provider value={{ color: "white", size: "30px" }}>
       <div className="icon-menu">
@@ -22,8 +24,8 @@ function Navbar() {
         />
       </div>
 
-      <nav className={navIcon ? "nav-menu-active" : "menu-close"}>
-        <ul>
+      <nav id="m-nav d-nav" className={navIcon ? "nav-menu-active" : "menu-close"}>
+        <ul className="ul-nav">
           <div className="icon">
             <RiCloseLine
               className="icon-exit icon-open"
@@ -33,22 +35,22 @@ function Navbar() {
           </div>
 
           <li className="li-item">
-            <Link to="/home" style={{ textDecoration: "none" }}>
+            <Link className="nav-link" to="/home" style={{ textDecoration: "none" }}>
               Home
             </Link>
           </li>
 
           <li className="li-item">
-            <Link href="/timesheet">Time Sheet</Link>
+            <Link className="nav-link" to="/timesheet">Time Sheet</Link>
           </li>
           <li className="li-item">
-            <Link href="/report">Report</Link>
+            <Link className="nav-link" to="/report">Report</Link>
           </li>
           <li className="li-item">
-            <Link href="/profile">Profile</Link>
+            <Link className="nav-link" to="/profile">Profile</Link>
           </li>
           <li className="li-item">
-            <Link href="/">Sign Out</Link>
+            <Link className="nav-link" to="/">Sign Out</Link>
           </li>
         </ul>
       </nav>
