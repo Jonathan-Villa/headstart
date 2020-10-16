@@ -13,7 +13,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div className="main-container">
+    
         <NavBar />
         <Switch>
           <Route path="/" exact component={Login} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/report" component={Reports} />
           <Route path="/profile" exact component={Profile} />
         </Switch>
-      </div>
+
     </Router>
   );
 }

@@ -1,12 +1,14 @@
-.home-container{
+.time-container{
     width: 89.5%;
     float: right;
 }
 
 
+
+
 @media (max-width: 1030px) {
 
-    .home-container{
+    .time-container{
         width: 100%;
     }
 

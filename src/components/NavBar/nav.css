@@ -1,18 +1,25 @@
-nav {
-    width: 200px;
-    min-width: 200px;
+
+#nav-bar {
+    background-color: #353535;
     height: 100vh;
-    background-color: #001233;
+    position: fixed;
+    display: flex;
+    width: 200px;
+    justify-content: center;
 }
 
 .ul-nav {
     display: flex;
+    align-items: center;
     flex-direction: column;
+    width: 100%;
 }
 
 .li-item {
+    text-align: center;
+    width: 100%;
+    padding: 30px 0px;
     list-style: none;
-    padding: 30px 35px;
 }
 
 .nav-link {
@@ -23,23 +30,10 @@ nav {
 }
 
 /* Responsive menu */
-.icon {
+.icon-x-container{
     display: none;
 }
-
-.icon-menu {
-    display: none;
-}
-
-.icon-stack {
-    display: none;
-}
-
-.icon {
-    display: none;
-}
-
-.menu-close {
+.icon-menu{
     display: none;
 }
 
@@ -48,47 +42,59 @@ nav {
 }
 
 @media (max-width: 1030px) {
-    .icon {
-        display: flex;
-        flex-direction: column;
+    #nav-bar {
+        display: block;
+        width: 200px;
+        min-width: 200px;
+        height: 100vh;
+        background-color: #353535;
     }
 
+    .li-item {
+        display: block;
+        list-style: none;
+       
+    }
+
+    .nav-link {
+        text-decoration: none;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: white;
+    }
+  
     .icon-menu {
         display: block;
-        background-color: #001233;
-        width: 100%;
+        background-color: #353535;
+        min-width: 100%;
     }
 
     .icon-stack {
-        display: block;
         padding: 30px;
         cursor: pointer;
     }
 
-    .icon {
+    .icon-x-container{
         display: block;
-        padding: 30px;
+        padding: 27px 30px;
         cursor: pointer;
     }
 
     .menu-close {
-        display: block;
         position: fixed;
         top: 0;
         left: 0;
         min-width: 200px;
         height: 100vh;
-        background-color: #001233;
-        transition: 800ms;
-        transform: translate(-200px);
+        transition: 600ms;
+        transform: translate(-400px);
     }
 
     .nav-menu-active {
-        display: block;
         position: fixed;
         top: 0;
         left: 0;
         transform: translateX(0px);
-        transition: 400ms;
+        transition: 500ms;
     }
 }
