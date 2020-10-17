@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { RiCloseLine } from "react-icons/ri";
 import { VscListFlat } from "react-icons/vsc";
@@ -21,16 +21,11 @@ function Navbar() {
         />
       </div>
 
-      <nav id="nav-bar" className={navClick ? 'nav-menu-active': 'menu-close'} >
-      <div className="icon-x-container">
-            <RiCloseLine
-              className="icon-exit"
-              size="35px"
-              onClick={navHandle}
-            />
-          </div>
+      <nav id="nav-bar" className={navClick ? "nav-menu-active" : "menu-close"}>
+        <div className="icon-x-container">
+          <RiCloseLine className="icon-exit" size="35px" onClick={navHandle} />
+        </div>
         <ul className="ul-nav" onClick={navHandle}>
-          
           <NavListItems />
         </ul>
       </nav>
@@ -39,4 +34,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

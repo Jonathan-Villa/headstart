@@ -6,23 +6,40 @@ import TimeSheet from "./Pages/timesheet";
 import Reports from "./Pages/report";
 import Profile from "./Pages/profile";
 import NavBar from "./components/NavBar/navbar";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 // The router routes to specfic components
+
+const LoginRoute = () => (
+  <div>
+    <Route exact path="/" render={() => <Redirect to="./login" />} />
+    <Route path="/login" component={Login} />
+  </div>
+);
+
+const DefaultPath = () => (
+  <div>
+
+    <NavBar />
+    <Route path="/Home" component={Home} />
+    <Route path="/timesheet" component={TimeSheet} />
+    <Route path="/report" component={Reports} />
+    <Route path="/profile" component={Profile} />
+  </div>
+);
 
 function App() {
   return (
     <Router>
-    
-        <NavBar />
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/home" component={Home} />
-          <Route path="/timesheet" component={TimeSheet} />
-          <Route path="/report" component={Reports} />
-          <Route path="/profile" exact component={Profile} />
-        </Switch>
-
+      <Switch>
+        <Route exact path="/(login)" component={LoginRoute} />
+        <Route component={DefaultPath} />
+      </Switch>
     </Router>
   );
 }
