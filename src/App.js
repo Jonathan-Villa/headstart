@@ -24,7 +24,6 @@ const LoginRoute = () => (
 
 const DefaultPath = () => (
   <div>
-
     <NavBar />
     <Route path="/Home" component={Home} />
     <Route path="/timesheet" component={TimeSheet} />
