@@ -1,14 +1,6 @@
 .profile-container{
-    width: 89.5%;
-    float: right;
+    width: 100%;
+    margin-left: 200px;
 }
 
 
-
-@media (max-width: 1030px) {
-
-    .profile-container{
-        width: 100%;
-    }
-
-}

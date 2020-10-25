@@ -1,11 +1,13 @@
-import React from 'react'
-import "./styles/report.css"
+import React from "react";
+import "./styles/report.css";
 function Report() {
-    return (
-        <div className="report-container">
-            <h1>Report page</h1>
-        </div>
-    )
+  return (
+    <div className="main-container">
+      <div>
+        <h1 className="header-profile">Report page</h1>
+      </div>
+    </div>
+  );
 }
 
-export default Report
+export default Report;

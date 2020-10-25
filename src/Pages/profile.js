@@ -1,11 +1,13 @@
-import React from 'react'
-import "./styles/profile.css"
+import React from "react";
+import "./styles/profile.css";
 function Profile() {
-    return (
-        <div className="profile-container">
-            <h1>Profile page</h1>
-        </div>
-    )
+  return (
+    <div className="main-container">
+      <div>
+        <h1 className="header-profile">Profile page</h1>
+      </div>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;

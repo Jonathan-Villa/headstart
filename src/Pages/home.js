@@ -1,12 +1,15 @@
-import React from 'react'
-import "./styles/home.css"
+import React from "react";
+import "./styles/home.css";
+import * as M from "@material-ui/core";
 
 function Home() {
-    return (
-        <div className="home-container" >
-            <h1>Home page</h1>
-        </div>
-    )
+  return (
+    <div className="main-container">
+      <div className="">
+        <h1>hello</h1>
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
