@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  // drawer style 
   drawer: {
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
       background: "#353535",
     },
   },
+  // app bar style
   appBar: {
     background: "#353535",
     [theme.breakpoints.up("sm")]: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
     },
   },
+  // Menu style
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
@@ -43,7 +46,8 @@ function Navbar(props) {
   const { window } = props;
   const theme = useTheme();
   const classes = useStyles();
-  // this state is used for burger icon/exit-icon/list item
+
+  // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const container =
@@ -54,7 +58,7 @@ function Navbar(props) {
       <div className={classes.toolbar} />
       <M.List id="li-items">
         {[
-          { route: "Home", path: "/home" },
+          { route: "Home", path: "/" },
           { route: "Time Sheet", path: "/timesheet" },
           { route: "Report", path: "/report" },
           { route: "Profile", path: "/profile" },

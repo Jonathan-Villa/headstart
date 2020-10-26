@@ -19,7 +19,7 @@ import {
 const LoginRoute = () => (
   <div>
     <Route exact path="/" render={() => <Redirect to="./login" />} />
-    <Route path="/login" component={Login} />
+    <Route exact path="/login" component={Login} />
    
   </div>
 );
@@ -27,7 +27,7 @@ const LoginRoute = () => (
 const DefaultPath = () => (
   <div>
     <NavBar />
-    <Route path="/home" component={Home}/>
+    <Route exact path="/" component={Home}/>
     <Route path="/timesheet" component={TimeSheet} />
     <Route path="/report" component={Reports} />
     <Route path="/profile" component={Profile} />
@@ -39,7 +39,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/(login)" component={LoginRoute} />
-        <Route path="/signup" component={SignUp}/>
+        <Route exact path="/signup" component={SignUp}/>
         <Route component={DefaultPath} />
       </Switch>
     </Router>
