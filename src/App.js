@@ -5,6 +5,7 @@ import Login from "./Pages/login";
 import TimeSheet from "./Pages/timesheet";
 import Reports from "./Pages/report";
 import Profile from "./Pages/profile";
+import SignUp from "./Pages/signup"
 import NavBar from "./components/NavBar/navbar";
 import {
   Route,
@@ -19,6 +20,7 @@ const LoginRoute = () => (
   <div>
     <Route exact path="/" render={() => <Redirect to="./login" />} />
     <Route path="/login" component={Login} />
+   
   </div>
 );
 
@@ -37,6 +39,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/(login)" component={LoginRoute} />
+        <Route path="/signup" component={SignUp}/>
         <Route component={DefaultPath} />
       </Switch>
     </Router>
