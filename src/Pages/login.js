@@ -2,7 +2,6 @@ import React from "react";
 import "./styles/login.css";
 import * as M from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import SignUp from "./signup";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

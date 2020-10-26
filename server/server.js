@@ -9,7 +9,7 @@ const app = express(); // app will take instance of express// instead of 'expres
 
 let sqlCon = mysql.createConnection({ // mysql connection 
     host:'localhost',
-    user:'root', 
+    user:'root1', 
     password:'', // your password
     database:'' // database that IS created// 
 });

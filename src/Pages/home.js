@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles/home.css";
-import * as M from "@material-ui/core";
 
 function Home() {
   return (

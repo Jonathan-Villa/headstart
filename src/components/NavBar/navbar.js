@@ -63,8 +63,8 @@ function Navbar(props) {
           { route: "Report", path: "/report" },
           { route: "Profile", path: "/profile" },
           { route: "Sign Out", path: "/login" },
-        ].map((text) => (
-          <M.ListItem button key={text}>
+        ].map((text,key) => (
+          <M.ListItem button key={key}>
             <Link className="nav-link" to={text.path}>
               {text.route}
             </Link>
@@ -80,7 +80,7 @@ function Navbar(props) {
       <M.AppBar position="static" className={classes.appBar}>
         <M.Toolbar >
           <M.IconButton
-            color="#353535"
+
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
