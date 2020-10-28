@@ -18,16 +18,15 @@ import {
 
 const LoginRoute = () => (
   <div>
-    <Route exact path="/" render={() => <Redirect to="./login" />} />
-    <Route exact path="/login" component={Login} />
-   
+    <Route exact path="/" component={Login} />
+  
   </div>
 );
 
 const DefaultPath = () => (
   <div>
     <NavBar />
-    <Route exact path="/" component={Home}/>
+    <Route exact path="/home" component={Home}/>
     <Route path="/timesheet" component={TimeSheet} />
     <Route path="/report" component={Reports} />
     <Route path="/profile" component={Profile} />
@@ -38,9 +37,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/(login)" component={LoginRoute} />
+        <Route exact path="/" component={LoginRoute} />
         <Route exact path="/signup" component={SignUp}/>
-        <Route component={DefaultPath} />
+        <Route component={DefaultPath}/>
       </Switch>
     </Router>
   );

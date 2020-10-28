@@ -1,27 +1,23 @@
 import React from "react";
 import "./styles/login.css";
 import * as M from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import useFormStyles from "../helpers/customStyles/formStyle"
+import useUserInput from "../helpers/customHooks/userInput"
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(1),
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 function Login() {
-  const classes = useStyles();
+  const [email, bindEmail, resetEmail] = useUserInput("");
+  const [password, bindPassword, resetPassword] = useUserInput("");
+  const classes = useFormStyles();
+
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+
+    resetEmail();
+    resetPassword();
+  }
+
   return (
     <M.Container id="login-container">
       <M.Container id="login-form-container" maxWidth="xs">
@@ -29,7 +25,7 @@ function Login() {
           <M.Typography component="h1" variant="h5">
             Sign in
           </M.Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <M.TextField
               variant="outlined"
               margin="normal"
@@ -40,7 +36,10 @@ function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+
+              {...bindEmail}
             />
+           
             <M.TextField
               variant="outlined"
               margin="normal"
@@ -51,6 +50,7 @@ function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              {...bindPassword}
             />
             <M.FormControlLabel
               control={<M.Checkbox value="remember" color="primary" />}

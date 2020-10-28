@@ -2,50 +2,15 @@ import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import "./nav.css";
 import * as M from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-
-const drawerWidth = 200;
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  // drawer style 
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-      background: "#353535",
-    },
-  },
-  // app bar style
-  appBar: {
-    background: "#353535",
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  // Menu style
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  // Handles content within
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    background: "#353535",
-    width: drawerWidth,
-  },
-}));
+import useNavStyls from "../../helpers/customStyles/navStyles";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { window } = props;
   const theme = useTheme();
-  const classes = useStyles();
+  const classes = useNavStyls();
 
   // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
@@ -58,12 +23,12 @@ function Navbar(props) {
       <div className={classes.toolbar} />
       <M.List id="li-items">
         {[
-          { route: "Home", path: "/" },
+          { route: "Home", path: "/home" },
           { route: "Time Sheet", path: "/timesheet" },
           { route: "Report", path: "/report" },
           { route: "Profile", path: "/profile" },
-          { route: "Sign Out", path: "/login" },
-        ].map((text,key) => (
+          { route: "Sign Out", path: "/" },
+        ].map((text, key) => (
           <M.ListItem button key={key}>
             <Link className="nav-link" to={text.path}>
               {text.route}
@@ -78,9 +43,8 @@ function Navbar(props) {
     <div>
       <M.CssBaseline />
       <M.AppBar position="static" className={classes.appBar}>
-        <M.Toolbar >
+        <M.Toolbar>
           <M.IconButton
-
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
@@ -112,8 +76,8 @@ function Navbar(props) {
             {drawer}
           </M.Drawer>
         </M.Hidden>
-          
-        <M.Hidden  xsDown implementation="css">
+
+        <M.Hidden xsDown implementation="css">
           <M.Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -121,7 +85,7 @@ function Navbar(props) {
             variant="permanent"
             open
           >
-           {drawer}
+            {drawer}
           </M.Drawer>
         </M.Hidden>
       </nav>
