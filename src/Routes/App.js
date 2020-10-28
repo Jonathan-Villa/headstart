@@ -1,12 +1,11 @@
 import React from "react";
-import "./App.css";
-import Home from "./Pages/home";
-import Login from "./Pages/login";
-import TimeSheet from "./Pages/timesheet";
-import Reports from "./Pages/report";
-import Profile from "./Pages/profile";
-import SignUp from "./Pages/signup"
-import NavBar from "./components/NavBar/navbar";
+import Home from "../Pages/home";
+import Login from "../Pages/login";
+import TimeSheet from "../Pages/timesheet";
+import Reports from "../Pages/report";
+import Profile from "../Pages/profile";
+import SignUp from "../Pages/signup"
+import NavBar from "../components/NavBar/navbar";
 import {
   Route,
   BrowserRouter as Router,
