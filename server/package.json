@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "dev": "run-p server start"
   },
   "author": "Jonathan Villa, Bob Barr, Robert Oliver, Joseph Nelson",
@@ -16,8 +16,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.6",
     "npm-run-all": "^4.1.5",
     "passport": "^0.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

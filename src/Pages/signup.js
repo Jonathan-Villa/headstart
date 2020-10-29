@@ -5,6 +5,7 @@ import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import axios from "axios";
 
+
 function Signup() {
   const classes = useFormStyles();
 
@@ -17,21 +18,22 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-
-    const userData = await axios
-      .post("http://localhost:4000/api/signup", {
+  
+    const userData =  await axios
+      .post("http://localhost:4000/api", {
         firstName: firstName,
         lastName: lastName,
         email: email,
         username: userName,
         password: password,
-      });
-    return userData;
+      }).then((res, err)=> {
 
-    }catch{
-        console.error();
-    }
+        if (err){
+          console.log(err)
+        }
+        console.log(res)
+      }).catch((e)=> {console.log(e)})
+    
 
     resetEmail();
     resetFirstName();
@@ -47,7 +49,7 @@ function Signup() {
         <M.Typography component="h1" variant="h5">
           Sign Up
         </M.Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form} method="POST" onSubmit={handleSubmit}>
           <M.TextField
             variant="outlined"
             margin="normal"
@@ -91,7 +93,7 @@ function Signup() {
             name="userName"
             label="Username"
             type="text"
-            id="lName-input"
+            id="userName-input"
             {...bindUserName}
           />
           <M.TextField

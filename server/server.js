@@ -11,56 +11,61 @@ dotEnv.config({ path: "./.env" });
 
 let corsOptions = {
   // middleware
-  Origin: "http://localhost:3000",
+  Origin: "http://localhost:3000/",
   optionsSuccessStatus: 200,
+  
 };
 const app = express(); // app will take instance of express// instead of 'express.get || express.send'
-
 app.use(cors(corsOptions));
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
+
 
 // all database credentials will be placed in the .env file for production -> for now it'll stay here
 let sqlCon = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Headstart123-", // your password
-  database: "headstart", // database that IS created//
+  password: "",
+  database: "headstart" 
 });
 
 sqlCon.connect((err) => {
   if (err) return console.log("Error: " + err.message);
 
+
   sqlCon.query("CREATE DATABASE IF NOT EXISTS headstart", (err, res) => {
     if (err) return console.log(err);
   });
+
   console.log("Succesful connection to headstart database");
 });
 
 app.get("/api", (req, res) => {
   // home path
-  res.send("<h1>Server is working</h1>");
+  res.send("hello");
 });
 
-app.get("/api/signup", cors(), (req, res) =>{
-
-    res.send("<h1>Hello</h1>")
-})
 
 // Register Route
-app.post("/api/signup", cors(), (req, res) => {
-   const{ firstName, lastName, email, username, password } = req.body
+app.post("/api", cors(), (req, res) => {
+  const firstName = req.body.firstName
+  const lastName = req.body.lastName
+  const email = req.body.emai
+  const username = req.body.username
+  const password = req.body.password
 
-   const userData = userTable.insertUser(firstName, lastName, email, username, password)
-    
-  sqlCon.query('INSERT INTO User SET ?',{firstName: firstName}, (err, result) => {
-    if (err) {
-      res.redirect("/signup");
-      throw console.error();
-    }
-    console.log(`Successfully redirected the user: ${req.body.username}`);
-    res.redirect("/home");
-  });
+  const sql = 'INSERT INTO User (firstName, lastName, email, username, password) VALUES (?,?,?,?,?)'
+
+  sqlCon.query(sql, [firstName,lastName,email,username,password],
+    (err, result) => {
+      if (err) {
+        console.log(err.code)
+        return res.send("fail to sign up");
+      }
+      console.log(`Successfully redirected the user: ${req.body.username}`);
+      return res.send('Successful signup! ');
+
+    });
 });
 
 app.listen(PORT, () => {
