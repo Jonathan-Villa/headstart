@@ -3,6 +3,7 @@ import * as M from "@material-ui/core";
 import "./styles/signup.css";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
+import axios from "axios";
 
 function Signup() {
   const classes = useFormStyles();
@@ -10,15 +11,34 @@ function Signup() {
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
+  const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+
+    const userData = await axios
+      .post("http://localhost:4000/api/signup", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        username: userName,
+        password: password,
+      });
+    return userData;
+
+    }catch{
+        console.error();
+    }
 
     resetEmail();
     resetFirstName();
     resetLastName();
     resetPassword();
+    resetUserName();
+
   };
 
   return (
@@ -61,6 +81,18 @@ function Signup() {
             type="text"
             id="lName-input"
             {...bindLastName}
+          />
+
+          <M.TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="userName"
+            label="Username"
+            type="text"
+            id="lName-input"
+            {...bindUserName}
           />
           <M.TextField
             variant="outlined"
