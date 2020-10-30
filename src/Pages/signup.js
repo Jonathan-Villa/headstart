@@ -1,46 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import * as M from "@material-ui/core";
 import "./styles/signup.css";
+import { Redirect, useHistory } from "react-router-dom";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import axios from "axios";
 
-
 function Signup() {
   const classes = useFormStyles();
-
+  const [isAuthenticated, setAuthentication] = useState(false);
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
-    const userData =  await axios
-      .post("http://localhost:4000/api", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        username: userName,
-        password: password,
-      }).then((res, err)=> {
-
-        if (err){
-          console.log(err)
+    const userData = await axios
+      .post(
+        "http://localhost:4000/api/signup",
+        {
+          user: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            username: userName,
+            password: password,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((res, err) => {
+        if (err) {
+          console.log(err);
         }
-        console.log(res)
-      }).catch((e)=> {console.log(e)})
-    
+        if (res === "Successful") {
+
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     resetEmail();
     resetFirstName();
     resetLastName();
     resetPassword();
     resetUserName();
-
   };
 
   return (

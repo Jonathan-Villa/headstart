@@ -14,18 +14,25 @@ import {
 } from "react-router-dom";
 
 // The router routes to specfic components
+const userState = {
+  isLoggedIn: "User not logged in",
+  user: {}
+}
+
 
 const LoginRoute = () => (
   <div>
     <Route exact path="/" component={Login} />
-  
   </div>
 );
 
-const DefaultPath = () => (
+const DefaultPath = (props) => (
   <div>
     <NavBar />
-    <Route exact path="/home" component={Home}/>
+    <Route 
+    exact
+    path="/home" 
+    render={props=> (<Home {...props}/>)}/>
     <Route path="/timesheet" component={TimeSheet} />
     <Route path="/report" component={Reports} />
     <Route path="/profile" component={Profile} />
@@ -38,7 +45,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={LoginRoute} />
         <Route exact path="/signup" component={SignUp}/>
-        <Route component={DefaultPath}/>
+        <Route/>
       </Switch>
     </Router>
   );
