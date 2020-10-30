@@ -4,11 +4,12 @@ import "./styles/signup.css";
 import { Redirect, useHistory } from "react-router-dom";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
+import App from "../Routes/App"
 import axios from "axios";
 
-function Signup() {
+function Signup({isAuthenticated,handleAuth}) {
   const classes = useFormStyles();
-  const [isAuthenticated, setAuthentication] = useState(false);
+
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
@@ -30,16 +31,14 @@ function Signup() {
             username: userName,
             password: password,
           },
-        },
-        { withCredentials: true }
+        }
       )
       .then((res, err) => {
         if (err) {
           console.log(err);
         }
-        if (res === "Successful") {
-
-        }
+          return isAuthenticated
+ 
       })
       .catch((e) => {
         console.log(e);
@@ -62,6 +61,7 @@ function Signup() {
           <M.TextField
             variant="outlined"
             margin="normal"
+            type="email"
             required
             fullWidth
             id="email"

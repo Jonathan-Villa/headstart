@@ -13,7 +13,7 @@ let corsOptions = {
   // middleware
   Origin: "http://localhost:3000/",
   optionsSuccessStatus: 200,
-  credentials: true
+
 };
 const app = express(); // app will take instance of express// instead of 'express.get || express.send'
 
@@ -28,7 +28,7 @@ app.get("/api", (req, res) => {
 
 // Register Route
 app.post("/api/signup", cors(), authSignUp, (req, res) => {
-  console.log(`Successfully signed up the user: ${req.body.username}`);
+  console.log(`Succesfully signed up username:${req.body.user.username}`)
   res.send("Successful");
 });
 
