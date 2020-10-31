@@ -5,7 +5,7 @@ import useFormStyles from "../helpers/customStyles/formStyle"
 import useUserInput from "../helpers/customHooks/userInput"
 
 
-function Login() {
+function Login({authenticate}) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();

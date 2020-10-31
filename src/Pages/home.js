@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/home.css";
+import {withRouter} from 'react-router-dom'
 
 function Home() {
   return (

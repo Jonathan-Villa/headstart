@@ -7,9 +7,8 @@ import useUserInput from "../helpers/customHooks/userInput";
 import App from "../Routes/App"
 import axios from "axios";
 
-function Signup({isAuthenticated,handleAuth}) {
+function Signup({userAuthenticate}) {
   const classes = useFormStyles();
-
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
@@ -19,7 +18,7 @@ function Signup({isAuthenticated,handleAuth}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const userData = await axios
       .post(
         "http://localhost:4000/api/signup",
@@ -37,8 +36,8 @@ function Signup({isAuthenticated,handleAuth}) {
         if (err) {
           console.log(err);
         }
-          return isAuthenticated
- 
+        
+        userAuthenticate.authenticate(()=> history.push('/home'))
       })
       .catch((e) => {
         console.log(e);
