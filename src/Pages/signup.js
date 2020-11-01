@@ -1,47 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as M from "@material-ui/core";
 import "./styles/signup.css";
-import { Redirect, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
-import App from "../Routes/App"
 import axios from "axios";
+import { UserContext } from "../helpers/utils/usercontext";
 
-function Signup({userAuthenticate}) {
+function Signup() {
   const classes = useFormStyles();
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
-  const history = useHistory();
+  const { authUser,  props } = useContext(UserContext);
+  let location = useLocation();
+  let history = useHistory();
+  let { from } = location.state || { from: { pathname: "/" } };
+  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    
-    const userData = await axios
-      .post(
-        "http://localhost:4000/api/signup",
-        {
-          user: {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            username: userName,
-            password: password,
-          },
-        }
-      )
+
+    const userData =  axios
+      .post("http://localhost:4000/api/signup", {
+        user: {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          username: userName,
+          password: password,
+        },
+      })
       .then((res, err) => {
         if (err) {
           console.log(err);
         }
-        
-        userAuthenticate.authenticate(()=> history.push('/home'))
+
+        if (res.data) {
+          authUser.authenticate(()=>{
+            history.push('/home')
+          });
+        }
       })
       .catch((e) => {
         console.log(e);
       });
+
+     
 
     resetEmail();
     resetFirstName();

@@ -3,7 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import "./nav.css";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 import useNavStyls from "../../helpers/customStyles/navStyles";
 
 function Navbar(props) {
@@ -27,7 +27,7 @@ function Navbar(props) {
           { route: "Time Sheet", path: "/timesheet" },
           { route: "Report", path: "/report" },
           { route: "Profile", path: "/profile" },
-          { route: "Sign Out", path: "/" },
+          { route: "Sign Out", path: "/login" },
         ].map((text, key) => (
           <M.ListItem button key={key}>
             <Link className="nav-link" to={text.path}>

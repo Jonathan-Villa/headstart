@@ -6,66 +6,58 @@ import TimeSheet from "../Pages/timesheet";
 import Reports from "../Pages/report";
 import Profile from "../Pages/profile";
 import Home from "../Pages/home";
+import PrivateRoute from "./privateroute";
 import {
   Route,
   BrowserRouter as Router,
   Switch,
-  withRouter,
-  useHistory,
   Redirect,
 } from "react-router-dom";
-import home from "../Pages/home";
+import { UserContext } from "../helpers/utils/usercontext";
+import Navbar from "../components/NavBar/navbar";
 
-function App() {
-  const history = useHistory();
-  const userAuthenticate = {
-    isAuthenticated: false,
 
-    authenticate() {
-      userAuthenticate.isAuthenticated = true;
-      history.push("/home");
+function App(props) {
+  const authUser = {
+    isAuthenticated:false,
+
+    authenticate(cb){
+      authUser.isAuthenticated = true;
+      setTimeout(cb, 100);
     },
-    signout() {
-      userAuthenticate.isAuthenticated = false;
-      history.push("/login");
-    },
-  };
+    signOut(cb){
+      authUser.isAuthenticated = false; 
+      setTimeout(cb,100)
+    }
+  }
+
   return (
     <Router>
-      <Switch>
-        <Route
-          exact={true}
-          path="/"
-          render={() => <Login userAuthenticate={userAuthenticate} />}
-        />
-        <Route
-          path="/signup"
-          render={() => <SignUp userAuthenticate={userAuthenticate} />}
-        />
-        <Privateroute userAuthenticate={userAuthenticate}>
-          <NavBar />
-          <Route exact path="/home" component={Home} />
-          <Route path="/timesheet" component={TimeSheet} />
-          <Route path="/report" component={Reports} />
-          <Route path="/profile" component={Profile} />
-        </Privateroute>
-      </Switch>
-    </Router>
-  );
-}
+      <UserContext.Provider value={{ props, authUser }}>
+        <Switch>
+          <Route exact path="/login" render={() => <Login />} />
+          <Route
+            exact
+            path="/signup"
+            component={SignUp}
+            history={props.historys}
+          />
+          <PrivateRoute component={Navbar}/>
+          <PrivateRoute exact path="/home" {...props} component={Home} />
+          <PrivateRoute exact path="/timesheet" component={TimeSheet} />
+          <PrivateRoute exact path="/reports" component={Reports} />
+          <PrivateRoute exact path="/profile " component={Profile} />
 
-function Privateroute({ userAuthenticate }, { children, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={() =>
-        userAuthenticate.isAuthenticated ? (
-          children
-        ) : (
-          <Redirect to={{ pathname: "/" }} />
-        )
-      }
-    />
+          <Route
+            exact={true}
+            path="/"
+            render={() =>
+              authUser.isAuthenticated ? <Redirect to="/home" /> : <Redirect to="/login" />
+            }
+          />
+        </Switch>
+      </UserContext.Provider>
+    </Router>
   );
 }
 

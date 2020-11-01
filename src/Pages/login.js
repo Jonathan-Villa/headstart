@@ -3,6 +3,9 @@ import "./styles/login.css";
 import * as M from "@material-ui/core";
 import useFormStyles from "../helpers/customStyles/formStyle"
 import useUserInput from "../helpers/customHooks/userInput"
+import axios from "axios";
+import {useHistory } from "react-router-dom";
+import {login} from "../helpers/utils/usercontext"
 
 
 function Login({authenticate}) {
@@ -11,8 +14,28 @@ function Login({authenticate}) {
   const classes = useFormStyles();
 
 
-  const handleSubmit=(e)=>{
+  const handleSubmit= async (e)=>{
     e.preventDefault();
+
+    await axios.post("http://localhost:4000/api/login", {
+
+    user:{
+      email: email,
+      password: password
+    }
+     
+    }).then((res, err) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(res)
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+  
+
+
 
     resetEmail();
     resetPassword();

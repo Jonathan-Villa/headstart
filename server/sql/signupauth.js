@@ -8,6 +8,7 @@ const authSignUp = (req, res, next) => {
   const password = req.body.user.password;
 
   const sql ="INSERT INTO User (firstName, lastName, email, username, password)VALUES (?,?,?,?,?)";
+  
   sqlCon.query(
     sql,
     [firstName, lastName, email, username, password],
