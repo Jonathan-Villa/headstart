@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import Login from "../Pages/login";
 import SignUp from "../Pages/signup";
 import NavBar from "../components/NavBar/navbar";
@@ -19,15 +19,15 @@ import Navbar from "../components/NavBar/navbar";
 
 function App(props) {
   const authUser = {
-    isAuthenticated:false,
+    isAuthenticated: false,
 
-    authenticate(cb){
+    authenticate(cb) {
       authUser.isAuthenticated = true;
       setTimeout(cb, 100);
     },
-    signOut(cb){
-      authUser.isAuthenticated = false; 
-      setTimeout(cb,100)
+    signOut(cb) {
+      authUser.isAuthenticated = false;
+      setTimeout(cb, 100)
     }
   }
 
@@ -41,13 +41,13 @@ function App(props) {
             path="/signup"
             component={SignUp}
           />
-
-          <PrivateRoute component={Navbar}/>
-          <PrivateRoute exact path="/home" {...props} component={Home} />
-          <PrivateRoute exact path="/timesheet" component={TimeSheet} />
-          <PrivateRoute exact path="/reports" component={Reports} />
-          <PrivateRoute exact path="/profile " component={Profile} />
-
+          <>
+            <PrivateRoute component={Navbar} />
+            <PrivateRoute exact path="/home" {...props} component={Home} />
+            <PrivateRoute exact path="/timesheet" component={TimeSheet} />
+            <PrivateRoute exact path="/report" component={Reports} />
+            <PrivateRoute exact path="/profile" component={Profile} />
+          </>
           <Route
             exact={true}
             path="/"

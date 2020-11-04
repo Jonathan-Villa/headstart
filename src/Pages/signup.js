@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import * as M from "@material-ui/core";
 import "./styles/signup.css";
-import { useLocation, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import axios from "axios";
@@ -42,7 +42,7 @@ function Signup() {
         if (response.data) {
           // log the succesful request
           authUser.authenticate(() => {
-            console.log(response)
+
             history.push("/home"); // redirects to home
           });
         }

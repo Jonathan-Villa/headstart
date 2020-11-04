@@ -1,23 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./styles/login.css";
 import * as M from "@material-ui/core";
 import useFormStyles from "../helpers/customStyles/formStyle"
 import useUserInput from "../helpers/customHooks/userInput"
 import axios from "axios";
-import {useHistory } from "react-router-dom";
-import {login} from "../helpers/utils/usercontext"
+import {UserContext} from "../helpers/utils/usercontext"
 
 
-function Login({authenticate}) {
+function Login() {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();
+  const {authUser} = useContext(UserContext)
 
-
-  const handleSubmit= async (e)=>{
+  const handleSubmit=(e)=>{
     e.preventDefault();
 
-    await axios.post("http://localhost:4000/api/login", {
+   axios.post("http://localhost:4000/api/login", {
 
     user:{
       email: email,
@@ -28,7 +27,7 @@ function Login({authenticate}) {
       if (err) {
         console.log(err);
       }
-      console.log(res)
+    
     })
     .catch((e) => {
       console.log(e);

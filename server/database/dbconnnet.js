@@ -9,11 +9,11 @@ mongoose.connect("mongodb://localhost:27017/headstartDB", {
 });
 mongoose.set("useCreateIndex", true);
 
-const userSchema = new Schema({
-  email: { type: String },
+const userSchema = new Schema({ 
+  email: { type: String, unique:true },
   firstName: { type: String },
   lastName: { type: String },
-  username: { type: String },
+  username: { type: String, unique:true },
   password: { type: String },
 });
 

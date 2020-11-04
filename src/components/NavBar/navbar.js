@@ -3,7 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import "./nav.css";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import { Link,withRouter } from "react-router-dom";
+import { Link} from "react-router-dom";
 import useNavStyls from "../../helpers/customStyles/navStyles";
 
 function Navbar(props) {

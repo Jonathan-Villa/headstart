@@ -24,9 +24,11 @@ app.use(bodyparser.json()); // parses any request to JSON from client
 
 app.use(
   session({
+    key: "userID",
     secret: "HeadStartSecretPreProduction",
     resave: false,
     saveUninitialized: false,
+    cookie:{secure:true , expires:60 *60 * 24}
   })
 );
 app.use(passport.initialize()); // Initailize
@@ -38,7 +40,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, function (err, user) {
+  User.findById(id,(err, user) =>{
     done(err, user);
   });
 });
@@ -59,14 +61,31 @@ app.post("/api/signup", cors(), (req, res) => {
 
   User.register(newUser, req.body.user.password, (err) => {
     if (err) {
-      return res.send("ERROR: User Registered")
+      res.send("ERROR: User Registered")
     }
+    res.send("Successful");
   });
-  return res.send("Successful");
+
 });
 
 app.post("/api/login", cors(), (req, res) => {
-  res.send("Succesful");
+  
+  const loginData = new User({
+    email: req.body.user.email,
+    password:req.body.user.password
+  });
+
+  req.logIn(loginData , (err)=>{
+
+    if(err) return res.send("ERROR: FAILED TO LOGIN IN");
+
+    passport.authenticate("local", (err,result)=>{
+      res.send("Succesfully logged in!")
+    })
+
+  })
+
+
 });
 
 app.listen(PORT, () => {
