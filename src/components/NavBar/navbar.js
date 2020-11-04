@@ -35,6 +35,7 @@ function Navbar(props) {
             </Link>
           </M.ListItem>
         ))}
+        
       </M.List>
     </div>
   );

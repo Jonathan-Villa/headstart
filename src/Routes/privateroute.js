@@ -2,15 +2,16 @@ import React , { useContext}from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../helpers/utils/usercontext";
 
-function PrivateRoute({ component: Component, path, ...rest }) {
-  const { authUser,  props } = useContext(UserContext);
+function PrivateRoute({ component: Component, ...rest }) {
+  // rest retrieves the remainder of the props
+  
+  const { authUser} = useContext(UserContext); // Context provider 
 
   return (
     <Route
-      path={path}
       {...rest}
       render={({location}) =>
-        authUser.isAuthenticated ? (
+        authUser.isAuthenticated ? ( 
           <Component  />
         ) : (
           <Redirect

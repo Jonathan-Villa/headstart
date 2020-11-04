@@ -40,8 +40,8 @@ function App(props) {
             exact
             path="/signup"
             component={SignUp}
-            history={props.historys}
           />
+
           <PrivateRoute component={Navbar}/>
           <PrivateRoute exact path="/home" {...props} component={Home} />
           <PrivateRoute exact path="/timesheet" component={TimeSheet} />
