@@ -2,90 +2,37 @@
 // To run the server with automatic updates use --- nodemon server.js
 const express = require("express");
 const cors = require("cors");
-const dotEnv = require("dotenv");
 const passport = require("passport");
 const bodyparser = require("body-parser"); // allows to parse any incoming request
-const session = require("express-session");
-
-const { User } = require("./database/dbconnnet");
+const mongoose = require("mongoose");
+const { dbURL } = require("./database/dbconnnet");
+const user = require("./validation/user");
 const PORT = 4000;
-dotEnv.config({ path: "./.env" });
 
 let corsOptions = {
   // middleware
   Origin: "http://localhost:3000/",
   optionsSuccessStatus: 200,
 };
+
+mongoose.connect(dbURL, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
+
 const app = express(); // app will take instance of express// instead of 'express.get || express.send'
+require("./validation/passportjwt")(passport);
 
 app.use(cors(corsOptions)); // allows a
+app.use(passport.initialize()); // Initailize
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
-
-app.use(
-  session({
-    key: "userID",
-    secret: "HeadStartSecretPreProduction",
-    resave: false,
-    saveUninitialized: false,
-    cookie:{secure:true , expires:60 *60 * 24}
-  })
-);
-app.use(passport.initialize()); // Initailize
-app.use(passport.session());
-
-passport.use(User.createStrategy());
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id,(err, user) =>{
-    done(err, user);
-  });
-});
+app.use("/api", user);
 
 app.get("/api", (req, res) => {
   // home path
   res.send("hello");
-});
-
-// Register Route
-app.post("/api/signup", cors(), (req, res) => {
-  const newUser = new User({
-    email: req.body.user.email,
-    firstName: req.body.user.firstName,
-    lastName: req.body.user.lastName,
-    username: req.body.user.username,
-  });
-
-  User.register(newUser, req.body.user.password, (err) => {
-    if (err) {
-      res.send("ERROR: User Registered")
-    }
-    res.send("Successful");
-  });
-
-});
-
-app.post("/api/login", cors(), (req, res) => {
-  
-  const loginData = new User({
-    email: req.body.user.email,
-    password:req.body.user.password
-  });
-
-  req.logIn(loginData , (err)=>{
-
-    if(err) return res.send("ERROR: FAILED TO LOGIN IN");
-
-    passport.authenticate("local", (err,result)=>{
-      res.send("Succesfully logged in!")
-    })
-
-  })
-
-
 });
 
 app.listen(PORT, () => {
