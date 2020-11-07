@@ -5,7 +5,7 @@ import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import axios from "axios";
 
-function Signup() {
+function Signup(state, ownProps) {
   const classes = useFormStyles();
 
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
@@ -14,31 +14,20 @@ function Signup() {
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
 
+  // "http://localhost:4000/api/signup"
+console.log(state, ownProps)
   const handleSubmit = (e) => {
     e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
-    // post request to signup
-    axios
-      .post("http://localhost:4000/api/signup", {
-        // type of data we are sending // ex. user.firstName, user.lastName
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        username: userName,
-        password: password,
-      })
-      .then((response, error) => {
-        if (error) {
-          // log error
-          console.log(error);
-        }
-        if (response) {
-          console.log(response);
-        }
-      })
-      .catch((e) => {
-        // catch any un-related errors
-        console.log(e);
-      });
+
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      username: userName,
+      password: password,
+    };
+
+
 
     // clear the inputs when the user submits
     resetEmail();

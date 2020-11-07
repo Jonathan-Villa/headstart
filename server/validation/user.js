@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
@@ -78,7 +77,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get(
-  "/me",
+  "/profile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     return res.json({
@@ -88,5 +87,6 @@ router.get(
     });
   }
 );
+
 
 module.exports = router;

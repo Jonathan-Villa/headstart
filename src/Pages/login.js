@@ -13,28 +13,16 @@ function Login() {
   const classes = useFormStyles();
   const {authUser} = useContext(UserContext)
 
+//"http://localhost:4000/api/login"
+
   const handleSubmit=(e)=>{
     e.preventDefault();
 
-   axios.post("http://localhost:4000/api/login", {
-
-    user:{
+    const userLogin = {
       email: email,
       password: password
     }
      
-    }).then((res, err) => {
-      if (err) {
-        console.log(err);
-      }
-    
-    })
-    .catch((e) => {
-      console.log(e);
-    })
-  
-
-
 
     resetEmail();
     resetPassword();
