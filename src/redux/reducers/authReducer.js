@@ -1,20 +1,21 @@
-import { SET_CURRENT_USER } from '../actions/actionTypes'
+import { SET_CURRENT_USER } from "../actions/actionTypes";
 
 const initialState = {
-    isAuthenticated: false,
-    user: {}
-}
+  isAuthenticated: false,
+  user: {},
+};
 
-const currentUser = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_CURRENT_USER: // type of action
+      return {
+        ...state, 
+        isAuthenticated: true,
+        payload: action.payload, // users submitted payload
+      };
+    default:
+      return state;
+  }
+};
 
-    switch (action.type) {
-        case SET_CURRENT_USER:
-            return {
-                ...state,
-                isAuthenticated: true,
-                payload: action.payload
-            }
-        default:
-            return state;
-    }
-} 
+export default authReducer;

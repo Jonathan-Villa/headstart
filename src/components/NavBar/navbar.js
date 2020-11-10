@@ -16,7 +16,7 @@ function Navbar(props) {
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window().document.body : undefined; 
 
   const drawer = (
     <div>

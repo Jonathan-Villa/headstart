@@ -24,7 +24,7 @@ mongoose.connect(dbURL, {
 const app = express(); // app will take instance of express// instead of 'express.get || express.send'
 require("./validation/passportjwt")(passport);
 
-app.use(cors(corsOptions)); // allows a
+app.use(cors(corsOptions));
 app.use(passport.initialize()); // Initailize
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
@@ -34,6 +34,10 @@ app.get("/api", (req, res) => {
   // home path
   res.send("hello");
 });
+
+app.get('/api/login', (req,res )=>{
+    res.send(`${req.body}`)
+})
 
 app.listen(PORT, () => {
   console.log("Server is up!");

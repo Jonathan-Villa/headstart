@@ -1,19 +1,19 @@
-import React , { useContext}from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { UserContext } from "../helpers/utils/usercontext";
+
 
 function PrivateRoute({ component: Component, ...rest }) {
   // rest retrieves the remainder of the props
-  
-  const { authUser} = useContext(UserContext); // Context provider 
+
 
   return (
     <Route
       {...rest}
       render={({location}) =>
-        authUser.isAuthenticated ? ( 
-          <Component  />
+        localStorage.getItem("jwt-token") ? ( 
+          <Component/>  // user has token
         ) : (
+          // user does not have token
           <Redirect
             to={{
               pathname: "/login",

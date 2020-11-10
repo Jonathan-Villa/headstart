@@ -1,32 +1,35 @@
-import React, {useContext} from "react";
+import React from "react";
 import "./styles/login.css";
+import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
-import useFormStyles from "../helpers/customStyles/formStyle"
-import useUserInput from "../helpers/customHooks/userInput"
-import axios from "axios";
-import {UserContext} from "../helpers/utils/usercontext"
+import useFormStyles from "../helpers/customStyles/formStyle";
+import useUserInput from "../helpers/customHooks/userInput";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/actions/authentications";
 
-
-function Login() {
+function Login({ history }) {
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/home" } };
+  const dispach = useDispatch();
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();
-  const {authUser} = useContext(UserContext)
 
-//"http://localhost:4000/api/login"
+  //"http://localhost:4000/api/login"
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const userLogin = {
       email: email,
-      password: password
-    }
-     
+      password: password,
+    };
+    dispach(loginUser(userLogin, history, from)); // login the user
 
+    // clear the inputs when the user submits
     resetEmail();
     resetPassword();
-  }
+  };
 
   return (
     <M.Container id="login-container">
@@ -46,10 +49,9 @@ function Login() {
               name="email"
               autoComplete="email"
               autoFocus
-
               {...bindEmail}
             />
-           
+
             <M.TextField
               variant="outlined"
               margin="normal"
@@ -96,4 +98,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default withRouter(Login);

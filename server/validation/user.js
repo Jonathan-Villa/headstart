@@ -8,13 +8,12 @@ const { User } = require("../database/dbconnnet");
 
 router.post("/signup", (req, res) => {
   console.log(req.body);
-  // check if any fields are empty
 
-  User.findOne({ email: req.body.email }).then((user) => {
+  User.findOne({ email: req.body.email }).then((user) => { // check to see if email is already in use
     if (user) {
       return res.status(400).json({ email: "Email is already registered" });
     } else {
-      const newUser = new User({
+      const newUser = new User({ // register user
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -22,7 +21,7 @@ router.post("/signup", (req, res) => {
         password: req.body.password,
       });
 
-      bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.genSalt(10, (err, salt) => { // salt, hash the password
         if (err) {
           console.log(err);
         } else {
@@ -43,24 +42,28 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+
+  // request the body from the post request
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ email }).then((user) => {
-    if (!user) {
+  console.log(req.body)
+
+  User.findOne({email: email }).then((user) => { // "findOne" queries the DB to find email
+    if (!user) { // return 404 if not found
       return res.status(404).json();
     }
 
-    bcrypt.compare(password, user.password).then((isUserMatch) => {
+    bcrypt.compare(password, user.password).then((isUserMatch) => { // validates password
       if (isUserMatch) {
         const payLoad = {
           id: user.id,
           username: user.username,
         };
-        jwt.sign(
-          payLoad,
+        jwt.sign( // create token
+          payLoad, // user data
           "secretIDHeadStart",
-          { expiresIn: 2400 },
+          { expiresIn: 3600 },
           (err, token) => {
             if (err) {
               console.log(err);

@@ -10,7 +10,7 @@ options.secretOrKey = 'secretIDHeadStart'
 module.exports = passport => {
     passport.use(new JWTStrategy(options, (jwt_payload, done) => {
         console.log(jwt_payload)
-        User.findById(jwt_payload.id)
+        User.findById(jwt_payload.id) 
             .then(user => {
                 if(user) {
                     return done(null, user);
