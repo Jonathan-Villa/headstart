@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/actions/authentications";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAuth } from "../redux/actions/authUser";
 
 function Login({ history }) {
   const location = useLocation();
@@ -14,8 +14,9 @@ function Login({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();
-
-  //"http://localhost:4000/api/login"
+  const isRegistered = useSelector(
+    (state) => state.registerReducer.registerSuccess
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ function Login({ history }) {
       email: email,
       password: password,
     };
-    dispach(loginUser(userLogin, history, from)); // login the user
+    dispach(loginAuth(userLogin, history, from)); // login the user
 
     // clear the inputs when the user submits
     resetEmail();
@@ -33,6 +34,13 @@ function Login({ history }) {
 
   return (
     <M.Container id="login-container">
+      {isRegistered ? (
+        <M.Snackbar
+          message="Successfully Registered!"
+          open
+          autoHideDuration={6000}
+        />
+      ) : null}
       <M.Container id="login-form-container" maxWidth="xs">
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">

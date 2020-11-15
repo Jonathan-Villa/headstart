@@ -1,10 +1,16 @@
-import {SET_CURRENT_USER} from './actionTypes'
+import {userActionType} from './actiontypes/userActionTypes'
 
 
-export const currentUser =(user)=>{ // store the current user
+export const login =(user)=>{ // store the current user
     return {
-        type: SET_CURRENT_USER,
+        type: userActionType.LOGIN_SUCCESS,
         payload: user
     }
 }
 
+export const register =()=>{
+    return {
+        type: userActionType.REGISTER_SUCCESS,
+        registerSuccess: true
+    }
+}
