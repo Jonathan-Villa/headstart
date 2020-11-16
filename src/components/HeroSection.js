@@ -1,11 +1,11 @@
 import React from 'react'
-import '../App.css';
+import '../Routes/App.css';
 import { Button } from './Buttlon'
-import '.HeroSection.css';
+import '../components/HeroSection.css';
 
 function HeroSection(){
     return (
-        <div className = 'hero-container'>
+        <div PagesclassName = 'hero-container'>
             <video src = "/videos/video-2.mp4" autoPlay loop muted />
             <h1>WELCOME TO HEADSTART </h1>
             <p> Let's take a look around </p>
@@ -20,7 +20,7 @@ function HeroSection(){
              buttonStyle= 'btn--primary'
             buttonSize = 'btn--large'
             >
-                GET STARTED
+                WATCH TRAILER <i className = 'far fa-play-circle'/>
             </Button>
             </div>
 

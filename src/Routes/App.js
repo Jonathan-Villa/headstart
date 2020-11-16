@@ -24,7 +24,7 @@ function App(props) {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path= "/home" component={Home} />
+          <Route exact path= "/Home" component={Home} />
 
           <>
             <PrivateRoute component={Navbar} />
