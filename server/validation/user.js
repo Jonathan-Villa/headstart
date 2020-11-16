@@ -60,18 +60,16 @@ router.post("/login", (req, res) => {
           id: user.id,
           username: user.username,
         };
-        jwt.sign( // create token
-          payLoad, // user data
-          "secretIDHeadStart",
-          { expiresIn: 3600 },
+
+        // user is validated // token expires in 1 hr
+        jwt.sign(payLoad, "secretIDHeadStart", { expiresIn: 3600 },
           (err, token) => {
             if (err) {
               console.log(err);
             } else {
               res.json({ success: true, token: `Bearer ${token}` });
             }
-          }
-        );
+          });
       } else {
         return res.status(400).json();
       }

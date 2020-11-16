@@ -8,27 +8,28 @@ import registerPost from "../http/registerPost"
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user)
     .then((res) => {
-
-      if(res.status === 200){
+      // registered successfully
+      if(res.status === 200){ 
         dispatch(register())
         history.push("/login");
       } 
-    
-    })
-    .catch((e) => dispatch());
+    }).catch((e) => dispatch());
 };
 
 export const loginAuth = (user, history, from) => (dispatch) => {
   loginPost(user)
-    .then((res) => {
-      const { token } = res.data; // get data
-      localStorage.setItem("jwt-token", token); //store token
+    .then((res) => {   console.log(res)
+      // data object with token
+      const { token } = res.data;
+      // store token in localstorage
+      localStorage.setItem("jwt-token", token);
       setAuthToken(token);
 
       const decodeToken = jwtDecode(token);
-      history.push(from); // redirect from login -> home
-      console.log(res)
-      dispatch(login(decodeToken)); // dispatch our action token
+       // redirect from login -> home
+      history.push(from);
+      // store the token in redux state
+      dispatch(login(decodeToken));
     })
     .catch((err) => {
       console.log(err);

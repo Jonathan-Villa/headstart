@@ -29,6 +29,7 @@ function Signup( { history }) {
       password: password,
     };
 
+    
     dispatch(registerAuth(user,history)) // registers the user
     // clear the inputs when the user submits
     resetEmail();

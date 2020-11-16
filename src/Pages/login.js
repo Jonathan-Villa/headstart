@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./styles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
+import  MAlert from "@material-ui/lab/Alert";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +15,16 @@ function Login({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();
+  const [open, setOpen] = useState(true);
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccess
   );
+
+  function Alert(props) {
+    return <MAlert elevation={6} variant="filled" {...props} />;
+  }
+  
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,15 +40,25 @@ function Login({ history }) {
     resetPassword();
   };
 
+  const handleClose = (e) => {
+    if (e === "clickaway") {
+      return;
+    }
+    setOpen((state) => (state = false));
+  };
+
+
   return (
     <M.Container id="login-container">
-      {isRegistered ? (
-        <M.Snackbar
-          message="Successfully Registered!"
-          open
-          autoHideDuration={6000}
-        />
-      ) : null}
+    
+        {isRegistered ? (
+          <M.Snackbar  open={open} onClick={handleClose} autoHideDuration={5000}>
+            <Alert onClick={handleClose} severity="success">
+              Successfully Registered!
+            </Alert>
+          </M.Snackbar>
+        ) : null}
+
       <M.Container id="login-form-container" maxWidth="xs">
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">
