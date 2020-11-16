@@ -1,6 +1,7 @@
 import {userActionType} from './actiontypes/userActionTypes'
 
 
+
 export const login =(user)=>{ // store the current user
     return {
         type: userActionType.LOGIN_SUCCESS,
@@ -9,8 +10,10 @@ export const login =(user)=>{ // store the current user
 }
 
 export const register =()=>{
-    return {
+    return  {
         type: userActionType.REGISTER_SUCCESS,
-        registerSuccess: true
+        registerSuccess: true,
+
     }
+    
 }
