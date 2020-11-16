@@ -15,6 +15,11 @@ import {
 import Navbar from "../components/NavBar/navbar";
 import store from "../redux/store/store";
 import { Provider } from "react-redux";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+
 
 function App(props) {
   return (

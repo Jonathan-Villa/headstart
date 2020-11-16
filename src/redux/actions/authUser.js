@@ -4,6 +4,7 @@ import { login, register} from "./actions";
 import loginPost from "../http/loginPost";
 import { userActionType } from "./actiontypes/userActionTypes";
 import registerPost from "../http/registerPost"
+import { toast } from 'react-toastify';
 
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user)
@@ -12,6 +13,7 @@ export const registerAuth = (user, history) => (dispatch) => {
       if(res.status === 200){ 
         dispatch(register())
         history.push("/login");
+        toast.success("sucessfully registered")
       } 
     }).catch((e) => dispatch());
 };
