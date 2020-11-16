@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./styles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
+import MAlert from "@material-ui/lab/Alert";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/actions/authentications";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAuth } from "../redux/actions/authUser";
+import { ToastContainer } from 'react-toastify';
+
 
 function Login({ history }) {
-  const location = useLocation();
-  const { from } = location.state || { from: { pathname: "/home" } };
-  const dispach = useDispatch();
+
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
   const classes = useFormStyles();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/home" } };
+  const dispach = useDispatch();
 
-  //"http://localhost:4000/api/login"
+  const isRegistered = useSelector(
+    (state) => state.registerReducer.registerSuccess
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +30,7 @@ function Login({ history }) {
       email: email,
       password: password,
     };
-    dispach(loginUser(userLogin, history, from)); // login the user
+    dispach(loginAuth(userLogin, history, from)); // login the user
 
     // clear the inputs when the user submits
     resetEmail();
@@ -33,6 +39,22 @@ function Login({ history }) {
 
   return (
     <M.Container id="login-container">
+      {isRegistered ? (
+        <>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover
+          />
+        </>
+      ) : null}
+
       <M.Container id="login-form-container" maxWidth="xs">
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">

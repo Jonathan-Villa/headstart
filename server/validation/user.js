@@ -11,7 +11,7 @@ router.post("/signup", (req, res) => {
 
   User.findOne({ email: req.body.email }).then((user) => { // check to see if email is already in use
     if (user) {
-      return res.status(400).json({ email: "Email is already registered" });
+      res.status(400).json({ email: "Email is already registered" });
     } else {
       const newUser = new User({ // register user
         firstName: req.body.firstName,
@@ -60,18 +60,16 @@ router.post("/login", (req, res) => {
           id: user.id,
           username: user.username,
         };
-        jwt.sign( // create token
-          payLoad, // user data
-          "secretIDHeadStart",
-          { expiresIn: 3600 },
+
+        // user is validated // token expires in 1 hr
+        jwt.sign(payLoad, "secretIDHeadStart", { expiresIn: 3600 },
           (err, token) => {
             if (err) {
               console.log(err);
             } else {
               res.json({ success: true, token: `Bearer ${token}` });
             }
-          }
-        );
+          });
       } else {
         return res.status(400).json();
       }

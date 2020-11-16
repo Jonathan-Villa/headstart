@@ -5,9 +5,9 @@ import "./styles/signup.css";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch } from "react-redux";
-import { registerNewUser } from "../redux/actions/authentications";
+import  {registerAuth}  from "../redux/actions/authUser";
 
-function Signup({ history }) {
+function Signup( { history }) {
   const dispatch = useDispatch();
   const classes = useFormStyles();
 
@@ -29,8 +29,8 @@ function Signup({ history }) {
       password: password,
     };
 
-    dispatch(registerNewUser(user, history)); // registers the user
-
+    
+    dispatch(registerAuth(user,history)) // registers the user
     // clear the inputs when the user submits
     resetEmail();
     resetFirstName();
