@@ -1,6 +1,6 @@
 import { alertType } from "./actiontypes/alertTypes";
 
-export const alertSucess = (message) => {
+export const alertSuccess = (message) => {
   return { type: alertType.SUCCESS, message };
 };
 

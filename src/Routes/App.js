@@ -15,7 +15,7 @@ import {
 import Navbar from "../components/NavBar/navbar";
 import store from "../redux/store/store";
 import { Provider } from "react-redux";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 function App(props) {
   return (
@@ -24,7 +24,6 @@ function App(props) {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path= "/Home" component={Home} />
 
           <>
             <PrivateRoute component={Navbar} />

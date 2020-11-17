@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import "./styles/signup.css";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch } from "react-redux";
-import  {registerAuth}  from "../redux/actions/authUser";
+import { registerAuth } from "../redux/actions/authUser";
+import RadioGroup from "../components/radioGroup";
 
-function Signup( { history }) {
+function Signup({ history }) {
   const dispatch = useDispatch();
   const classes = useFormStyles();
 
+  const [title, setTitle] = useState();
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
 
-  console.log();
   const handleSubmit = (e) => {
     e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
 
@@ -26,11 +27,11 @@ function Signup( { history }) {
       lastName: lastName,
       email: email,
       username: userName,
+      title: title,
       password: password,
     };
 
-    
-    dispatch(registerAuth(user,history)) // registers the user
+    dispatch(registerAuth(user, history)); // registers the user
     // clear the inputs when the user submits
     resetEmail();
     resetFirstName();
@@ -39,12 +40,17 @@ function Signup( { history }) {
     resetUserName();
   };
 
+  const handleRadioChange = (data) => {
+    setTitle(data);
+  };
+
   return (
     <M.Container id="sign-up-container">
       <M.Container id="sign-up-form" maxWidth="xs">
         <M.Typography component="h1" variant="h5">
           Sign Up
         </M.Typography>
+
         <form className={classes.form} method="POST" onSubmit={handleSubmit}>
           <M.TextField
             variant="outlined"
@@ -93,6 +99,7 @@ function Signup( { history }) {
             id="userName-input"
             {...bindUserName}
           />
+
           <M.TextField
             variant="outlined"
             margin="normal"
@@ -105,6 +112,9 @@ function Signup( { history }) {
             autoComplete="current-password"
             {...bindPassword}
           />
+
+          <RadioGroup data={title} selectedTitle={handleRadioChange} />
+
           <M.Button
             type="submit"
             fullWidth

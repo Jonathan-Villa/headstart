@@ -1,16 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-
 function PrivateRoute({ component: Component, ...rest }) {
   // ...rest retrieves the remainder of the props
   return (
     <Route
       {...rest}
-      render={({location}) =>
+      render={({ location }) =>
         localStorage.getItem("jwt-token") ? (
           // user has token
-          <Component/>  
+          <Component />
         ) : (
           // user does not have token
           <Redirect

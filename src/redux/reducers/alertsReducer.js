@@ -5,12 +5,12 @@ import { alertType } from "../actions/actiontypes/alertTypes";
     case alertType.SUCCESS:
       return {
         type: "Successful request",
-        payload: action.payload,
+        message: action.payload,
       };
     case alertType.ERROR:
       return {
         type: "ERROR",
-        payload: action.payload,
+        message: action.payload,
       };
     default:
       return state;

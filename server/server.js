@@ -35,9 +35,9 @@ app.get("/api", (req, res) => {
   res.send("hello");
 });
 
-app.get('/api/login', (req,res )=>{
-    res.send(`${req.body}`)
-})
+app.get("/api/login", (req, res) => {
+  res.send(`${req.body}`);
+});
 
 app.listen(PORT, () => {
   console.log("Server is up!");
