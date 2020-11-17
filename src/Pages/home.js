@@ -1,15 +1,16 @@
 import React from "react";
 import "./styles/home.css";
-import {withRouter} from 'react-router-dom'
+import { useSelector} from "react-redux"
+import HeroSection from '../components/HeroSection';
 
 function Home() {
+
   return (
-    <div className="main-container">
-      <div className="">
-        <h1>hello</h1>
-      </div>
-    </div>
+    <>
+    <HeroSection />
+    </>
   );
 }
+
 
 export default Home;

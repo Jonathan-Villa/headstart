@@ -2,35 +2,42 @@
 // To run the server with automatic updates use --- nodemon server.js
 const express = require("express");
 const cors = require("cors");
-const dotEnv = require("dotenv");
+const passport = require("passport");
 const bodyparser = require("body-parser"); // allows to parse any incoming request
-const sql = require("./sql/sqlconnect");
-const {authSignUp} = require('./sql/auth')
+const mongoose = require("mongoose");
+const { dbURL } = require("./database/dbconnnet");
+const user = require("./validation/user");
 const PORT = 4000;
-dotEnv.config({ path: "./.env" });
 
 let corsOptions = {
   // middleware
   Origin: "http://localhost:3000/",
   optionsSuccessStatus: 200,
-
 };
-const app = express(); // app will take instance of express// instead of 'express.get || express.send'
 
-app.use(cors(corsOptions)); // allows a
+mongoose.connect(dbURL, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
+
+const app = express(); // app will take instance of express// instead of 'express.get || express.send'
+require("./validation/passportjwt")(passport);
+
+app.use(cors(corsOptions));
+app.use(passport.initialize()); // Initailize
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
+app.use("/api", user);
 
 app.get("/api", (req, res) => {
   // home path
   res.send("hello");
 });
 
-// Register Route
-app.post("/api/signup", cors(), authSignUp, (req, res) => {
-  console.log(`Succesfully signed up username:${req.body.user.username}`)
-  res.send("Successful");
-});
+app.get('/api/login', (req,res )=>{
+    res.send(`${req.body}`)
+})
 
 app.listen(PORT, () => {
   console.log("Server is up!");

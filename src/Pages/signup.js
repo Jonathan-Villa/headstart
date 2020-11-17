@@ -1,48 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import "./styles/signup.css";
-import { Redirect, useHistory } from "react-router-dom";
 import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
-import App from "../Routes/App"
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import  {registerAuth}  from "../redux/actions/authUser";
 
-function Signup({userAuthenticate}) {
+function Signup( { history }) {
+  const dispatch = useDispatch();
   const classes = useFormStyles();
+
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
   const [lastName, bindLastName, resetLastName] = useUserInput("");
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
-  const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  console.log();
+  const handleSubmit = (e) => {
+    e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
+
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      username: userName,
+      password: password,
+    };
+
     
-    const userData = await axios
-      .post(
-        "http://localhost:4000/api/signup",
-        {
-          user: {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            username: userName,
-            password: password,
-          },
-        }
-      )
-      .then((res, err) => {
-        if (err) {
-          console.log(err);
-        }
-        
-        userAuthenticate.authenticate(()=> history.push('/home'))
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
+    dispatch(registerAuth(user,history)) // registers the user
+    // clear the inputs when the user submits
     resetEmail();
     resetFirstName();
     resetLastName();
@@ -131,4 +120,4 @@ function Signup({userAuthenticate}) {
   );
 }
 
-export default Signup;
+export default withRouter(Signup);
