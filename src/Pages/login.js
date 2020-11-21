@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
@@ -7,6 +7,8 @@ import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAuth } from "../redux/actions/authUser";
 import { ToastContainer } from "react-toastify";
+import CloseIcon from '@material-ui/icons/Close';
+import { Alert } from "@material-ui/lab";
 
 function Login({ history }) {
   const location = useLocation();
@@ -14,10 +16,13 @@ function Login({ history }) {
   const dispach = useDispatch();
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
+  const [alertIconClick, setAlertIconClick] = useState(true)
   const classes = useFormStyles();
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccess
   );
+
+  const handleAlertIconClick = () => setAlertIconClick(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,21 +40,20 @@ function Login({ history }) {
 
   return (
     <M.Container id="login-container">
-      {isRegistered ? (
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover
-        />
-      ) : null}
-
       <M.Container id="login-form-container" maxWidth="xs">
+        {isRegistered ? (
+          <M.Collapse in={alertIconClick}>
+            <Alert variant="filled" action={
+              <M.IconButton
+                aria-label="close alert"
+                onClick={handleAlertIconClick}
+                color="inherit"
+                size="small">
+                <CloseIcon fontSize="inherit" />
+              </M.IconButton>
+            } severity="success">Successfully Registered!</Alert>
+          </M.Collapse>
+        ) : null}
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">
             Sign in
