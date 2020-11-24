@@ -5,7 +5,7 @@ const registerReducer = (state = {}, action) => {
     case userActionType.REGISTER_REQUEST:
       return { registering: true };
     case userActionType.REGISTER_SUCCESS:
-      return { registerSuccess: true };
+      return { registerSuccessful: true };
     case userActionType.REGISTER_FAILURE:
       return { registerFailure: false };
 

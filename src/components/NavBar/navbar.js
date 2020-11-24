@@ -3,20 +3,33 @@ import { FiMenu } from "react-icons/fi";
 import "./nav.css";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useNavStyls from "../../helpers/customStyles/navStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/actions";
+import { alertSuccess } from "../../redux/actions/alertAction";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { window } = props;
   const theme = useTheme();
   const classes = useNavStyls();
-
+  const isLoggedIn = useSelector((state) => state.loginReducer.isAuthenticated);
+  const dispach = useDispatch();
   // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
+  const handleSignOutClick = () => {
+    localStorage.removeItem("jwt-token");
+
+    if (!isLoggedIn) {
+      dispach(logout());
+      dispach(alertSuccess("You have successfully"));
+    }
+  };
+
   const container =
-    window !== undefined ? () => window().document.body : undefined; 
+    window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
     <div>
@@ -27,7 +40,6 @@ function Navbar(props) {
           { route: "Time Sheet", path: "/timesheet" },
           { route: "Report", path: "/report" },
           { route: "Profile", path: "/profile" },
-          { route: "Sign Out", path: "/login" },
         ].map((text, key) => (
           <M.ListItem button key={key}>
             <Link className="nav-link" to={text.path}>
@@ -35,7 +47,13 @@ function Navbar(props) {
             </Link>
           </M.ListItem>
         ))}
-        
+        {isLoggedIn ? (
+          <M.ListItem>
+            <Link onClick={handleSignOutClick} to="#" className="nav-link">
+              Sign Out
+            </Link>
+          </M.ListItem>
+        ) : null}
       </M.List>
     </div>
   );

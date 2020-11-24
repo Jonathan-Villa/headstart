@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
@@ -6,24 +6,22 @@ import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAuth } from "../redux/actions/authUser";
-import { ToastContainer } from "react-toastify";
-import CloseIcon from '@material-ui/icons/Close';
-import { Alert } from "@material-ui/lab";
+import SnackBar from "../alerts/snackbar"
+import { alertSuccess } from "../redux/actions/alertAction";
 
 function Login({ history }) {
+  const classes = useFormStyles();
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: "/home" } };
-  const dispach = useDispatch();
+  const dispatch = useDispatch();
+
+  const { from } = location.state || { from: { pathname: "/home" } }; 
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
-  const [alertIconClick, setAlertIconClick] = useState(true)
-  const classes = useFormStyles();
+ 
   const isRegistered = useSelector(
-    (state) => state.registerReducer.registerSuccess
+    (state) => state.registerReducer.registerSuccessful
   );
-
-  const handleAlertIconClick = () => setAlertIconClick(false)
-
+    
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,8 +29,8 @@ function Login({ history }) {
       email: email,
       password: password,
     };
-    dispach(loginAuth(userLogin, history, from)); // login the user
-
+    dispatch(loginAuth(userLogin, history, from)); // login the user
+    dispatch(alertSuccess("Successfully logged in!"))
     // clear the inputs when the user submits
     resetEmail();
     resetPassword();
@@ -41,19 +39,11 @@ function Login({ history }) {
   return (
     <M.Container id="login-container">
       <M.Container id="login-form-container" maxWidth="xs">
+
         {isRegistered ? (
-          <M.Collapse in={alertIconClick}>
-            <Alert variant="filled" action={
-              <M.IconButton
-                aria-label="close alert"
-                onClick={handleAlertIconClick}
-                color="inherit"
-                size="small">
-                <CloseIcon fontSize="inherit" />
-              </M.IconButton>
-            } severity="success">Successfully Registered!</Alert>
-          </M.Collapse>
+          <SnackBar  />
         ) : null}
+
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">
             Sign in

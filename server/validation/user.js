@@ -11,6 +11,7 @@ router.post("/signup", (req, res) => {
 
   User.findOne({ email: req.body.email }).then((user) => {
     // check to see if email is already in use
+    console.log(user)
     if (user) {
       res.status(400).json({ email: "Email is already registered" });
     } else {

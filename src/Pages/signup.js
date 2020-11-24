@@ -7,6 +7,7 @@ import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch } from "react-redux";
 import { registerAuth } from "../redux/actions/authUser";
 import RadioGroup from "../components/radioGroup";
+import {alertSuccess} from "../redux/actions/alertAction"
 
 function Signup({ history }) {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Signup({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
@@ -32,6 +34,7 @@ function Signup({ history }) {
     };
 
     dispatch(registerAuth(user, history)); // registers the user
+    dispatch(alertSuccess("Successfully Registered!"))
     // clear the inputs when the user submits
     resetEmail();
     resetFirstName();

@@ -1,20 +1,25 @@
 import { alertType } from "../actions/actiontypes/alertTypes";
 
- const alertsReducer = (state = {}, action) => {
+ const alertReducer = (state = {}, action) => {
   switch (action.type) {
     case alertType.SUCCESS:
       return {
-        type: "Successful request",
-        message: action.payload,
+        type: "success",
+        message: action.message,
       };
+    case alertType.MESSAGE: 
+    return {
+      type: "info",
+      message: action.message
+    }
     case alertType.ERROR:
       return {
-        type: "ERROR",
-        message: action.payload,
+        type: "error",
+        message: action.message,
       };
     default:
       return state;
   }
 };
 
-export default alertsReducer
+export default alertReducer

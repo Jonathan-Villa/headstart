@@ -10,6 +10,8 @@ const userSchema = new Schema({
   password: { type: String },
 });
 
+
+
 const dbURL = "mongodb://localhost:27017/headstartDB";
 const User = new mongoose.model("users", userSchema);
 

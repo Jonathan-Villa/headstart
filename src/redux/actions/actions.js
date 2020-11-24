@@ -14,3 +14,9 @@ export const register = () => {
     registerSuccess: true,
   };
 };
+
+export const logout = () => {
+  return {
+    type: userActionType.LOGOUT
+  }
+}

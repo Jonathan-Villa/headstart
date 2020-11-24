@@ -3,8 +3,9 @@ import setAuthToken from "./setAuthToken";
 import { login, register } from "./actions";
 import loginPost from "../http/loginPost";
 import registerPost from "../http/registerPost";
-import { toast } from "react-toastify";
 
+import {alertSuccess, alertError} from "../actions/alertAction"
+ 
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user)
     .then((res) => {
@@ -12,11 +13,14 @@ export const registerAuth = (user, history) => (dispatch) => {
       if (res.status === 200) {
         console.log(res.data.title);
         dispatch(register());
+        dispatch(alertSuccess("Successfully Registered!"))
         history.push("/login"); // will redirect them to login page
-        toast.success("Sucessfully registered!");
       }
+
+      
+
     })
-    .catch((e) => dispatch());
+    .catch((err) => dispatch(alertError(err)));
 };
 
 export const loginAuth = (user, history, from) => (dispatch) => {
@@ -34,8 +38,9 @@ export const loginAuth = (user, history, from) => (dispatch) => {
       history.push(from);
       // store the token in redux state
       dispatch(login(decodeToken));
+      dispatch(alertSuccess("Sucessfully logged in!"))
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(alertError(err))
     });
 };
