@@ -1,13 +1,13 @@
 import React from "react";
 import "./styles/profile.css";
-function Profile() {
+function Settings() {
   return (
     <div className="main-container">
       <div>
-        <h1 className="header-profile">Profile page</h1>
+        <h1 className="header-profile">Settings page</h1>
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default Settings;

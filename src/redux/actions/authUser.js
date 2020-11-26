@@ -16,9 +16,6 @@ export const registerAuth = (user, history) => (dispatch) => {
         dispatch(alertSuccess("Successfully Registered!"))
         history.push("/login"); // will redirect them to login page
       }
-
-      
-
     })
     .catch((err) => dispatch(alertError(err)));
 };

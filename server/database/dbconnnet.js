@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+require('dotenv').config();
 
 const userSchema = new Schema({
   email: { type: String, unique: true },
@@ -12,7 +13,7 @@ const userSchema = new Schema({
 
 
 
-const dbURL = "mongodb://localhost:27017/headstartDB";
+const dbURL = process.env.DATEBASE_URL;
 const User = new mongoose.model("users", userSchema);
 
 module.exports = {

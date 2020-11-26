@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
-import "./nav.css";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import useNavStyls from "../../helpers/customStyles/navStyles";
+import useNavStyles from "../../helpers/customStyles/navStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
+import StudentNav from "./studentNav/studentNav"
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { window } = props;
   const theme = useTheme();
-  const classes = useNavStyls();
+  const styles = useNavStyles();
+
   const isLoggedIn = useSelector((state) => state.loginReducer.isAuthenticated);
   const dispach = useDispatch();
+
   // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const handleSignOutClick = () => {
-    localStorage.removeItem("jwt-token");
+    // removing token will sign the user out
+    localStorage.removeItem("jwt-token"); 
 
     if (!isLoggedIn) {
       dispach(logout());
@@ -33,23 +36,13 @@ function Navbar(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
-      <M.List id="li-items">
-        {[
-          { route: "Home", path: "/home" },
-          { route: "Time Sheet", path: "/timesheet" },
-          { route: "Report", path: "/report" },
-          { route: "Profile", path: "/profile" },
-        ].map((text, key) => (
-          <M.ListItem button key={key}>
-            <Link className="nav-link" to={text.path}>
-              {text.route}
-            </Link>
-          </M.ListItem>
-        ))}
+      <div className={styles.toolbar} />
+      <M.List >
+        <StudentNav/>
+
         {isLoggedIn ? (
           <M.ListItem>
-            <Link onClick={handleSignOutClick} to="#" className="nav-link">
+            <Link onClick={handleSignOutClick} to="#" className={styles.links}>
               Sign Out
             </Link>
           </M.ListItem>
@@ -61,13 +54,13 @@ function Navbar(props) {
   return (
     <div>
       <M.CssBaseline />
-      <M.AppBar position="static" className={classes.appBar}>
+      <M.AppBar position="static" className={styles.appBar}>
         <M.Toolbar>
           <M.IconButton
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            className={classes.menuButton}
+            className={styles.menuButton}
           >
             <FiMenu />
           </M.IconButton>
@@ -77,7 +70,7 @@ function Navbar(props) {
         </M.Toolbar>
       </M.AppBar>
 
-      <nav className={classes.drawer}>
+      <nav className={styles.drawer}>
         <M.Hidden smUp implementation="css">
           <M.Drawer
             container={container}
@@ -86,7 +79,7 @@ function Navbar(props) {
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{
-              paper: classes.drawerPaper,
+              paper: styles.drawerPaper,
             }}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
@@ -99,7 +92,7 @@ function Navbar(props) {
         <M.Hidden xsDown implementation="css">
           <M.Drawer
             classes={{
-              paper: classes.drawerPaper,
+              paper: styles.drawerPaper,
             }}
             variant="permanent"
             open

@@ -1,5 +1,5 @@
 import React from "react";
-import { useStyles } from "../helpers/customStyles/radioGroupStyles";
+import { useStyles } from "../../helpers/customStyles/radioGroupStyles";
 import * as M from "@material-ui/core";
 
 function RadioGroup(props) {

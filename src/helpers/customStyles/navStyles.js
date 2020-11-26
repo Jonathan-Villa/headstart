@@ -10,12 +10,12 @@ const useNavStyles = makeStyles((theme) => ({
       [theme.breakpoints.up("sm")]: {
         width: drawerWidth,
         flexShrink: 0,
-        background: "#353535",
+        background: "#ffff",
       },
     },
     // app bar style
     appBar: {
-      background: "#353535",
+      background: "#00b4d8",
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -31,9 +31,28 @@ const useNavStyles = makeStyles((theme) => ({
     // Handles content within
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
-      background: "#353535",
+      background: "#ffff",
       width: drawerWidth,
     },
+    collapse:{
+      background: "#f8f9fa"
+    },
+    links: { 
+      textDecoration: "none",
+      fontSize: "18px",
+      width: "100%",
+      height: "30px",
+      display: "block",
+      color:"black"
+    },
+    linksCollapse:{
+      marginLeft: "10px", 
+      height: "27px",
+      fontSize: "15px",
+      textDecoration:"none",
+      color:"black",
+      display: "block",
+    }
   }));
 
 export default useNavStyles

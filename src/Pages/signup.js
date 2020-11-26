@@ -6,7 +6,7 @@ import useFormStyles from "../helpers/customStyles/formStyle";
 import useUserInput from "../helpers/customHooks/userInput";
 import { useDispatch } from "react-redux";
 import { registerAuth } from "../redux/actions/authUser";
-import RadioGroup from "../components/radioGroup";
+import RadioGroup from "../components/radioGroup/radioGroup";
 import {alertSuccess} from "../redux/actions/alertAction"
 
 function Signup({ history }) {
@@ -53,7 +53,6 @@ function Signup({ history }) {
         <M.Typography component="h1" variant="h5">
           Sign Up
         </M.Typography>
-
         <form className={classes.form} method="POST" onSubmit={handleSubmit}>
           <M.TextField
             variant="outlined"

@@ -3,7 +3,7 @@ import Login from "../Pages/login";
 import SignUp from "../Pages/signup";
 import TimeSheet from "../Pages/timesheet";
 import Reports from "../Pages/report";
-import Profile from "../Pages/profile";
+import Settings from "../Pages/settings";
 import Home from "../Pages/home";
 import PrivateRoute from "./privateroute";
 import {
@@ -27,9 +27,9 @@ function App(props) {
           <>
             <PrivateRoute component={Navbar} />
             <PrivateRoute exact path="/home" {...props} component={Home} />
-            <PrivateRoute path="/timesheet" component={TimeSheet} />
+            <PrivateRoute path="/time-sheet" component={TimeSheet} />
             <PrivateRoute path="/report" component={Reports} />
-            <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/settings" component={Settings} />
           </>
           <Redirect from={"/login"} to="/home" />
         </Switch>

@@ -8,10 +8,11 @@ const mongoose = require("mongoose");
 const { dbURL } = require("./database/dbconnnet");
 const user = require("./validation/user");
 const PORT = 4000;
+require('dotenv').config();
 
 let corsOptions = {
   // middleware
-  Origin: "http://localhost:3000/",
+  Origin: process.env.PORT ,
   optionsSuccessStatus: 200,
 };
 
