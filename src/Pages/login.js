@@ -1,27 +1,27 @@
 import React from "react";
-import "./styles/login.css";
+import "./pageStyles/login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
-import useFormStyles from "../helpers/customStyles/formStyle";
-import useUserInput from "../helpers/customHooks/userInput";
+import { useFormStyles } from "./pageStyles/formStyles";
+import { useUserInput } from "../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAuth } from "../redux/actions/authUser";
-import SnackBar from "../alerts/snackbar"
-import { alertSuccess } from "../redux/actions/alertAction";
+import { loginAuth } from "../redux/actions";
+import SnackBar from "../components/alerts/snackbar";
+import { alertSuccess } from "../redux/actions";
 
 function Login({ history }) {
   const classes = useFormStyles();
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { from } = location.state || { from: { pathname: "/home" } }; 
+  const { from } = location.state || { from: { pathname: "/home" } };
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
- 
+
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccessful
   );
-    
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -30,7 +30,7 @@ function Login({ history }) {
       password: password,
     };
     dispatch(loginAuth(userLogin, history, from)); // login the user
-    dispatch(alertSuccess("Successfully logged in!"))
+    dispatch(alertSuccess("Successfully logged in!"));
     // clear the inputs when the user submits
     resetEmail();
     resetPassword();
@@ -39,10 +39,7 @@ function Login({ history }) {
   return (
     <M.Container id="login-container">
       <M.Container id="login-form-container" maxWidth="xs">
-
-        {isRegistered ? (
-          <SnackBar  />
-        ) : null}
+        {isRegistered ? <SnackBar /> : null}
 
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">
@@ -107,5 +104,5 @@ function Login({ history }) {
     </M.Container>
   );
 }
-
+export { Login };
 export default withRouter(Login);

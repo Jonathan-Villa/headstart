@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
-import "./styles/signup.css";
-import useFormStyles from "../helpers/customStyles/formStyle";
-import useUserInput from "../helpers/customHooks/userInput";
+import "./pageStyles/signup.css";
+import { useFormStyles } from "./pageStyles/formStyles";
+import { useUserInput } from "../customTools/customHooks";
 import { useDispatch } from "react-redux";
-import { registerAuth } from "../redux/actions/authUser";
-import RadioGroup from "../components/radioGroup/radioGroup";
-import {alertSuccess} from "../redux/actions/alertAction"
+import { registerAuth } from "../redux/actions";
+import { RadioGroup } from "../components/radioGroup";
+import { alertSuccess } from "../redux/actions";
 
 function Signup({ history }) {
   const dispatch = useDispatch();
@@ -19,7 +19,6 @@ function Signup({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
-
 
   const handleSubmit = (e) => {
     e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
@@ -34,7 +33,7 @@ function Signup({ history }) {
     };
 
     dispatch(registerAuth(user, history)); // registers the user
-    dispatch(alertSuccess("Successfully Registered!"))
+    dispatch(alertSuccess("Successfully Registered!"));
     // clear the inputs when the user submits
     resetEmail();
     resetFirstName();
@@ -131,5 +130,5 @@ function Signup({ history }) {
     </M.Container>
   );
 }
-
-export default withRouter(Signup);
+export { Signup };
+export default withRouter({ Signup });

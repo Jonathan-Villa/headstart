@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function Snackbar() {
   const [open, setOpen] = useState(true);
   const snack = useRef();
-  
+
   const alertType = useSelector((state) => state.alertReducer);
 
   const handleClose = (e, reason) => {

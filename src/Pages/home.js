@@ -1,8 +1,9 @@
 import React from "react";
-import "./styles/home.css";
+import "./pageStyles/home.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import DataTable from "../components/DataTable/datatable";
+
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -20,6 +21,7 @@ function Home() {
   const classes = useStyles();
   return (
     <div className="main-container">
+
       <Grid container spacing={4} className={classes.grid}>
         <Grid item xs={12} md={12}></Grid>
         <Grid item xs={12} md={6}>
@@ -34,4 +36,4 @@ function Home() {
   );
 }
 
-export default Home;
+export {Home};

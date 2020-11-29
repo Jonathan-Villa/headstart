@@ -1,9 +1,7 @@
 import jwtDecode from "jwt-decode";
 import setAuthToken from "./setAuthToken";
 import { login, register } from "./actions";
-import loginPost from "../http/loginPost";
-import registerPost from "../http/registerPost";
-
+import {loginPost, registerPost} from "../http"
 import {alertSuccess, alertError} from "../actions/alertAction"
  
 export const registerAuth = (user, history) => (dispatch) => {

@@ -1,10 +1,5 @@
 import React from "react";
-import Login from "../Pages/login";
-import SignUp from "../Pages/signup";
-import TimeSheet from "../Pages/timesheet";
-import Reports from "../Pages/report";
-import Settings from "../Pages/settings";
-import Home from "../Pages/home";
+import { Home, TimeSheet, Report, Settings, Login, Signup } from "../Pages";
 import PrivateRoute from "./privateroute";
 import {
   Route,
@@ -12,7 +7,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Navbar from "../components/NavBar/navbar";
+import { Navbar } from "../components/NavBar";
 import store from "../redux/store/store";
 import { Provider } from "react-redux";
 
@@ -22,13 +17,13 @@ function App(props) {
       <Router>
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/signup" component={Signup} />
 
           <>
             <PrivateRoute component={Navbar} />
             <PrivateRoute exact path="/home" {...props} component={Home} />
             <PrivateRoute path="/time-sheet" component={TimeSheet} />
-            <PrivateRoute path="/report" component={Reports} />
+            {/* <PrivateRoute path="/report" component={Report} /> */}
             <PrivateRoute path="/settings" component={Settings} />
           </>
           <Redirect from={"/login"} to="/home" />

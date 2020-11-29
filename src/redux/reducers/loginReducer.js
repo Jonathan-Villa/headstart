@@ -1,10 +1,9 @@
-import { userActionType } from "../actions/actiontypes/userActionTypes";
+import { userActionType } from "../actions/actiontypes";
 
 let user = localStorage.getItem("jwt-token");
 
 const initialState = user
   ? {
-     
       isAuthenticated: true,
       user,
     }
@@ -27,4 +26,4 @@ const loginReducer = (state = initialState, action) => {
   }
 };
 
-export default loginReducer;
+export { loginReducer };

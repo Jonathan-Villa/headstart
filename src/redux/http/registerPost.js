@@ -8,4 +8,4 @@ const registerPost = async (user) => {
     .catch((err) => err);
 };
 
-export default registerPost;
+export { registerPost };

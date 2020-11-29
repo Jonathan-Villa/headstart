@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/report.css";
+import "./pageStyles/report.css";
 function Report() {
   return (
     <div className="main-container">
@@ -10,4 +10,4 @@ function Report() {
   );
 }
 
-export default Report;
+export { Report };

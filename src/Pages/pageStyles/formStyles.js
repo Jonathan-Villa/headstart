@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 
-const useFormStyles = makeStyles((theme) => ({
+export const useFormStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: " "
+    height: " ",
   },
   form: {
     width: "100%",
@@ -17,5 +17,3 @@ const useFormStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default useFormStyles

@@ -1,13 +1,13 @@
 import React from "react";
-import "./styles/timesheet.css";
-function Timesheet() {
+import "./pageStyles/timesheet.css";
+import { StudentTabs } from "../components/studentTabs";
+function TimeSheet() {
   return (
     <div className="main-container">
-      <div>
-        <h1 className="header-timesheet">Timesheet page</h1>
-      </div>
+
+      <StudentTabs />
     </div>
   );
 }
 
-export default Timesheet;
+export { TimeSheet };

@@ -3,11 +3,11 @@ import { FiMenu } from "react-icons/fi";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import useNavStyles from "../../helpers/customStyles/navStyles";
+import { useNavStyles } from "./styles/navStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/actions/actions";
+import { logout } from "../../redux/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
-import StudentNav from "./studentNav/studentNav"
+import { studentPath } from "./paths";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,7 +23,7 @@ function Navbar(props) {
 
   const handleSignOutClick = () => {
     // removing token will sign the user out
-    localStorage.removeItem("jwt-token"); 
+    localStorage.removeItem("jwt-token");
 
     if (!isLoggedIn) {
       dispach(logout());
@@ -37,8 +37,12 @@ function Navbar(props) {
   const drawer = (
     <div>
       <div className={styles.toolbar} />
-      <M.List >
-        <StudentNav/>
+      <M.List>
+        {studentPath.map((index, key) => (
+          <M.ListItem key={key}>
+            <Link className={styles.links} to={index.path}>{index.pathName}</Link>
+          </M.ListItem>
+        ))}
 
         {isLoggedIn ? (
           <M.ListItem>
@@ -105,4 +109,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export { Navbar };

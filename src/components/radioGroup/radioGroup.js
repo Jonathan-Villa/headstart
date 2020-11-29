@@ -1,9 +1,9 @@
 import React from "react";
-import { useStyles } from "../../helpers/customStyles/radioGroupStyles";
+import { useRadioGroupStyles } from "./styles/radioGroupStyles";
 import * as M from "@material-ui/core";
 
 function RadioGroup(props) {
-  const radioStyle = useStyles();
+  const radioStyle = useRadioGroupStyles();
 
   const handleRadioChange = (event) => {
     // store selected value to the components property
@@ -29,4 +29,4 @@ function RadioGroup(props) {
   );
 }
 
-export default RadioGroup;
+export { RadioGroup };

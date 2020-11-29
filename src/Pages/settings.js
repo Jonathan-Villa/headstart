@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/profile.css";
+import "./pageStyles/profile.css";
 function Settings() {
   return (
     <div className="main-container">
@@ -10,4 +10,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export {Settings};

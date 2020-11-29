@@ -1,11 +1,11 @@
 import axios from "axios";
 
-// post request for user login 
-const loginPost = async (user) => { 
+// post request for user login
+const loginPost = async (user) => {
   return await axios
-    .post("http://localhost:4000/api/login", user) 
+    .post("http://localhost:4000/api/login", user)
     .then((res) => res) // return response
     .catch((err) => err);
 };
 
-export default loginPost;
+export { loginPost };
