@@ -5,7 +5,6 @@ let user = localStorage.getItem("jwt-token");
 const initialState = user
   ? {
       isAuthenticated: true,
-      user,
     }
   : { isAuthenticated: false, user: {} };
 

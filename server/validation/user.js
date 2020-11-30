@@ -7,13 +7,17 @@ const passport = require("passport");
 const { User } = require("../database/dbconnnet");
 
 router.post("/signup", (req, res) => {
-  console.log(req.body);
-
   User.findOne({ email: req.body.email }).then((user) => {
     // check to see if email is already in use
-    console.log(user)
+    console.log(user);
     if (user) {
-      res.status(400).json({ email: "Email is already registered" });
+      res
+        .status(400)
+        .send({
+          type: "error",
+          email: user.email,
+          message: "Email is already registered",
+        });
     } else {
       const newUser = new User({
         // register user
@@ -51,14 +55,9 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log(req.body);
-
   User.findOne({ email: email }).then((user) => {
     // "findOne" queries the DB to find email
-    if (!user) {
-      // return 404 if not found
-      return res.status(404).json();
-    }
+    if (!user) return res.status(400).json("Email is not registered");
 
     bcrypt.compare(password, user.password).then((isUserMatch) => {
       // validates password
@@ -66,6 +65,7 @@ router.post("/login", (req, res) => {
         const payLoad = {
           id: user.id,
           username: user.username,
+          role: user.title,
         };
 
         // user is validated // token expires in 1 hr
@@ -75,18 +75,28 @@ router.post("/login", (req, res) => {
           { expiresIn: 3600 },
           (err, token) => {
             if (err) {
-              console.log(err);
+              res.json(
+                "Wrong password. Try again or click Forgot password to reset it"
+              );
             } else {
               res.json({ success: true, token: `Bearer ${token}` });
             }
           }
         );
       } else {
-        return res.status(400).json();
+        return res.status(400).json("Email or Password was incorrect!");
       }
     });
   });
 });
+
+router.post("login/admin-hd", (req,res)=> {
+  const email = req.body.email
+  const password = req.body.password
+
+  
+
+})
 
 router.get(
   "/profile",

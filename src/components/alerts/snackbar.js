@@ -14,11 +14,8 @@ function Snackbar() {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
-
-  console.log(snack);
 
   return (
     <div>
@@ -50,4 +47,4 @@ function Snackbar() {
   );
 }
 
-export default Snackbar;
+export { Snackbar };

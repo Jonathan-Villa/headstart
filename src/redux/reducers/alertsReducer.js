@@ -16,6 +16,7 @@ const alertReducer = (state = {}, action) => {
       return {
         type: "error",
         message: action.message,
+        email: action.email
       };
     default:
       return state;

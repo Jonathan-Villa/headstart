@@ -5,7 +5,7 @@ const loginPost = async (user) => {
   return await axios
     .post("http://localhost:4000/api/login", user)
     .then((res) => res) // return response
-    .catch((err) => err);
+    .catch((err) => err.response);
 };
 
 export { loginPost };

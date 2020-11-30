@@ -1,5 +1,6 @@
 import React from "react";
 import { Home, TimeSheet, Report, Settings, Login, Signup } from "../Pages";
+import {AdminLogin } from "../Pages/adminPages";
 import PrivateRoute from "./privateroute";
 import {
   Route,
@@ -18,6 +19,7 @@ function App(props) {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login/admin-hd" component={AdminLogin}/>
 
           <>
             <PrivateRoute component={Navbar} />
@@ -26,6 +28,9 @@ function App(props) {
             {/* <PrivateRoute path="/report" component={Report} /> */}
             <PrivateRoute path="/settings" component={Settings} />
           </>
+
+
+          
           <Redirect from={"/login"} to="/home" />
         </Switch>
       </Router>

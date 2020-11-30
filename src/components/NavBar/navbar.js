@@ -39,13 +39,13 @@ function Navbar(props) {
       <div className={styles.toolbar} />
       <M.List>
         {studentPath.map((index, key) => (
-          <M.ListItem key={key}>
+          <M.ListItem button key={key}>
             <Link className={styles.links} to={index.path}>{index.pathName}</Link>
           </M.ListItem>
         ))}
 
         {isLoggedIn ? (
-          <M.ListItem>
+          <M.ListItem button>
             <Link onClick={handleSignOutClick} to="#" className={styles.links}>
               Sign Out
             </Link>

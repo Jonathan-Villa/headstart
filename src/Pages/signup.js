@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import "./pageStyles/signup.css";
 import { useFormStyles } from "./pageStyles/formStyles";
 import { useUserInput } from "../customTools/customHooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerAuth } from "../redux/actions";
 import { RadioGroup } from "../components/radioGroup";
-import { alertSuccess } from "../redux/actions";
+import { Snackbar } from "../components/alerts";
 
 function Signup({ history }) {
   const dispatch = useDispatch();
   const classes = useFormStyles();
+  const alertMessage = useSelector((state) => state.alertReducer);
 
   const [title, setTitle] = useState();
   const [firstName, bindFirstName, resetFirstName] = useUserInput("");
@@ -33,7 +34,7 @@ function Signup({ history }) {
     };
 
     dispatch(registerAuth(user, history)); // registers the user
-    dispatch(alertSuccess("Successfully Registered!"));
+
     // clear the inputs when the user submits
     resetEmail();
     resetFirstName();
@@ -44,11 +45,14 @@ function Signup({ history }) {
 
   const handleRadioChange = (data) => {
     setTitle(data);
+
   };
 
   return (
     <M.Container id="sign-up-container">
       <M.Container id="sign-up-form" maxWidth="xs">
+        {alertMessage.type === "error" ? <Snackbar /> : null}
+
         <M.Typography component="h1" variant="h5">
           Sign Up
         </M.Typography>
@@ -59,6 +63,12 @@ function Signup({ history }) {
             type="email"
             required
             fullWidth
+            helperText={
+              alertMessage.email === email
+                ? "This email is already registered"
+                : false
+            }
+            error={alertMessage.type === "error" ? true : false}
             id="email"
             label="Email Address"
             name="email"
@@ -95,6 +105,7 @@ function Signup({ history }) {
             required
             fullWidth
             name="userName"
+            
             label="Username"
             type="text"
             id="userName-input"

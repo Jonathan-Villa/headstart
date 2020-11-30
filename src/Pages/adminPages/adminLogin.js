@@ -1,15 +1,14 @@
 import React from "react";
-import "./pageStyles/login.css";
-import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
-import { useFormStyles } from "./pageStyles/formStyles";
-import { useUserInput } from "../customTools/customHooks";
+import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAuth } from "../redux/actions";
-import { Snackbar } from "../components/alerts";
-import { alertSuccess } from "../redux/actions";
+import { useFormStyles } from "../pageStyles/formStyles";
+import { withRouter, useLocation } from "react-router-dom";
+import { Snackbar } from "../../components/alerts";
+import { loginAuth } from "../../redux/actions";
+import "../pageStyles/login.css";
 
-function Login({ history }) {
+function AdminLogin({ history }) {
   const classes = useFormStyles();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function Login({ history }) {
       password: password,
     };
     dispatch(loginAuth(userLogin, history, from)); // login the user
-    dispatch(alertSuccess("Successfully logged in!"));
     // clear the inputs when the user submits
     resetEmail();
     resetPassword();
@@ -43,7 +41,7 @@ function Login({ history }) {
 
         <div className={classes.paper}>
           <M.Typography component="h1" variant="h5">
-            Sign in
+            Admin Sign in
           </M.Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
             <M.TextField
@@ -91,12 +89,6 @@ function Login({ history }) {
                   Forgot password?
                 </M.Link>
               </M.Grid>
-              <M.Grid item>
-                <M.Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </M.Link>
-              </M.Grid>
-              <M.Grid item></M.Grid>
             </M.Grid>
           </form>
         </div>
@@ -104,5 +96,5 @@ function Login({ history }) {
     </M.Container>
   );
 }
-export { Login };
-export default withRouter(Login);
+
+export { AdminLogin };

@@ -9,11 +9,10 @@ function RadioGroup(props) {
     // store selected value to the components property
     props.selectedTitle(event.target.value);
   };
-
   return (
-    <M.FormControl className={radioStyle.radioForm} component="fieldset">
+    <M.FormControl  required className={radioStyle.radioForm} component="fieldset">
       <M.FormLabel>Select your title</M.FormLabel>
-      <M.RadioGroup onChange={handleRadioChange} row aria-label="select title">
+      <M.RadioGroup onChange={handleRadioChange}  row aria-label="select title">
         <M.FormControlLabel
           value="Student"
           control={<M.Radio />}
@@ -25,6 +24,7 @@ function RadioGroup(props) {
           label="Preceptor"
         />
       </M.RadioGroup>
+      <M.FormHelperText>{props.helplabel} </M.FormHelperText>
     </M.FormControl>
   );
 }

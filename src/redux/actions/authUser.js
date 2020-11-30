@@ -1,21 +1,23 @@
 import jwtDecode from "jwt-decode";
 import setAuthToken from "./setAuthToken";
 import { login, register } from "./actions";
-import {loginPost, registerPost} from "../http"
-import {alertSuccess, alertError} from "../actions/alertAction"
- 
+import { loginPost, registerPost } from "../http";
+import { alertSuccess, alertError } from "../actions/alertAction";
+
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user)
     .then((res) => {
       // registered successfully
       if (res.status === 200) {
-        console.log(res.data.title);
         dispatch(register());
-        dispatch(alertSuccess("Successfully Registered!"))
+        dispatch(alertSuccess("Successfully Registered!"));
         history.push("/login"); // will redirect them to login page
       }
+      if(res.status === 400){
+        console.log(res.data)
+        dispatch(alertError(res.data.message, res.data.email))
+      }
     })
-    .catch((err) => dispatch(alertError(err)));
 };
 
 export const loginAuth = (user, history, from) => (dispatch) => {
@@ -33,9 +35,9 @@ export const loginAuth = (user, history, from) => (dispatch) => {
       history.push(from);
       // store the token in redux state
       dispatch(login(decodeToken));
-      dispatch(alertSuccess("Sucessfully logged in!"))
+      dispatch(alertSuccess("Sucessfully logged in!"));
     })
     .catch((err) => {
-      dispatch(alertError(err))
+      dispatch(alertError(err));
     });
 };
