@@ -4,6 +4,7 @@ import { login, register } from "./actions";
 import { loginPost, registerPost } from "../http";
 import { alertSuccess, alertError } from "../actions/alertAction";
 
+
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user)
     .then((res) => {

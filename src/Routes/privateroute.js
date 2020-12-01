@@ -15,7 +15,7 @@ function PrivateRoute({ component: Component, ...rest }) {
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: location, error: "Login first" },
+              state: { from: location },
             }}
           />
         )

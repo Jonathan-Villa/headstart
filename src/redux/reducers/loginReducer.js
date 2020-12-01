@@ -2,11 +2,7 @@ import { userActionType } from "../actions/actiontypes";
 
 let user = localStorage.getItem("jwt-token");
 
-const initialState = user
-  ? {
-      isAuthenticated: true,
-    }
-  : { isAuthenticated: false, user: {} };
+const initialState = user ? { isAuthenticated: true } : { isAuthenticated: false, user: {} };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,7 +12,8 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        payload: action.payload, // users submitted payload
+        payload: action.payload,
+        role: action.payload.role // users submitted payload
       };
     case userActionType.LOGIN_FAILURE:
       return {};

@@ -18,6 +18,8 @@ function Login({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
 
+  console.log(from)
+
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccessful
   );

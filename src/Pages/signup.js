@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import "./pageStyles/signup.css";
@@ -45,7 +45,6 @@ function Signup({ history }) {
 
   const handleRadioChange = (data) => {
     setTitle(data);
-
   };
 
   return (
@@ -105,7 +104,6 @@ function Signup({ history }) {
             required
             fullWidth
             name="userName"
-            
             label="Username"
             type="text"
             id="userName-input"

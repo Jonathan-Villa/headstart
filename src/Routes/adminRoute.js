@@ -1,24 +1,18 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Page403 } from "../Pages/errorPages";
 
-function AdminRoute({ component: Component, rest }) {
-  const isAdmin = useSelector((state) => state.loginReducer.payload);
+function AdminRoute({ component: Component, ...rest }) {
+  const isAdmin = useSelector((state) => state.loginReducer.role);
 
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        isAdmin.role === "Admin" ? (
-          <Component />
+      render={(props,{ location }) =>
+        isAdmin === "admin" ? (
+          <Component {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: location, error: "Status: 403" },
-            }}
-          />
+          <Redirect to={{ pathname: "/login", state: { from: location } }} />
         )
       }
     />

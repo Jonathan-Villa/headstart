@@ -14,14 +14,14 @@ function RadioGroup(props) {
       <M.FormLabel>Select your title</M.FormLabel>
       <M.RadioGroup onChange={handleRadioChange}  row aria-label="select title">
         <M.FormControlLabel
-          value="Student"
+          value="student"
           control={<M.Radio />}
           label="Student"
         />
         <M.FormControlLabel
-          value="Preceptor"
+          value="admin"
           control={<M.Radio />}
-          label="Preceptor"
+          label="Admin"
         />
       </M.RadioGroup>
       <M.FormHelperText>{props.helplabel} </M.FormHelperText>

@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-
+const { admin, student } = require("./roleAuthorization");
 const { User } = require("../database/dbconnnet");
 
 router.post("/signup", (req, res) => {
@@ -11,13 +11,11 @@ router.post("/signup", (req, res) => {
     // check to see if email is already in use
     console.log(user);
     if (user) {
-      res
-        .status(400)
-        .send({
-          type: "error",
-          email: user.email,
-          message: "Email is already registered",
-        });
+      res.status(400).send({
+        type: "error",
+        email: user.email,
+        message: "Email is already registered",
+      });
     } else {
       const newUser = new User({
         // register user
@@ -79,7 +77,18 @@ router.post("/login", (req, res) => {
                 "Wrong password. Try again or click Forgot password to reset it"
               );
             } else {
-              res.json({ success: true, token: `Bearer ${token}` });
+              if (payLoad.role === "admin") {
+                res.json({
+                  success: true,
+                  token: `Bearer ${token}`,
+                  user: admin,
+                });
+              }
+              res.json({
+                success: true,
+                token: `Bearer ${token}`,
+                user: student,
+              });
             }
           }
         );
@@ -89,14 +98,6 @@ router.post("/login", (req, res) => {
     });
   });
 });
-
-router.post("login/admin-hd", (req,res)=> {
-  const email = req.body.email
-  const password = req.body.password
-
-  
-
-})
 
 router.get(
   "/profile",
