@@ -8,9 +8,9 @@ function AdminRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props,{ location }) =>
+      render={({ location }) =>
         isAdmin === "admin" ? (
-          <Component {...props} />
+          <Component />
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />
         )

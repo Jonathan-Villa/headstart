@@ -8,4 +8,4 @@ function StudentProfile() {
   );
 }
 
-export default StudentProfile;
+export { StudentProfile };

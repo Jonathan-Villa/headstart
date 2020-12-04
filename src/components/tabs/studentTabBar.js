@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { AppBar, Tab, Box } from "@material-ui/core";
+import { AppBar, Tab } from "@material-ui/core";
 import { useTabStyles } from "./styles/tabStyles";
 import { TabContext, TabPanel, TabList } from "@material-ui/lab";
-import { ViewAll, ViewCurrent, ViewRejected } from "../studentComponents";
+import { ViewAll, ViewCurrent, ViewRejected } from "../student/studentTabPanels";
 
 const StudentTabs = () => {
   const [value, setValue] = useState('1');
@@ -20,6 +20,8 @@ const StudentTabs = () => {
             <Tab value="1" label="View Current" />
             <Tab value="2" label="View All" />
             <Tab value="3" label="View Rejected" />
+
+            
           </TabList>
         </AppBar>
 

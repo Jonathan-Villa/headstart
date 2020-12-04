@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
 import { studentPath, adminPath } from "./paths";
+import { Snackbar } from "../alerts/";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -16,14 +17,8 @@ function Navbar(props) {
   const styles = useNavStyles();
   const isAdmin = useSelector((state) => state.loginReducer.role);
 
-  useEffect(()=> { 
-    
-
-  },[])
-
   const isLoggedIn = useSelector((state) => state.loginReducer.isAuthenticated);
   const dispach = useDispatch();
-
 
   // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
@@ -32,9 +27,9 @@ function Navbar(props) {
     // removing token will sign the user out
     localStorage.removeItem("jwt-token");
 
-    if (!isLoggedIn) {
+    if (isLoggedIn === true) {
       dispach(logout());
-      dispach(alertSuccess("You have successfully"));
+      dispach(alertSuccess("You have successfully logged out"));
     }
   };
 
@@ -47,8 +42,10 @@ function Navbar(props) {
       <M.List>
         {isAdmin === "admin"
           ? adminPath.map((index, key) => (
-              <M.ListItem key={key}>
-                <Link className={styles.links} to={index.path}>{index.pathName}</Link>
+              <M.ListItem button key={key}>
+                <Link className={styles.links} to={index.path}>
+                  {index.pathName}
+                </Link>
               </M.ListItem>
             ))
           : studentPath.map((index, key) => (
@@ -72,6 +69,7 @@ function Navbar(props) {
 
   return (
     <div>
+     
       <M.CssBaseline />
       <M.AppBar position="static" className={styles.appBar}>
         <M.Toolbar>

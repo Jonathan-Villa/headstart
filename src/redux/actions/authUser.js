@@ -13,6 +13,7 @@ export const registerAuth = (user, history) => (dispatch) => {
         dispatch(register());
         dispatch(alertSuccess("Successfully Registered!"));
         history.push("/login"); // will redirect them to login page
+
       }
       if(res.status === 400){
         console.log(res.data)
@@ -34,6 +35,7 @@ export const loginAuth = (user, history, from) => (dispatch) => {
       const decodeToken = jwtDecode(token);
       // redirect from login -> home
       history.push(from);
+
       // store the token in redux state
       dispatch(login(decodeToken));
       dispatch(alertSuccess("Sucessfully logged in!"));

@@ -1,39 +1,20 @@
 import React from "react";
 import "./pageStyles/home.css";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import DataTable from "../components/DataTable/datatable";
-
-
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    width: "100%",
-    margin: "0px",
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-}));
-
+import { AdminHome } from "../components/admin";
+import { useSelector } from "react-redux";
+import { StudentHome } from "../components/student";
+import { useLocation, useHistory, withRouter } from "react-router-dom";
 function Home() {
-  const classes = useStyles();
+  const isAdminRole = useSelector((state) => state.loginReducer.role);
+  const location = useLocation();
+  const history = useHistory();
+
   return (
     <div className="main-container">
-
-      <Grid container spacing={4} className={classes.grid}>
-        <Grid item xs={12} md={12}></Grid>
-        <Grid item xs={12} md={6}>
-          <DataTable />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <DataTable />
-        </Grid>
-        <Grid item xs={12} md={6}></Grid>
-      </Grid>
+      {isAdminRole === "admin" ? <AdminHome /> : <StudentHome />}
     </div>
   );
 }
 
-export {Home};
+export { Home };
+export default withRouter(Home);

@@ -1,11 +1,14 @@
 import React from "react";
 import "./pageStyles/timesheet.css";
-import { StudentTabs } from "../components/studentTabs";
+import { useSelector } from "react-redux";
+import { StudentTimeSheet } from "../components/student";
+import { AdminTimeSheet } from "../components/admin";
+
 function TimeSheet() {
+  const isAdminRole = useSelector((state) => state.loginReducer.role);
   return (
     <div className="main-container">
-
-      <StudentTabs />
+      {isAdminRole === "admin" ? <AdminTimeSheet /> : <StudentTimeSheet />}
     </div>
   );
 }

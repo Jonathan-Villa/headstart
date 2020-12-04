@@ -55,7 +55,7 @@ router.post("/login", (req, res) => {
 
   User.findOne({ email: email }).then((user) => {
     // "findOne" queries the DB to find email
-    if (!user) return res.status(400).json("Email is not registered");
+    if (!user) return res.status(400).json({error: "error" , message: "Email is not registered"});
 
     bcrypt.compare(password, user.password).then((isUserMatch) => {
       // validates password
