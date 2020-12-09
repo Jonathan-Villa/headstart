@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import * as M from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";

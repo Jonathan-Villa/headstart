@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
-import {DataTable} from "../DataTable";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -16,13 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getTables = () => {
-  return (
-    <Grid item xs={12} sm={4} md={6}>
-      <DataTable />
-    </Grid>
-  );
-};
 
 function Grid() {
   const classes = useStyles();

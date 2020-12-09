@@ -37,6 +37,7 @@ router.post("/signup", (req, res) => {
               console.log(err);
             } else {
               newUser.password = hash;
+            
               newUser.save().then((user) => {
                 res.json(user);
               });
