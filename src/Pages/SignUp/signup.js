@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
-import "./pageStyles/signup.css";
-import { useFormStyles } from "./pageStyles/formStyles";
-import { useUserInput } from "../customTools/customHooks";
+import "./signup.css";
+import { useFormStyles } from "./styles";
+import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { registerAuth } from "../redux/actions";
-import { RadioGroup } from "../components/radioGroup";
-import { Snackbar } from "../components/alerts";
+import { registerAuth } from "../../redux/actions";
+import { RadioGroup } from "../../components/radioGroup";
+import { Snackbar } from "../../components/Alerts";
 
 function Signup({ history }) {
   const dispatch = useDispatch();
-  const classes = useFormStyles();
+  const styles = useFormStyles();
   const alertMessage = useSelector((state) => state.alertReducer);
 
   const [title, setTitle] = useState();
@@ -55,7 +55,7 @@ function Signup({ history }) {
         <M.Typography component="h1" variant="h5">
           Sign Up
         </M.Typography>
-        <form className={classes.form} method="POST" onSubmit={handleSubmit}>
+        <form className={styles.form} method="POST" onSubmit={handleSubmit}>
           <M.TextField
             variant="outlined"
             margin="normal"
@@ -130,7 +130,7 @@ function Signup({ history }) {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={styles.submit}
           >
             Sign Up
           </M.Button>

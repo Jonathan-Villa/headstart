@@ -1,0 +1,45 @@
+
+.quick-log-form{
+    height: 100%;
+    margin: 35px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.site-work-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.header-container{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    color: white;
+    background-color: #212529;
+}
+
+.grant-date-container, 
+.time-in-out-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.btn-quicklog-container{
+    width: 100%;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}

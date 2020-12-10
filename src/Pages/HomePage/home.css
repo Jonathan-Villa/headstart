@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@500&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+
+  font-family: 'Lato', sans-serif;
+}
+
+.today-h3{
+  text-align: right;
+}
+
+.main-container{
+  margin-left: 200px;
+  display: flex;
+  
+  flex-direction: column;
+}
+
+.icon-container{
+  height: auto;
+  width: auto;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-container-home{
+  height: auto;
+  width: auto;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+@media (max-width: 600px) {
+
+   .main-container{
+       margin: 0%;
+       width: 100%;
+   }
+
+}

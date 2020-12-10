@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
 import { studentPath, adminPath } from "./paths";
-import { Snackbar } from "../alerts/";
+import { Snackbar } from "../Alerts";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);

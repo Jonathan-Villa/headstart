@@ -5,8 +5,8 @@ const cors = require("cors");
 const passport = require("passport");
 const bodyparser = require("body-parser"); // allows to parse any incoming request
 const mongoose = require("mongoose");
-const { dbURL } = require("./database/dbconnnet");
-const user = require("./validation/user");
+const { dbURL } = require("./Database/dbconnnet");
+const user = require("./Validation/user");
 const PORT = 4000;
 require('dotenv').config();
 

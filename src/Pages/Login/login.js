@@ -1,16 +1,16 @@
 import React from "react";
-import "./pageStyles/login.css";
+import "./login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
-import { useFormStyles } from "./pageStyles/formStyles";
-import { useUserInput } from "../customTools/customHooks";
+import { useFormStyles } from "./styles";
+import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAuth } from "../redux/actions";
-import { Snackbar } from "../components/alerts";
-import { alertSuccess } from "../redux/actions";
+import { loginAuth } from "../../redux/actions";
+import { Snackbar } from "../../components/Alerts";
+import { alertSuccess } from "../../redux/actions";
 
 function Login({ history }) {
-  const classes = useFormStyles();
+  const styles = useFormStyles();
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -43,11 +43,11 @@ function Login({ history }) {
       <M.Container id="login-form-container" maxWidth="xs">
         {isRegistered ? <Snackbar /> : null}
 
-        <div className={classes.paper}>
+        <div className={styles.paper}>
           <M.Typography component="h1" variant="h5">
             Sign in
           </M.Typography>
-          <form className={classes.form} onSubmit={handleSubmit}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <M.TextField
               variant="outlined"
               margin="normal"
@@ -83,7 +83,7 @@ function Login({ history }) {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={styles.submit}
             >
               Sign In
             </M.Button>

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { admin, student } = require("./roleAuthorization");
-const { User } = require("../database/dbconnnet");
+const { User } = require("../Database/dbconnnet");
 
 router.post("/signup", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
@@ -37,7 +37,7 @@ router.post("/signup", (req, res) => {
               console.log(err);
             } else {
               newUser.password = hash;
-            
+
               newUser.save().then((user) => {
                 res.json(user);
               });
@@ -56,7 +56,10 @@ router.post("/login", (req, res) => {
 
   User.findOne({ email: email }).then((user) => {
     // "findOne" queries the DB to find email
-    if (!user) return res.status(400).json({error: "error" , message: "Email is not registered"});
+    if (!user)
+      return res
+        .status(400)
+        .json({ error: "error", message: "Email is not registered" });
 
     bcrypt.compare(password, user.password).then((isUserMatch) => {
       // validates password

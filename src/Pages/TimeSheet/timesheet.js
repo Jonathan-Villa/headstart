@@ -1,8 +1,8 @@
 import React from "react";
-import "./pageStyles/timesheet.css";
+import "./timesheet.css";
 import { useSelector } from "react-redux";
-import { StudentTimeSheet } from "../components/student";
-import { AdminTimeSheet } from "../components/admin";
+import { StudentTimeSheet } from "../../components/student";
+import { AdminTimeSheet } from "../../components/Admin";
 
 function TimeSheet() {
   const isAdminRole = useSelector((state) => state.loginReducer.role);

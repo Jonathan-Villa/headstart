@@ -15,7 +15,7 @@ export const useNavStyles = makeStyles((theme) => ({
   },
   // app bar style
   appBar: {
-    background: "#001845",
+    background: "#212529",
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
