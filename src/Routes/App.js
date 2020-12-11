@@ -10,7 +10,7 @@ import {
 import { Navbar } from "../components/NavBar";
 
 function App(props) {
-  console.log(props);
+
   return (
     <Router>
       <Switch>

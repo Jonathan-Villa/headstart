@@ -7,13 +7,13 @@ import { useStyles } from "./styles";
 function StudentHome() {
   const styles = useStyles();
   return (
-    <Container className={styles.root}>
+    <div  className={styles.Container}>
       <QuickLogForm />
 
       <Paper className={styles.paper} elevation={3}>
         <DataTable />
       </Paper>
-    </Container>
+    </div>
   );
 }
 

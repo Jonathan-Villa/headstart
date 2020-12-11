@@ -4,6 +4,7 @@ const drawerWidth = 200;
 export const useNavStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+
   },
   // drawer style
   drawer: {

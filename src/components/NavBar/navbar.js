@@ -68,7 +68,7 @@ function Navbar(props) {
   );
 
   return (
-    <div>
+    <div >
      
       <M.CssBaseline />
       <M.AppBar position="static" className={styles.appBar}>
@@ -90,6 +90,7 @@ function Navbar(props) {
       <nav className={styles.drawer}>
         <M.Hidden smUp implementation="css">
           <M.Drawer
+        
             container={container}
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}

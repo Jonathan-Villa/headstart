@@ -1,41 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Paper,
   TextField,
   Button,
-  FormControl,
   MenuItem,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  InputAdornment,
   Typography,
+  IconButton,
 } from "@material-ui/core";
+import { AiOutlineUpload } from "react-icons/ai";
 import { grants } from "./grants";
 import { useStyles } from "./styles";
 import "./styles.css";
 import { useUserInput } from "../../customTools/customHooks";
-
+import SignatureCanvas from "react-signature-canvas";
 function QuickLogForm() {
   const styles = useStyles();
+  const clearPad = useRef();
   const [grant, setGrant] = useState("HS");
+  const [open, setOpen] = useState(false);
   const [date, bindDate, resetDate] = useUserInput();
   const [site, bindSite, resetSite] = useUserInput();
   const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
   const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
-  const [totalHours, bindTotalHours, resetTotalHours] = useUserInput();
-  const [preceptorSign, bindPreceptorSign, resetPreceptorSign] = useUserInput();
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput();
-
+  const [signatureImage, setSignatureImage] = useState();
   const handleGrantChange = (e) => {
     setGrant(e.target.value);
   };
 
-  console.log(timeIn, timeOut, workPerformed, date, site)
+  const handleUploadDialog = () => {
+    setOpen(true);
+  };
+  const handleDialogClose = () => {
+    setOpen(false);
+    setSignatureImage(
+      clearPad.current.getTrimmedCanvas().toDataURL("image/png")
+    );
+  };
+
+  const handleClearSignPad = () => {
+    clearPad.current.clear();
+  };
+
+  const handleQuickLogSubmit=(e)=>{
+    e.prevent.default()
+
+    const quickLogPayload = {
+      grant : grant, 
+      date: date,
+      site: site,
+      workPerformed: workPerformed,
+      timeIn: timeIn,
+      timeOut: timeOut,
+      preceptorSignature: signatureImage,
+      dateOfSign: dateOfSign
+    }
+
+    resetDate()
+    resetDateOfSign()
+    resetSite()
+    resetTimeIn()
+    resetTimeOut()
+    resetWorkPerformed()
+  }
+
+  console.log(signatureImage);
 
   return (
     <Paper elevation={3} className={styles.paper}>
       <div className="header-container">
         <Typography variant="h6">Quick Log</Typography>
       </div>
-      <form className="quick-log-form">
+      <form onSubmit={handleQuickLogSubmit} className="quick-log-form">
         <div className="grant-date-container">
           <TextField
             select
@@ -116,7 +157,40 @@ function QuickLogForm() {
           />
         </div>
 
-        
+        <TextField
+          id="preceptor-sign"
+          label="Preceptor Signature"
+          size="small"
+          disabled
+          InputProps={{
+            endAdornment: (
+              <InputAdornment onClick={handleUploadDialog}>
+                <IconButton>
+                  <AiOutlineUpload />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+          required
+          className={styles.signTxt}
+        />
+        <Dialog open={open}>
+          <DialogTitle>Preceptor Signature</DialogTitle>
+          <SignatureCanvas
+            ref={clearPad}
+            penColor="black"
+            canvasProps={{
+              width: 700,
+              height: 200,
+              className: "preceptorSign",
+            }}
+          />
+          <DialogActions>
+            <Button color="secondary" variant="outlined" onClick={handleClearSignPad}>Clear</Button>
+            <Button color="primary"  onClick={handleDialogClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
         <TextField
           label="Date of Signature"
           type="date"
@@ -131,10 +205,20 @@ function QuickLogForm() {
         />
 
         <div className="btn-quicklog-container">
-          <Button className={styles.btnClear} type="post" color="secondary" variant="outlined">
+          <Button
+            className={styles.btnClear}
+            type="post"
+            color="secondary"
+            variant="outlined"
+          >
             Clear
           </Button>
-          <Button className={styles.btnSubmit} type="post" color="primary" variant="outlined">
+          <Button
+            className={styles.btnSubmit}
+            type="post"
+            color="primary"
+            variant="outlined"
+          >
             Submit
           </Button>
         </div>

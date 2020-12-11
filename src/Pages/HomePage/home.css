@@ -2,6 +2,7 @@
 *{
   margin: 0;
   padding: 0;
+ 
 }
 
 body{
@@ -15,10 +16,12 @@ body{
 
 .main-container{
   margin-left: 200px;
-  display: flex;
-  
+  width: 100%;
+  display: flex; 
   flex-direction: column;
+  position: fixed;
 }
+
 
 .icon-container{
   height: auto;

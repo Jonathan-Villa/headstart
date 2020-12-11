@@ -27,6 +27,10 @@ export const useStyles = makeStyles(() => ({
     width: "100%",
     margin: "15px 0",
   },
+  signTxt: {
+    width:"100%",
+    margin: "15px 0"
+  },
   dateSign: {
     width: "175px",
     margin: "15px 0",
@@ -40,5 +44,8 @@ export const useStyles = makeStyles(() => ({
   },
   btnClear: {
     margin: "15px 0 0 0",
+  },
+  formControl:{
+    margin:"20px 0"
   }
 }));

@@ -16,23 +16,25 @@ function Home() {
 
   return (
     <div className="main-container">
-      <Paper className={styles.paper}>
-        <div className="icon-container">
-          <ImCalendar size={70} />
-        </div>
-        <div className="date-container-home">
-          <h2>
-            {new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            }).format(today)}
-          </h2>
-          <h3 className="today-h3">Today</h3>
-        </div>
-      </Paper>
+    
+        <Paper className={styles.paper}>
+          <div className="icon-container">
+            <ImCalendar size={70} />
+          </div>
+          <div className="date-container-home">
+            <h2>
+              {new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              }).format(today)}
+            </h2>
+            <h3 className="today-h3">Today</h3>
+          </div>
+        </Paper>
 
-      {isAdminRole === "admin" ? <AdminHome /> : <StudentHome />}
+        {isAdminRole === "admin" ? <AdminHome /> : <StudentHome />}
+
     </div>
   );
 }
