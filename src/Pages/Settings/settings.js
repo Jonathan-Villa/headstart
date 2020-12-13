@@ -2,7 +2,7 @@ import React from "react";
 import "./settings.css";
 import { useSelector } from "react-redux";
 import { StudentSettings } from "../../components/student";
-import { AdminSettings } from "../../components/Admin";
+import { AdminSettings } from "../../components/admin";
 function Settings() {
   const isAdminRole = useSelector((state) => state.loginReducer.role);
   return (

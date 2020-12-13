@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.css";
-import { AdminHome } from "../../components/Admin";
+import { AdminHome } from "../../components/admin";
 import { useSelector } from "react-redux";
 import { StudentHome } from "../../components/student";
 import { withRouter } from "react-router-dom";
