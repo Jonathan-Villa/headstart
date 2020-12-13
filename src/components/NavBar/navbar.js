@@ -37,7 +37,7 @@ function Navbar(props) {
 
   const drawer = (
     <div>
-      <div className={styles.toolbar} />
+      <div className={styles.listItem} />
       <M.List>
         {isAdmin === "admin"
           ? adminPath.map((index, key) => (
