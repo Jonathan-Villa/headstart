@@ -6,7 +6,7 @@ import { useFormStyles } from "./styles";
 import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAuth } from "../../redux/actions";
-import { Snackbar } from "../../components/Alerts";
+import { Snackbar } from "../../components/alerts";
 import { alertSuccess } from "../../redux/actions";
 
 function Login({ history }) {

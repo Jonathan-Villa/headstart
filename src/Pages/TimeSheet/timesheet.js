@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./timesheet.css";
 import { useSelector } from "react-redux";
 import { StudentTimeSheet } from "../../components/student";
-import { AdminTimeSheet } from "../../components/Admin";
+import { AdminTimeSheet } from "../../components/admin";
 
 function TimeSheet() {
   const isAdminRole = useSelector((state) => state.loginReducer.role);

@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
 import { studentPath, adminPath } from "./paths";
+<<<<<<< HEAD
+=======
+import { Snackbar } from "../alerts";
+>>>>>>> 24d517c3c9cdc3612dd57ba3acf8a6e4a3a48200
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);

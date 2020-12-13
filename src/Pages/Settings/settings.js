@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./settings.css";
 import { useSelector } from "react-redux";
 import { StudentSettings } from "../../components/student";
-import { AdminSettings } from "../../components/Admin";
-import {useStyles} from "./styles"
-import { Paper} from "@material-ui/core"
+import { AdminSettings } from "../../components/admin";
+import {Paper} from "@material-ui/core"
+import { useStyles} from "./styles"
 function Settings() {
   const isAdminRole = useSelector((state) => state.loginReducer.role);
   const [user, setUser]= useState()

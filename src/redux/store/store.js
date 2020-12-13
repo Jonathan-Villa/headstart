@@ -6,7 +6,7 @@ import {persistStore} from "redux-persist"
 
  const store = createStore(
   rootReducer,
-  compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  compose(applyMiddleware(thunk))
 );
 
  const persistor = persistStore(store)

@@ -1,9 +1,16 @@
 import React from "react";
+import {CenteredGrid} from "../CenteredGrid/centeredGrid"
+import { useStyles } from './styles';
+import {TimeSheet} from "../TimeSheet/timesheet"
+
+
 
 function AdminTimeSheet() {
+  const styles = useStyles()
   return (
-    <div>
-      <h1>Admin Time Sheet</h1>
+    <div className={styles.Container}>
+     
+      <TimeSheet/>
     </div>
   );
 }
