@@ -7,7 +7,7 @@ import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAuth } from "../../redux/actions";
 import { RadioGroup } from "../../components/radioGroup";
-import { Snackbar } from "../../components/alerts";
+import { Snackbar } from "../../components/Alerts";
 
 function Signup({ history }) {
   const dispatch = useDispatch();

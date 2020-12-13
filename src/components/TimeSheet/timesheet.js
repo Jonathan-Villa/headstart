@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
 import * as M from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { useStyles } from "./styles";
-import {useSelector} from "react-redux"
-import { StudentTimeSheet } from "../../components/student";
-import { AdminTimeSheet } from "../../components/admin";
-
-
-
+import { useStyles, useToolbarStyles } from "./styles";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -138,26 +131,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === "light"
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: "1 1 100%",
-  },
-}));
-
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
@@ -210,9 +183,6 @@ EnhancedTableToolbar.propTypes = {
 };
 
 function TimeSheet() {
-  
-
-
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
@@ -354,8 +324,6 @@ function TimeSheet() {
         control={<M.Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-      
-      
     </div>
   );
 }

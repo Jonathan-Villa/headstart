@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./settings.css";
 import { useSelector } from "react-redux";
 import { StudentSettings } from "../../components/student";
-import { AdminSettings } from "../../components/admin";
+import { AdminSettings } from "../../components/Admin";
 import {Paper} from "@material-ui/core"
 import { useStyles} from "./styles"
 function Settings() {

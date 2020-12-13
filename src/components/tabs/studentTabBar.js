@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AppBar, Tab } from "@material-ui/core";
 import { useTabStyles } from "./styles/tabStyles";
 import { TabContext, TabPanel, TabList } from "@material-ui/lab";
-import { ViewAll, ViewCurrent, ViewRejected } from "../student/studentTabPanels";
+import { ViewAll, ViewCurrent, ViewRejected } from "../student/StudentTabPanels";
 
 const StudentTabs = () => {
   const [value, setValue] = useState('1');

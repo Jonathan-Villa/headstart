@@ -19,23 +19,27 @@ import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
 import { useDispatch } from "react-redux";
 import { quickLog } from "../../redux/actions";
+import axios from "axios";
 function QuickLogForm() {
   const styles = useStyles();
   const clearPad = useRef();
+  const today = Date.now();
   const dispatch = useDispatch();
-  const [grant, setGrant] = useState("HS");
+  const [grant, bindGrant, resetGrant] = useUserInput("HS");
   const [open, setOpen] = useState(false);
   const [date, bindDate, resetDate] = useUserInput();
   const [site, bindSite, resetSite] = useUserInput();
   const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
   const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
-  const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput();
+  const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
+    new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(today)
+  );
   const [signatureImage, setSignatureImage] = useState();
-
-  const handleGrantChange = (e) => {
-    setGrant(e.target.value);
-  };
 
   const handleUploadDialog = () => {
     setOpen(true);
@@ -51,23 +55,24 @@ function QuickLogForm() {
   const handleClearSignPad = () => {
     clearPad.current.clear(); // clears signature pad
   };
-
   const handleQuickLogSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
 
-    const quickLogPayload = {
-      grant: grant,
-      date: date,
-      site: site,
-      workPerformed: workPerformed,
-      timeIn: timeIn,
-      timeOut: timeOut,
-      preceptorSignature: signatureImage,
-      dateOfSign: dateOfSign,
-    };
+    axios
+      .post("http://localhost:4000/api/quicklog", {
+        grant: grant,
+        date: date,
+        site: site,
+        workPerformed: workPerformed,
+        timeIn: timeIn,
+        timeOut: timeOut,
+        dateOfSign: dateOfSign,
+        preceptorSignature: signatureImage,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
 
-    dispatch(quickLog(quickLogPayload));
-
+    resetGrant()
     resetDate();
     resetDateOfSign();
     resetSite();
@@ -75,8 +80,6 @@ function QuickLogForm() {
     resetTimeOut();
     resetWorkPerformed();
   };
-
-  console.log(signatureImage);
 
   return (
     <Paper elevation={3} className={styles.paper}>
@@ -92,8 +95,7 @@ function QuickLogForm() {
             label="Select Grant"
             variant="outlined"
             size="small"
-            value={grant}
-            onChange={handleGrantChange}
+            {...bindGrant}
           >
             {grants.map((index, key) => (
               <MenuItem key={key} value={index.value}>
@@ -174,13 +176,7 @@ function QuickLogForm() {
           required
           size="small"
           disabled
-          label={
-            signatureImage ? (
-              "Succesfully Signed!"
-            ) : (
-              "Preceptor Signature"
-            )
-          }
+          label={signatureImage ? "Succesfully Signed!" : "Preceptor Signature"}
           color="primary"
           InputProps={{
             endAdornment: (
@@ -221,16 +217,17 @@ function QuickLogForm() {
 
         <TextField
           label="Date of Signature"
-          type="date"
+          type="text"
           size="small"
           color="primary"
           variant="outlined"
           required
-          value={signatureImage? date : null}
+          placeholder={signatureImage ? dateOfSign : ""}
           InputLabelProps={{
             shrink: true,
           }}
           className={styles.dateSign}
+          {...bindDateOfSign}
         />
 
         <div className="btn-quicklog-container">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import { AdminHome } from "../../components/admin";
+import { AdminHome } from "../../components/Admin";
 import { useSelector } from "react-redux";
 import { StudentHome } from "../../components/student";
 import { withRouter } from "react-router-dom";

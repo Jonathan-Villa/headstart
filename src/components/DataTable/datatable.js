@@ -13,12 +13,7 @@ const columns = [
     width: 100,
   },
   { field: "approvedBy", headerName: "Approved By", width: 140 },
-  {
-    valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
-  },
+
 ];
 
 const rows = [

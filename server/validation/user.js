@@ -103,6 +103,18 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/quicklog", (req,res)=> {
+  const payload = req.body
+
+  if(res) {
+
+    console.log(payload)
+    res.status(200)
+  }
+
+ 
+})
+
 router.get(
   "/api",
   passport.authenticate("jwt", { session: false }),
