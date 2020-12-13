@@ -20,3 +20,9 @@ export const logout = () => {
   }
 }
 
+export const quickLog = (log)=> {
+  return{
+    type: userActionType.QUICK_LOG_POST,
+    payload: log
+  }
+}

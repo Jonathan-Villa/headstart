@@ -8,7 +8,8 @@ export const useStyles = makeStyles((theme)=> ({
         margin:"50px",
         display:"flex",
         justifyContent:"space-between",
-        alignItems:"center"
+        alignItems:"center",
+        position:"static"
     }, 
 
 }))

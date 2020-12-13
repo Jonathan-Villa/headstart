@@ -17,9 +17,12 @@ import { useStyles } from "./styles";
 import "./styles.css";
 import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
+import { useDispatch } from "react-redux";
+import { quickLog } from "../../redux/actions";
 function QuickLogForm() {
   const styles = useStyles();
   const clearPad = useRef();
+  const dispatch = useDispatch();
   const [grant, setGrant] = useState("HS");
   const [open, setOpen] = useState(false);
   const [date, bindDate, resetDate] = useUserInput();
@@ -29,6 +32,7 @@ function QuickLogForm() {
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput();
   const [signatureImage, setSignatureImage] = useState();
+
   const handleGrantChange = (e) => {
     setGrant(e.target.value);
   };
@@ -38,36 +42,39 @@ function QuickLogForm() {
   };
   const handleDialogClose = () => {
     setOpen(false);
+    // get trimmed signature image
     setSignatureImage(
       clearPad.current.getTrimmedCanvas().toDataURL("image/png")
     );
   };
 
   const handleClearSignPad = () => {
-    clearPad.current.clear();
+    clearPad.current.clear(); // clears signature pad
   };
 
-  const handleQuickLogSubmit=(e)=>{
-    e.prevent.default()
+  const handleQuickLogSubmit = (e) => {
+    e.prevent.default();
 
     const quickLogPayload = {
-      grant : grant, 
+      grant: grant,
       date: date,
       site: site,
       workPerformed: workPerformed,
       timeIn: timeIn,
       timeOut: timeOut,
       preceptorSignature: signatureImage,
-      dateOfSign: dateOfSign
-    }
+      dateOfSign: dateOfSign,
+    };
 
-    resetDate()
-    resetDateOfSign()
-    resetSite()
-    resetTimeIn()
-    resetTimeOut()
-    resetWorkPerformed()
-  }
+    dispatch(quickLog(quickLogPayload));
+
+    resetDate();
+    resetDateOfSign();
+    resetSite();
+    resetTimeIn();
+    resetTimeOut();
+    resetWorkPerformed();
+  };
 
   console.log(signatureImage);
 
@@ -98,6 +105,7 @@ function QuickLogForm() {
             type="date"
             label="Date"
             required
+            color="primary"
             size="small"
             variant="outlined"
             className={styles.dateTxt}
@@ -112,6 +120,7 @@ function QuickLogForm() {
           label="Site"
           type="text"
           size="small"
+          color="primary"
           variant="outlined"
           rowsMax={false}
           required
@@ -122,6 +131,7 @@ function QuickLogForm() {
         <TextField
           label="Work Performed"
           type="text"
+          color="primary"
           variant="outlined"
           multiline={true}
           required
@@ -134,6 +144,7 @@ function QuickLogForm() {
           <TextField
             label="Time IN"
             type="time"
+            color="primary"
             required
             size="small"
             variant="outlined"
@@ -147,6 +158,7 @@ function QuickLogForm() {
             label="Time OUT"
             type="time"
             required
+            color="primary"
             size="small"
             variant="outlined"
             InputLabelProps={{
@@ -159,9 +171,17 @@ function QuickLogForm() {
 
         <TextField
           id="preceptor-sign"
-          label="Preceptor Signature"
+          required
           size="small"
           disabled
+          label={
+            signatureImage ? (
+              "Succesfully Signed!"
+            ) : (
+              "Preceptor Signature"
+            )
+          }
+          color="primary"
           InputProps={{
             endAdornment: (
               <InputAdornment onClick={handleUploadDialog}>
@@ -172,7 +192,6 @@ function QuickLogForm() {
             ),
           }}
           variant="outlined"
-          required
           className={styles.signTxt}
         />
         <Dialog open={open}>
@@ -187,21 +206,31 @@ function QuickLogForm() {
             }}
           />
           <DialogActions>
-            <Button color="secondary" variant="outlined" onClick={handleClearSignPad}>Clear</Button>
-            <Button color="primary"  onClick={handleDialogClose}>Close</Button>
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={handleClearSignPad}
+            >
+              Clear
+            </Button>
+            <Button color="primary" onClick={handleDialogClose}>
+              Close
+            </Button>
           </DialogActions>
         </Dialog>
+
         <TextField
           label="Date of Signature"
           type="date"
           size="small"
+          color="primary"
           variant="outlined"
           required
+          value={signatureImage? date : null}
           InputLabelProps={{
             shrink: true,
           }}
           className={styles.dateSign}
-          {...bindDateOfSign}
         />
 
         <div className="btn-quicklog-container">

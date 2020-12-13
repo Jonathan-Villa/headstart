@@ -2,7 +2,9 @@ import { makeStyles } from "@material-ui/core";
 
 export const useTabStyles = makeStyles(() => ({
   root: {
-    margin: "20px",
+    width:"100%",
+    position:"static",
+  
     flexGrow: 1
   },
   appBar: {

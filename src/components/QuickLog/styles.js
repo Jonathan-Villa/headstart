@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(() => ({
   paper: {
-    width: "420px",
+    position:"static",
+    width: "400px",
     height: "auto",
     display: "flex",
     flexDirection: "column",
@@ -13,39 +14,38 @@ export const useStyles = makeStyles(() => ({
   },
   grantTxt: {
     width: "100px",
-    margin: "15px 0"
+    margin: "10px 0"
   },
   dateTxt: {
     width: "175px",
-    margin: "15px 0"
+    margin: "10px 0"
   },
   siteTxt: {
     width: "100%",
-    margin: "15px 0",
+    margin: "10px 0",
   },
   workTxt: {
     width: "100%",
-    margin: "15px 0",
+    margin: "10px 0",
   },
   signTxt: {
+  
     width:"100%",
-    margin: "15px 0"
+    margin: "10px 0"
   },
   dateSign: {
     width: "175px",
-    margin: "15px 0",
+    margin: "10px 0",
   },
   time: {
-    width: "140px",
-    margin: "15px 0",
+    width: "135px",
+    margin: "10px 0",
   },
   btnSubmit:{
-    margin: "15px 0 0 0",
+    margin: "10px 0 0 0 ",
   },
   btnClear: {
-    margin: "15px 0 0 0",
+    margin: "10px 0 0 0",
   },
-  formControl:{
-    margin:"20px 0"
-  }
+
 }));

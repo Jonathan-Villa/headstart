@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { loginReducer, registerReducer, alertReducer } from "../../reducers";
+import { loginReducer, registerReducer, alertReducer,quickLogReducer } from "../../reducers";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
@@ -8,17 +8,17 @@ const rootReducer = combineReducers({
   loginReducer,
   registerReducer,
   alertReducer,
+  quickLogReducer
 });
 
 const reducer = persistReducer(
   {
     key: "root",
     storage,
-    whitelist: ["loginReducer"],
     transforms: [
       encryptTransform({
         secretKey: "head-start-secretKey",
-        onError: function (error) {
+        onError:  (error) => {
           console.log(error);
         },
       }),
@@ -27,4 +27,4 @@ const reducer = persistReducer(
   rootReducer
 );
 
-export default reducer;
+export default reducer

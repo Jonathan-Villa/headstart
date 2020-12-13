@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions";
 import { alertSuccess } from "../../redux/actions/alertAction";
 import { studentPath, adminPath } from "./paths";
-import { Snackbar } from "../Alerts";
 
 function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -49,7 +48,7 @@ function Navbar(props) {
               </M.ListItem>
             ))
           : studentPath.map((index, key) => (
-              <M.ListItem button key={key}>
+              <M.ListItem className={styles.listItem } button key={key}>
                 <Link className={styles.links} to={index.path}>
                   {index.pathName}
                 </Link>
@@ -57,7 +56,7 @@ function Navbar(props) {
             ))}
 
         {isLoggedIn ? (
-          <M.ListItem button>
+          <M.ListItem  className={styles.listItem} button>
             <Link onClick={handleSignOutClick} to="#" className={styles.links}>
               Sign Out
             </Link>
@@ -90,7 +89,6 @@ function Navbar(props) {
       <nav className={styles.drawer}>
         <M.Hidden smUp implementation="css">
           <M.Drawer
-        
             container={container}
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}

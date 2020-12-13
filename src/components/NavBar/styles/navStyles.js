@@ -4,7 +4,6 @@ const drawerWidth = 200;
 export const useNavStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-
   },
   // drawer style
   drawer: {
@@ -17,9 +16,11 @@ export const useNavStyles = makeStyles((theme) => ({
   // app bar style
   appBar: {
     background: "#212529",
+    position: "static",
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      position: "static",
     },
   },
   // Menu style
@@ -32,11 +33,17 @@ export const useNavStyles = makeStyles((theme) => ({
   // Handles content within
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    background: "#ffff",
+    background: "#212529",
     width: drawerWidth,
   },
   collapse: {
     background: "#f8f9fa",
+  },
+  listItem: {
+    "&:hover": {
+      
+      backgroundColor: "#adb5bd",
+    },
   },
   links: {
     textDecoration: "none",
@@ -44,7 +51,7 @@ export const useNavStyles = makeStyles((theme) => ({
     width: "100%",
     height: "30px",
     display: "block",
-    color: "black",
+    color: "#ffff",
   },
   linksCollapse: {
     marginLeft: "10px",
