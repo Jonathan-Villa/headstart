@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Paper,
   TextField,
@@ -17,7 +17,7 @@ import { useStyles } from "./styles";
 import "./styles.css";
 import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { quickLog } from "../../redux/actions";
 import axios from "axios";
 function QuickLogForm() {
@@ -32,6 +32,8 @@ function QuickLogForm() {
   const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
   const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
+  const userID = useSelector((state)=> state.loginReducer.payload.id)
+
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
     new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -55,9 +57,10 @@ function QuickLogForm() {
   const handleClearSignPad = () => {
     clearPad.current.clear(); // clears signature pad
   };
+
   const handleQuickLogSubmit = (e) => {
     e.preventDefault();
-
+    
     axios
       .post("http://localhost:4000/api/quicklog", {
         grant: grant,
@@ -68,6 +71,7 @@ function QuickLogForm() {
         timeOut: timeOut,
         dateOfSign: dateOfSign,
         preceptorSignature: signatureImage,
+        id: userID
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -124,7 +128,7 @@ function QuickLogForm() {
           size="small"
           color="primary"
           variant="outlined"
-          rowsMax={false}
+         
           required
           className={styles.siteTxt}
           {...bindSite}
@@ -197,6 +201,7 @@ function QuickLogForm() {
             penColor="black"
             canvasProps={{
               width: 700,
+              
               height: 200,
               className: "preceptorSign",
             }}

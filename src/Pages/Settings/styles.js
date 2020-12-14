@@ -1,5 +1,5 @@
 import {makeStyles} from "@material-ui/core"
-import { CenteredGrid } from "../../components/CenteredGrid/centeredGrid"
+
 
 
 export const useStyles = makeStyles((theme)=>({

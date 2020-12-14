@@ -6,7 +6,7 @@
 }
 
 body{
-
+  background-color: white;
   font-family: 'Lato', sans-serif;
 }
 
@@ -17,7 +17,6 @@ body{
 
 .main-container{
   margin-left: 200px;
- 
   position: static;
 }
 

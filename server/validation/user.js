@@ -4,10 +4,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { admin, student } = require("./roleAuthorization");
-const { User } = require("../Database/dbconnnet");
+const { User, TimeSheet } = require("../Database/dbconnnet");
 
-router.post("/signup", (req, res) => {
-  User.findOne({ email: req.body.email }).then((user) => {
+router.post("/signup", async (req, res) => {
+  const { firstName, lastName, email, username, title, password } = req.body;
+  await User.findOne({ email: email }).then(async (user) => {
     // check to see if email is already in use
     console.log(user);
     if (user) {
@@ -17,14 +18,13 @@ router.post("/signup", (req, res) => {
         message: "Email is already registered",
       });
     } else {
-      const newUser = new User({
-        // register user
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        username: req.body.username,
-        title: req.body.title,
-        password: req.body.password,
+      const newUser = await User.create({
+        firstName,
+        lastName,
+        email,
+        username,
+        title,
+        password,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -51,8 +51,7 @@ router.post("/signup", (req, res) => {
 
 router.post("/login", (req, res) => {
   // request the body from the post request
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   User.findOne({ email: email }).then((user) => {
     // "findOne" queries the DB to find email
@@ -77,18 +76,18 @@ router.post("/login", (req, res) => {
           { expiresIn: 3600 },
           (err, token) => {
             if (err) {
-              res.json(
+              return res.json(
                 "Wrong password. Try again or click Forgot password to reset it"
               );
             } else {
               if (payLoad.role === "admin") {
-                res.json({
+                return res.json({
                   success: true,
                   token: `Bearer ${token}`,
                   user: admin,
                 });
               }
-              res.json({
+              return res.json({
                 success: true,
                 token: `Bearer ${token}`,
                 user: student,
@@ -103,29 +102,48 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.post("/quicklog", (req,res)=> {
-  const payload = req.body
+router.post("/quicklog", async (req, res) => {
+  const { id } = req.body;
+  const {
+    grant,
+    date,
+    site,
+    workPerformed,
+    timeIn,
+    timeOut,
+    preceptorSignature,
+    dateOfSign,
+  } = req.body;
 
-  if(res) {
+  const user = await User.findById(id);
 
-    console.log(payload)
-    res.status(200)
-  }
+  const timeSheet = await TimeSheet.create({
+    grant,
+    date,
+    site,
+    workPerformed,
+    timeIn,
+    timeOut,
+    preceptorSignature,
+    dateOfSign,
+    user,
+  });
+  await timeSheet.save();
 
+  return User.findByIdAndUpdate(id).then((user) => {
+    if (user) {
+      user.timesheet.push(timeSheet);
+      user.save();
+      res.status(200).json(user.timesheet);
+    }
+  });
+});
+
+router.get("/login", async (req, res) => {
+    const timeSheetData = await TimeSheet.find({})
  
-})
 
-router.get(
-  "/api",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    console.log(req.body)
-    return res.json({
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email,
-    });
-  }
-);
+    res.status(200).json(timeSheetData)
+});
 
 module.exports = router;

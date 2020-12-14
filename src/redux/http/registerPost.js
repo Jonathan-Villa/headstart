@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // register post request
-const registerPost = async (user) => {
-  return await axios
+const registerPost = (user) => {
+  return axios
     .post("http://localhost:4000/api/signup", user)
     .then((res) => res)
     .catch((err) => err.response);

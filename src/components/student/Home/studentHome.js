@@ -8,7 +8,7 @@ function StudentHome() {
   const styles = useStyles();
   
   return (
-    <div  className={styles.Container}>
+    <div className={styles.Container}>
       <QuickLogForm />
 
       <Paper className={styles.paper} elevation={3}>

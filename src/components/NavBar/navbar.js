@@ -37,11 +37,11 @@ function Navbar(props) {
 
   const drawer = (
     <div>
-      <div className={styles.listItem} />
+      <div className={styles.toolbar} />
       <M.List>
         {isAdmin === "admin"
           ? adminPath.map((index, key) => (
-              <M.ListItem button key={key}>
+              <M.ListItem className={styles.listItem} button key={key}>
                 <Link className={styles.links} to={index.path}>
                   {index.pathName}
                 </Link>

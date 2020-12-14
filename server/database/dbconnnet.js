@@ -9,23 +9,28 @@ const userSchema = new Schema({
   username: { type: String, unique: true },
   title: { type: String, required: true },
   password: { type: String },
+  timesheet: [{type: mongoose.Schema.Types.ObjectId, ref: 'timesheet'}]
 });
 
-const approvalLog = new Schema({
-  date: { type: Date, unique: true, required: true },
-  firstName: { type: String },
-  lastName: { type: String, required: true },
-  weeklyDatePeriod: { type: String, unique: true, required: true },
-  approvedBy: { type: String, required: true },
+const timesheetSchema = new Schema({
   grant: { type: String, required: true },
+  date: { type: String },
+  site: { type: String, required: true },
+  workPerformed: { type: String, required: true },
+  timeIn: { type: String, required: true },
+  timeOut: { type: String, required: true },
+
+  preceptorSignature: { type: String, required: true },
+  dateOfSign: { type: String, required: true },
+  user:{type: mongoose.Schema.Types.ObjectId, ref: 'users'} 
 });
 
 const dbURL = process.env.DATEBASE_URL;
 const User = new mongoose.model("users", userSchema);
-const ApprovalLog = new mongoose.model("logs", approvalLog);
+const TimeSheet = new mongoose.model("timesheet", timesheetSchema);
 
 module.exports = {
   dbURL,
   User,
-  ApprovalLog,
+  TimeSheet,
 };

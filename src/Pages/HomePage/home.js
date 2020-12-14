@@ -22,8 +22,6 @@ function Home(props) {
     getRole()
   },[role])
 
-  console.log(user)
-
   return (
     <div className="main-container">
       <Paper className={styles.paper}>

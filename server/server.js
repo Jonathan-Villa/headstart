@@ -20,6 +20,7 @@ mongoose.connect(dbURL, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 const app = express(); // app will take instance of express// instead of 'express.get || express.send'
