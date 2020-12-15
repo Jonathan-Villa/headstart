@@ -16,7 +16,6 @@ function Home(props) {
   const today = Date.now();
   const [user, setUser] = useState();
   const userID = useSelector((state) => state.loginReducer.id);
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {

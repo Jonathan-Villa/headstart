@@ -1,7 +1,7 @@
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { useStyles } from "./styles";
-import axios from "axios"
+
 
 function StudentSettings() {
   const styles = useStyles();

@@ -1,6 +1,5 @@
 import React from "react";
 import { DataGrid } from "@material-ui/data-grid";
-//import { DataTable } from '@material-ui/core';
 
 function DataTable(props) {
 

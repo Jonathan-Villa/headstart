@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme)=> ({
     paper:{
         width:"370px",
         height:"100px",
-        margin: "0px 50px",
+        margin: "20px 50px",
         display:"flex",
         justifyContent:"space-between",
         alignItems:"center",

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataTable } from "../../DataTable";
 import { Paper } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { quickLog } from "../../../redux/actions";
+import { useSelector} from "react-redux";
 import { useStylesCurrent } from "./styles";
 import {rows, columns} from "./tableAttributes"
 
