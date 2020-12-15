@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
-import "./signup.css";
 import { useFormStyles } from "./styles";
 import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,14 +47,14 @@ function Signup({ history }) {
   };
 
   return (
-    <M.Container id="sign-up-container">
-      <M.Container id="sign-up-form" maxWidth="xs">
+    <M.Container className={styles.root}>
+      <M.Container className={styles.subroot}>
         {alertMessage.type === "error" ? <Snackbar /> : null}
 
-        <M.Typography component="h1" variant="h5">
-          Sign Up
-        </M.Typography>
         <form className={styles.form} method="POST" onSubmit={handleSubmit}>
+          <M.Typography align="center" variant="h5">
+            Sign Up
+          </M.Typography>
           <M.TextField
             variant="outlined"
             margin="normal"

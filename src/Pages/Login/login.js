@@ -1,5 +1,4 @@
 import React from "react";
-import "./login.css";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
@@ -17,8 +16,6 @@ function Login({ history }) {
   const { from } = location.state || { from: { pathname: "/home" } };
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
-
-
 
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccessful
@@ -39,14 +36,15 @@ function Login({ history }) {
   };
 
   return (
-    <M.Container id="login-container">
-      <M.Container id="login-form-container" maxWidth="xs">
+    <M.Container maxWidth="xl" className={styles.root}>
+      <M.Container className={styles.container}>
         {isRegistered ? <Snackbar /> : null}
 
         <div className={styles.paper}>
-          <M.Typography component="h1" variant="h5">
-            Sign in
-          </M.Typography>
+          <div className={styles.headingContainer}>
+            <M.Typography variant="h4">Head Start</M.Typography>
+            <M.Typography variant="h5">Sign in</M.Typography>
+          </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <M.TextField
               variant="outlined"

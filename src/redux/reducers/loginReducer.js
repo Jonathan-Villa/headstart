@@ -13,6 +13,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         payload: action.payload,
+        id: action.payload.id,
         role: action.payload.role // users submitted payload
       };
     case userActionType.LOGIN_FAILURE:

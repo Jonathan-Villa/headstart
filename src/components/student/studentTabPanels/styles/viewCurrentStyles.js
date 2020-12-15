@@ -1,6 +1,9 @@
 import {makeStyles} from "@material-ui/core"
 
-const currentComponentStyles = makeStyles(()=> ({
+export const useStylesCurrent = makeStyles(()=> ({
 
- 
+    paper:{
+        width:"90%"
+    }
+
 }))

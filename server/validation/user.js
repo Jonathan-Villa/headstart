@@ -85,12 +85,14 @@ router.post("/login", (req, res) => {
                   success: true,
                   token: `Bearer ${token}`,
                   user: admin,
+                  id: user.id
                 });
               }
               return res.json({
                 success: true,
                 token: `Bearer ${token}`,
                 user: student,
+                id: user.id
               });
             }
           }
@@ -139,7 +141,7 @@ router.post("/quicklog", async (req, res) => {
   });
 });
 
-router.get("/login", async (req, res) => {
+router.get("/timesheet", async (req, res) => {
     const timeSheetData = await TimeSheet.find({})
  
 

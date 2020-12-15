@@ -32,7 +32,7 @@ function QuickLogForm() {
   const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
   const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
-  const userID = useSelector((state)=> state.loginReducer.payload.id)
+  const userID = useSelector((state)=> state.loginReducer.id)
 
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
     new Intl.DateTimeFormat("en-US", {
