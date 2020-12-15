@@ -27,38 +27,10 @@ function Settings() {
     getUser()
   },[isAdminRole])
 
-  // function ListItemLink(props) {
-  //   return <ListItem button component="a" {...props} />;
-  // }
+
 
   return (
     <div className="main-container">
-      
-      <List component="nav" aria-label="main mailbox folders">
-        <ListItem button>
-         
-          <ListItemText primary="First Name:" />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-         
-          <ListItemText primary="Last Name:" />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText primary = "Account Type:"/>
-
-        </ListItem>
-        <Divider />
-        <ListItem button>
-         
-          <ListItemText primary="CLICK HERE TO PERMANENTLY DELETE YOUR ACCOUNT" />
-        </ListItem>
-      </List>
-      
-      <Divider />
-      
-    
       <Paper className={styles.paper} elevation={3}>
         {user === "admin" ? <AdminSettings /> : <StudentSettings />}
       </Paper>

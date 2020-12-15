@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   Paper,
   TextField,
@@ -17,14 +17,10 @@ import { useStyles } from "./styles";
 import "./styles.css";
 import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
-import { useDispatch, useSelector } from "react-redux";
-import { quickLog } from "../../redux/actions";
+import { useSelector } from "react-redux";
+
 import axios from "axios";
 function QuickLogForm() {
-  const styles = useStyles();
-  const clearPad = useRef();
-  const today = Date.now();
-  const dispatch = useDispatch();
   const [grant, bindGrant, resetGrant] = useUserInput("HS");
   const [open, setOpen] = useState(false);
   const [date, bindDate, resetDate] = useUserInput();
@@ -32,7 +28,13 @@ function QuickLogForm() {
   const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
   const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
   const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
-  const userID = useSelector((state)=> state.loginReducer.id)
+  const [signatureImage, setSignatureImage] = useState();
+  const userID = useSelector((state) => state.loginReducer.id);
+
+  const styles = useStyles();
+  const clearPad = useRef();
+  const today = Date.now();
+
 
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
     new Intl.DateTimeFormat("en-US", {
@@ -41,7 +43,6 @@ function QuickLogForm() {
       day: "2-digit",
     }).format(today)
   );
-  const [signatureImage, setSignatureImage] = useState();
 
   const handleUploadDialog = () => {
     setOpen(true);
@@ -60,23 +61,23 @@ function QuickLogForm() {
 
   const handleQuickLogSubmit = (e) => {
     e.preventDefault();
-    
+
     axios
       .post("http://localhost:4000/api/quicklog", {
         grant: grant,
         date: date,
         site: site,
         workPerformed: workPerformed,
-        timeIn: timeIn,
+        timeIn: timeIn % 12 || 12,
         timeOut: timeOut,
         dateOfSign: dateOfSign,
         preceptorSignature: signatureImage,
-        id: userID
+        id: userID,
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-    resetGrant()
+    resetGrant();
     resetDate();
     resetDateOfSign();
     resetSite();
@@ -128,7 +129,6 @@ function QuickLogForm() {
           size="small"
           color="primary"
           variant="outlined"
-         
           required
           className={styles.siteTxt}
           {...bindSite}
@@ -201,7 +201,7 @@ function QuickLogForm() {
             penColor="black"
             canvasProps={{
               width: 700,
-              
+
               height: 200,
               className: "preceptorSign",
             }}

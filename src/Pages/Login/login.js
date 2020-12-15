@@ -35,6 +35,10 @@ function Login({ history }) {
     resetPassword();
   };
 
+  const handleLinkClick = () => {
+    history.push('/signup')
+  };
+
   return (
     <M.Container maxWidth="xl" className={styles.root}>
       <M.Container className={styles.container}>
@@ -43,7 +47,6 @@ function Login({ history }) {
         <div className={styles.paper}>
           <div className={styles.headingContainer}>
             <M.Typography variant="h4">Head Start</M.Typography>
-            <M.Typography variant="h5">Sign in</M.Typography>
           </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <M.TextField
@@ -92,7 +95,11 @@ function Login({ history }) {
                 </M.Link>
               </M.Grid>
               <M.Grid item>
-                <M.Link href="/signup" variant="body2">
+                <M.Link
+                  onClick={handleLinkClick}
+                  href="/signup"
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </M.Link>
               </M.Grid>

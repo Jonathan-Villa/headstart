@@ -49,7 +49,7 @@ function Navbar(props) {
             ))
           : studentPath.map((index, key) => (
               <M.ListItem className={styles.listItem } button key={key}>
-                <Link className={styles.links} to={index.path}>
+                <Link  className={styles.links} to={index.path}>
                   {index.pathName}
                 </Link>
               </M.ListItem>

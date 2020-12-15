@@ -12,14 +12,8 @@ const columns = [
     type: "Date",
     width: 125,
   },
-  { field: "approvedBy", headerName: "Approved By", width: 140 },
   { field: "site", headerName: "Site", width : 100 },
-  {
-    valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
-  },
+
 ];
 
 const rows = [

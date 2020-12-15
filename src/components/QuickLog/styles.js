@@ -3,10 +3,9 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles(() => ({
   paper: {
     position:"static",
-    width: "400px",
-    height: "auto",
-    display: "flex",
-    flexDirection: "column",
+    width: "370px",
+    height: "510px",
+    margin: "0px 50px"
   },
   header: {
     width: "100%",

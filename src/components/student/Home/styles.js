@@ -4,10 +4,11 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
-    margin: "10px 50px",
-    height : "fit-content",
-    width: "85%",
+    margin: "30px 0px",
+    height : "650px",
+    width: "100%",
     justifyContent: "space-between",
+    flexWrap: "wrap"
   },
 
  

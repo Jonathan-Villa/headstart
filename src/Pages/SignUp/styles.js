@@ -13,23 +13,19 @@ export const useFormStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    height: "680px",
+    height: "700px",
     width: "500px",
     borderRadius: "10px",
     justifyContent: "center",
   },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "500px",
+  heading: {
+    margin:"10px"
   },
   form: {
-    width: "93%",
-    marginTop: theme.spacing(1),
+    width: "100%",
+
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  submitBtn: {
+    margin: theme.spacing(2, 0, 2),
   },
 }));

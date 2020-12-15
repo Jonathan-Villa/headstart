@@ -118,7 +118,7 @@ router.post("/quicklog", async (req, res) => {
   } = req.body;
 
   const user = await User.findById(id);
-
+  const firstName = user.name
   const timeSheet = await TimeSheet.create({
     grant,
     date,
@@ -129,6 +129,7 @@ router.post("/quicklog", async (req, res) => {
     preceptorSignature,
     dateOfSign,
     user,
+    
   });
   await timeSheet.save();
 

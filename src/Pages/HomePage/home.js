@@ -1,26 +1,58 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
 import { AdminHome } from "../../components/Admin";
-import { useSelector } from "react-redux";
 import { StudentHome } from "../../components/student";
 import { withRouter } from "react-router-dom";
 import { Paper } from "@material-ui/core";
 import { ImCalendar } from "react-icons/im";
 import { useStyles } from "./styles";
-
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { quickLog } from "../../redux/actions";
 
 function Home(props) {
   const styles = useStyles();
   const role = useSelector((state) => state.loginReducer.role);
   const today = Date.now();
-  const [user, setUser]= useState()
+  const [user, setUser] = useState();
+  const userID = useSelector((state) => state.loginReducer.id);
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(()=> {
-    const getRole = ()=> {
-      setUser(role)
-    }
-    getRole()
-  },[role])
+  useEffect(() => {
+    const getRole = () => {
+      setUser(role);
+    };
+    getRole();
+  }, [role]);
+
+  useEffect(() => {
+    const fetchQuickLogs = () => {
+      axios
+        .get("http://localhost:4000/api/timesheet")
+        .then(({ data }) => data.filter((index) => index.user === userID))
+        .then((res) =>
+          dispatch(
+            quickLog(
+              res.map((m, key) => ({
+                id: key,
+                grant: m["grant"],
+                date: m["date"],
+                site: m["site"],
+                workPerformed: m["workPerformed"],
+                timeIn: m["timeIn"],
+                timeOut: m["timeOut"],
+                preceptorSignature: m["preceptorSignature"],
+                dateOfSign: m["dateOfSign"],
+              }))
+            )
+          )
+        )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    };
+    fetchQuickLogs();
+  }, [dispatch, userID]);
 
   return (
     <div className="main-container">

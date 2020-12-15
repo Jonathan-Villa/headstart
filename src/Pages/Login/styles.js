@@ -15,7 +15,7 @@ export const useFormStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center' , 
-    height: '570px',
+    height: '550px',
     width:'450px',
     borderRadius: '10px',
     justifyContent: 'center',
@@ -39,7 +39,7 @@ export const useFormStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
+
   },
   submit: {
     margin: theme.spacing(3, 0, 2),

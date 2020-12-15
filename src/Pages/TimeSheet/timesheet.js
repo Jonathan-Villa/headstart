@@ -16,8 +16,7 @@ function TimeSheet() {
   },[isAdminRole])
 
   return (
-    <div className="main-container">\
-    
+    <div className="main-container">
       {user === "admin" ? <AdminTimeSheet /> : <StudentTimeSheet />}
     </div>
   );

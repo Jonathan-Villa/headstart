@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Navbar } from "../components/NavBar";
 
+
 function App(props) {
 
   return (
@@ -19,11 +20,12 @@ function App(props) {
 
         <>
           <PrivateRoute component={Navbar} />
-          <PrivateRoute exact path="/home" {...props} component={Home} />
-          <PrivateRoute path="/time-sheet" component={TimeSheet} />
-          <PrivateRoute path="/reports" component={Reports}/>
-          <PrivateRoute path="/settings" component={Settings} />
+          <Route exact path="/home" {...props} component={Home} />
+          <Route path="/time-sheet" component={TimeSheet} />
+          <Route path="/reports" component={Reports}/>
+          <Route path="/settings" component={Settings} />
           <Redirect from="/login" to="/home" />
+          
         </>
       </Switch>
     </Router>

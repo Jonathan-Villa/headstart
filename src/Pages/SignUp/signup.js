@@ -52,7 +52,7 @@ function Signup({ history }) {
         {alertMessage.type === "error" ? <Snackbar /> : null}
 
         <form className={styles.form} method="POST" onSubmit={handleSubmit}>
-          <M.Typography align="center" variant="h5">
+          <M.Typography className={styles.heading} align="center" variant="h4">
             Sign Up
           </M.Typography>
           <M.TextField
@@ -60,6 +60,7 @@ function Signup({ history }) {
             margin="normal"
             type="email"
             required
+            autoFocus
             fullWidth
             helperText={
               alertMessage.email === email
@@ -71,7 +72,6 @@ function Signup({ history }) {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             {...bindEmail}
           />
           <M.TextField
@@ -129,7 +129,7 @@ function Signup({ history }) {
             fullWidth
             variant="contained"
             color="primary"
-            className={styles.submit}
+            className={styles.submitBtn}
           >
             Sign Up
           </M.Button>

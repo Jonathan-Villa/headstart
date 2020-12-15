@@ -17,7 +17,13 @@ body{
 
 .main-container{
   margin-left: 200px;
+  height: 100vh;
+  width: auto;
   position: static;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
 }
 
 
@@ -35,6 +41,7 @@ body{
   width: auto;
   margin: 20px;
   display: flex;
+  position: static;
   flex-direction: column;
 
 }
