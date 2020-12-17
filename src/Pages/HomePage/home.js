@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
 import { AdminHome } from "../../components/Admin";
-import { StudentHome } from "../../components/student";
+import { StudentHome } from "../../components/Student";
 import { withRouter } from "react-router-dom";
 import { Paper } from "@material-ui/core";
 import { ImCalendar } from "react-icons/im";

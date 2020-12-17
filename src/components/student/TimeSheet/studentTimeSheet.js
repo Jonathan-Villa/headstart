@@ -1,5 +1,5 @@
 import React from "react";
-import { StudentTabs } from "../../tabs";
+import { StudentTabs } from "../../Tabs";
 import { useStyles } from "./styles";
 
 function StudentTimeSheet() {

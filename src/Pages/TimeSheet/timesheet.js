@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./timesheet.css";
 import { useSelector } from "react-redux";
-import { StudentTimeSheet } from "../../components/student";
+import { StudentTimeSheet } from "../../components/Student";
 import { AdminTimeSheet } from "../../components/Admin";
 
 function TimeSheet() {

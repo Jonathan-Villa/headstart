@@ -1,5 +1,5 @@
 import React from "react";
-import {useStylesViewAll} from "./styles/"
+import {useStylesViewAll} from "./styles"
 import { Paper } from "@material-ui/core";
 import { DataTable} from "../../DataTable"
 import {rows, columns} from "./tableAttributes"
