@@ -9,6 +9,7 @@ import { useStyles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { quickLog } from "../../redux/actions";
+import {io} from "socket.io-client"
 
 function Home(props) {
   const styles = useStyles();
@@ -47,7 +48,6 @@ function Home(props) {
             )
           )
         )
-        .then((res) => console.log(res))
         .catch((err) => console.log(err));
     };
     fetchQuickLogs();

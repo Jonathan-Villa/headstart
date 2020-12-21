@@ -7,6 +7,9 @@ const bodyparser = require("body-parser"); // allows to parse any incoming reque
 const mongoose = require("mongoose");
 const { dbURL } = require("./Database/dbconnnet");
 const user = require("./Validation/user");
+const app = express();
+const http = require('http').createServer(app)
+var io = require('socket.io')(http)
 const PORT = 4000;
 require('dotenv').config();
 
@@ -23,7 +26,7 @@ mongoose.connect(dbURL, {
   useFindAndModify: false,
 });
 
-const app = express(); // app will take instance of express// instead of 'express.get || express.send'
+ // app will take instance of express// instead of 'express.get || express.send'
 require("./validation/passportjwt")(passport);
 
 app.use(cors(corsOptions));
@@ -31,6 +34,8 @@ app.use(passport.initialize()); // Initailize
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
 app.use("/api", user);
+
+
 
 app.get("/api", (req, res) => {
   // home path
@@ -41,6 +46,13 @@ app.get("/api/login", (req, res) => {
   res.send(`${req.body}`);
 });
 
-app.listen(PORT, () => {
+
+http.listen(PORT, () => {
   console.log("Server is up!");
 });
+
+
+
+io.on('connection', (socket)=> {
+  console.log("connected")
+})

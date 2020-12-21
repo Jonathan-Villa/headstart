@@ -3,6 +3,7 @@ import { Paper } from "@material-ui/core";
 import { DataTable } from "../../DataTable";
 import {useStylesViewAll} from "./styles"
 import {rows, columns} from "./tableAttributes"
+
 function ViewAll() {
   const styles = useStylesViewAll()
   return (

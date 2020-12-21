@@ -1,6 +1,7 @@
 import React from "react";
 import { Home, TimeSheet, Reports, Settings, Login, Signup } from "../Pages";
 import PrivateRoute from "./privateroute";
+import "./App.css"
 import {
   Route,
   BrowserRouter as Router,

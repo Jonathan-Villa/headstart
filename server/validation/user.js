@@ -6,9 +6,10 @@ const passport = require("passport");
 const { admin, student } = require("./roleAuthorization");
 const { User, TimeSheet } = require("../Database/dbconnnet");
 
-router.post("/signup", async (req, res) => {
+
+router.post("/signup",  (req, res) => {
   const { firstName, lastName, email, username, title, password } = req.body;
-  await User.findOne({ email: email }).then(async (user) => {
+   User.findOne({ email: email }).then(async (user) => {
     // check to see if email is already in use
     console.log(user);
     if (user) {
@@ -49,16 +50,21 @@ router.post("/signup", async (req, res) => {
   });
 });
 
+
+
 router.post("/login", (req, res) => {
   // request the body from the post request
   const { email, password } = req.body;
 
+
   User.findOne({ email: email }).then((user) => {
     // "findOne" queries the DB to find email
-    if (!user)
-      return res
+    
+    if (!user){
+      res
         .status(400)
         .json({ error: "error", message: "Email is not registered" });
+    }
 
     bcrypt.compare(password, user.password).then((isUserMatch) => {
       // validates password
@@ -98,10 +104,10 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        return res.status(400).json("Email or Password was incorrect!");
+        return res.status(400).json({message:"Incorrect Password!"});
       }
     });
-  });
+  })
 });
 
 router.post("/quicklog", async (req, res) => {
@@ -118,7 +124,7 @@ router.post("/quicklog", async (req, res) => {
   } = req.body;
 
   const user = await User.findById(id);
-  const firstName = user.name
+
   const timeSheet = await TimeSheet.create({
     grant,
     date,
