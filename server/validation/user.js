@@ -151,8 +151,15 @@ router.post("/quicklog", async (req, res) => {
 router.get("/timesheet", async (req, res) => {
     const timeSheetData = await TimeSheet.find({})
  
-
     res.status(200).json(timeSheetData)
 });
+
+router.get("/request-user-logs", async (req,res)=>{
+  const userLogs =  await TimeSheet.find({})
+
+  res.status(200).json(userLogs)
+})
+
+
 
 module.exports = router;

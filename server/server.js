@@ -9,7 +9,7 @@ const { dbURL } = require("./Database/dbconnnet");
 const user = require("./Validation/user");
 const app = express();
 const http = require('http').createServer(app)
-var io = require('socket.io')(http)
+const io = require('socket.io')(http)
 const PORT = 4000;
 require('dotenv').config();
 
@@ -35,7 +35,13 @@ app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
 app.use("/api", user);
 
+io.on('connect', (socket)=>{
+  socket.on("/signup", ({name, room})=> {
+    console.log(room)
+  })
 
+
+})
 
 app.get("/api", (req, res) => {
   // home path

@@ -30,7 +30,7 @@ function Home(props) {
     const fetchQuickLogs = () => {
       axios
         .get("http://localhost:4000/api/timesheet")
-        .then(({ data }) => data.filter((index) => index.user === userID))
+        .then(({ data }) => data.filter((index) =>  role === "admin" ?  true  :  index.user === userID))
         .then((res) =>
           dispatch(
             quickLog(
@@ -51,7 +51,7 @@ function Home(props) {
         .catch((err) => console.log(err));
     };
     fetchQuickLogs();
-  }, [dispatch, userID]);
+  }, [dispatch, userID,role]);
 
   return (
     <div className="main-container">

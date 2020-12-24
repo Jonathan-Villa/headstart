@@ -8,6 +8,7 @@ import {Paper} from "@material-ui/core"
 function StudentHome() {
   const styles = useStyles();
   const getQuickLogData = useSelector((state) => state.quickLogReducer.payload);
+
   const [data, setData] = useState([]);
   const columns = [
     { field: "status", headerName: "Status", width: 90 },
