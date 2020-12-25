@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { AdminHome } from "../../components/Admin";
 import { StudentHome } from "../../components/Student";
-import { withRouter } from "react-router-dom";
+import { withRouter,useHistory } from "react-router-dom";
 import { Paper } from "@material-ui/core";
 import { ImCalendar } from "react-icons/im";
 import { useStyles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { quickLog } from "../../redux/actions";
-import {io} from "socket.io-client"
+import {  timeSheet, timeSheetFailure } from "../../redux/actions";
 
-function Home(props) {
+function Home() {
   const styles = useStyles();
-  const role = useSelector((state) => state.loginReducer.role);
+  const role = useSelector((state) => state.userReducer.role);
+  const userID = useSelector((state) => state.userReducer.id);
   const today = Date.now();
   const [user, setUser] = useState();
-  const userID = useSelector((state) => state.loginReducer.id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +25,7 @@ function Home(props) {
     getRole();
   }, [role]);
 
+
   useEffect(() => {
     const fetchQuickLogs = () => {
       axios
@@ -33,7 +33,7 @@ function Home(props) {
         .then(({ data }) => data.filter((index) =>  role === "admin" ?  true  :  index.user === userID))
         .then((res) =>
           dispatch(
-            quickLog(
+            timeSheet(
               res.map((m, key) => ({
                 id: key,
                 grant: m["grant"],
@@ -48,7 +48,7 @@ function Home(props) {
             )
           )
         )
-        .catch((err) => console.log(err));
+        .catch((err) => dispatch(timeSheetFailure()));
     };
     fetchQuickLogs();
   }, [dispatch, userID,role]);

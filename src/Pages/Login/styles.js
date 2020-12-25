@@ -13,33 +13,29 @@ export const useFormStyles = makeStyles((theme) => ({
   container:{ 
     boxShadow: '0px 1px 6px rgba(0, 0, 0, .25)',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center' , 
-    height: '550px',
-    width:'450px',
-    borderRadius: '10px',
-    justifyContent: 'center',
-    padding: "35px",
-
+    overflowX:"hidden",
+    overflowY:"hidden",
+    height: '460px',
+    maxWidth:'400px',
+    borderRadius: '6px',
+    justifyContent:"center",
+    padding: "0px",
   },
   headingContainer:{
-    display:"flex",
     width: "100%",
-    flexDirection:"column",
-    alignItems: "center",
-    justifyContent:"space-evenly",
-    height: "100px"
+    textAlign:"center",
+    verticalAlign:"center",
+    marginBottom:"20px",
+    position:"static"
   },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "90%",
+
+  progressBar:{
+    width:"100%"
   },
   form: {
-    width: "100%",
-
+    bottom:"31%",
+    width: "350px",
+    position:"absolute"
   },
   submit: {
     margin: theme.spacing(3, 0, 2),

@@ -50,7 +50,6 @@ function AdminReports() {
       grant: "",
     },
   ];
-  console.log(reportsData);
 
   return (
     <div className={styles.root} >
@@ -58,7 +57,7 @@ function AdminReports() {
         <DataTable
           rows={reportsData || defaultRows}
           columns={columns}
-          size={4}
+          size={20}
         />
       </Paper>
     </div>

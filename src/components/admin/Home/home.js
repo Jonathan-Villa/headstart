@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
-import { AdminDataTable } from "../AdminDataTable/adminDataTable";
 import { QuickLogForm } from "../../QuickLog";
 import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
@@ -19,7 +18,6 @@ function AdminHome() {
     });
   }, [getUserLogs]);
 
-  console.log(rows);
 
   const columns = [
     { field: "date", headerName: "Date", width: 90 },

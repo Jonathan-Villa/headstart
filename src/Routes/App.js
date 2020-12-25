@@ -15,6 +15,9 @@ import {Snackbar} from "../components/Alerts/snackbar"
 
 function App(props) {
   const alertMessage = useSelector((state) => state.alertReducer);
+
+  
+
   return (
     <Router>
       {alertMessage.type  === "error" ? <Snackbar/> : null }

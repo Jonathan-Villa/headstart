@@ -1,4 +1,4 @@
-import { makeStyles, createMuiTheme } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 export const useFormStyles = makeStyles((theme) => ({
   root: {
@@ -10,29 +10,30 @@ export const useFormStyles = makeStyles((theme) => ({
   },
   subroot: {
     color: "#000",
-    boxShadow: "0px 1px 6px rgba(0, 0, 0, .35)",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    height: "700px",
-    width: "500px",
-    borderRadius: "10px",
-    justifyContent: "center",
+    overflowX:"hidden",
+    overflowY:"hidden",
+    boxShadow: "0px 1px 4px rgba(0, 0, 0, .35)",
+    height: "600px",
+    maxWidth: "440px",
+    borderRadius: "6px",
+    padding:"0px",
+    display:"flex ",
+    justifyContent:"center",
+    position:"static"
   },
   heading: {
     margin:"10px"
   },
   form: {
-    width: "100%",
+    margin:"40px 10px",
+    width: "400px",
+    position:"absolute",
   },
   submitBtn: {
     margin: theme.spacing(2, 0, 2),
   },
   progressBar: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
+    width:"100%"
   },
 
 

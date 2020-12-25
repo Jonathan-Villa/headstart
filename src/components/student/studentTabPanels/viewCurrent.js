@@ -6,13 +6,12 @@ import { useStylesCurrent } from "./styles";
 import {rows, columns} from "./tableAttributes"
 
 function ViewCurrent() {
-  const timeSheetData = useSelector((state) => state.quickLogReducer.payload);
+  const timeSheetData = useSelector((state) => state.timeSheetReducer.payload);
   const styles = useStylesCurrent();
   const [data, setData] = useState([]);
-  const today = new Date()
-  const day = String(today.getDate()).padStart(2,"0")
-  const month = String(today.getMonth()).padStart(2,"0")
-  const year = today.getFullYear()
+  // const today = new Date()
+
+  console.log(timeSheetData)
 
   useEffect(() => {
     setData({

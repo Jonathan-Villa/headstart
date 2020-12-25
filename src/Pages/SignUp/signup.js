@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
@@ -6,7 +6,7 @@ import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAuth, registerRequest } from "../../redux/actions";
 import { RadioGroup } from "../../components/RadioGroup";
-import {LinearProgress} from "@material-ui/core"
+import {LinearProgressBar} from "../../components"
 
 function Signup({ history }) {
   const dispatch = useDispatch();
@@ -37,9 +37,8 @@ function Signup({ history }) {
     };
     dispatch(registerRequest())
 
-    setTimeout(()=> {
       dispatch(registerAuth(user, history));
-    },2000)
+
      // registers the user
 
     // clear the inputs when the user submits
@@ -58,9 +57,11 @@ function Signup({ history }) {
     <M.Container className={styles.root}>
       <M.Container className={styles.subroot}>
 
-        <div className={styles.progressBar}>
-        {registerRequested ? <LinearProgress color="primary" variant="indeterminate" /> : null}
-        </div>
+    
+       <div className={styles.progressBar}>
+       {registerRequested ? <LinearProgressBar color="primary" variant="indeterminate" /> : null}
+       </div>
+
         <form className={styles.form} method="POST" onSubmit={handleSubmit}>
           <M.Typography className={styles.heading} align="center" variant="h4">
             Sign Up
@@ -68,10 +69,12 @@ function Signup({ history }) {
         
 
             <M.TextField
+            
               variant="outlined"
               margin="normal"
               type="email"
               required
+              size="small"
               autoFocus
               fullWidth
               error={alertMessage.type ===  "error" ? true : false}
@@ -85,6 +88,7 @@ function Signup({ history }) {
               variant="outlined"
               margin="normal"
               required
+              size="small"
               fullWidth
               name="firstName"
               label="First Name"
@@ -96,6 +100,7 @@ function Signup({ history }) {
               variant="outlined"
               margin="normal"
               required
+              size="small"
               fullWidth
               name="lastName"
               label="Last Name"
@@ -107,6 +112,7 @@ function Signup({ history }) {
             <M.TextField
               variant="outlined"
               margin="normal"
+              size="small"
               required
               fullWidth
               style={{color:"white"}}
@@ -122,6 +128,7 @@ function Signup({ history }) {
               margin="normal"
               required
               fullWidth
+              size="small"
               name="password"
               label="Password"
               type="password"
@@ -136,6 +143,7 @@ function Signup({ history }) {
           <M.Button
             type="submit"
             fullWidth
+
             variant="contained"
             color="primary"
             className={styles.submitBtn}

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavStyles } from "./styles/navStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions";
-import { alertSuccess } from "../../redux/actions/alertAction";
+import { alertSuccess } from "../../redux/actions/AlertActions/alertAction";
 import { studentPath, adminPath } from "./paths";
 
 function Navbar(props) {
@@ -14,10 +14,12 @@ function Navbar(props) {
   const { window } = props;
   const theme = useTheme();
   const styles = useNavStyles();
-  const isAdmin = useSelector((state) => state.loginReducer.role);
+  const isAdmin = useSelector((state) => state.userReducer.role);
 
-  const isLoggedIn = useSelector((state) => state.loginReducer.isAuthenticated);
+  const isLoggedIn = useSelector((state) => state.userReducer.isAuthenticated);
   const dispach = useDispatch();
+
+  console.log(isLoggedIn, isAdmin)
 
   // this state is used for the mobile response
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);

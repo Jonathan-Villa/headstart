@@ -1,4 +1,4 @@
-import { userActionType } from "../actiontypes";
+import { userActionType } from "../Actiontypes";
 export const register = () => {
   return {
     type: userActionType.REGISTER_SUCCESS,

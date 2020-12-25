@@ -119,7 +119,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/quicklog", async (req, res) => {
   const { id } = req.body;
-
+  console.log(req.body)
   const {
     grant,
     date,

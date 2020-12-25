@@ -3,27 +3,20 @@ import "./settings.css";
 import { useSelector } from "react-redux";
 import { StudentSettings } from "../../components/Student";
 import { AdminSettings } from "../../components/Admin";
-import {Paper} from "@material-ui/core"
-import { useStyles} from "./styles"
-
+import { Paper } from "@material-ui/core";
+import { useStyles } from "./styles";
 
 function Settings() {
-  const isAdminRole = useSelector((state) => state.loginReducer.role);
-  const [user, setUser]= useState()
-  const styles = useStyles()
-  const classes = useStyles();
+  const isAdminRole = useSelector((state) => state.userReducer.role);
+  const [user, setUser] = useState();
+  const styles = useStyles();
 
-
-  useEffect(()=> {
-    const getUser =()=> {
-      setUser(isAdminRole)
-    }
-    getUser()
-  },[isAdminRole])
-
-  
-
-
+  useEffect(() => {
+    const getUser = () => {
+      setUser(isAdminRole);
+    };
+    getUser();
+  }, [isAdminRole]);
 
   return (
     <div className="main-container">

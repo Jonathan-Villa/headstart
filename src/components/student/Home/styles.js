@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
  
   paper:{
     margin:"0px 50px",
-    width:"800px",
+    width:"564px",
     height:"fit-content"
   }
 

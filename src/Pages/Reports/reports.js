@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Page403 } from "../ErrorPages";
 
 function Reports() {
-  const isAdminRole = useSelector((state) => state.loginReducer.role);
+  const isAdminRole = useSelector((state) => state.userReducer.role);
   const [user, setUser] = useState()
 
   useEffect(()=> {

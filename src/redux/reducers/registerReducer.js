@@ -1,4 +1,4 @@
-import { userActionType } from "../actions/actiontypes/userActionTypes";
+import { userActionType } from "../actions/Actiontypes/userActionTypes";
 
 const registerReducer = (state = {}, action) => {
   switch (action.type) {

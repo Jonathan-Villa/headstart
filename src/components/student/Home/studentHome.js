@@ -7,7 +7,7 @@ import {Paper} from "@material-ui/core"
 
 function StudentHome() {
   const styles = useStyles();
-  const getQuickLogData = useSelector((state) => state.quickLogReducer.payload);
+  const getQuickLogData = useSelector((state) => state.timeSheetReducer.payload);
 
   const [data, setData] = useState([]);
   const columns = [
@@ -36,7 +36,7 @@ function StudentHome() {
     <div className={styles.Container}>
       <QuickLogForm />
       <Paper className={styles.paper} elevation={3}>
-        <DataTable rows={data.log || rows} columns={columns} size={4} />
+        <DataTable rows={data.log || rows} columns={columns} size={10} />
       </Paper>
     </div>
   );

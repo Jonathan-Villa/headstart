@@ -18,24 +18,18 @@ import "./styles.css";
 import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
 import { useSelector } from "react-redux";
-
 import axios from "axios";
-function QuickLogForm() {
-  const [grant, bindGrant, resetGrant] = useUserInput("HS");
-  const [open, setOpen] = useState(false);
-  const [date, bindDate, resetDate] = useUserInput();
-  const [site, bindSite, resetSite] = useUserInput();
-  const [workPerformed, bindWorkPerformed, resetWorkPerformed] = useUserInput();
-  const [timeIn, bindTimeIn, resetTimeIn] = useUserInput();
-  const [timeOut, bindTimeOut, resetTimeOut] = useUserInput();
-  const [signatureImage, setSignatureImage] = useState();
-  const userID = useSelector((state) => state.loginReducer.id);
+import {useDispatch} from "react-redux"
+import { quickLogFail, alertError } from "../../redux/actions";
 
+
+function QuickLogForm() {
+  const [open, setOpen] = useState(false);
+  const userID = useSelector((state) => state.userReducer.id);
+  const today = Date.now();
   const styles = useStyles();
   const clearPad = useRef();
-  const today = Date.now();
-
-
+  const dispatch = useDispatch()
   const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
     new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -44,15 +38,35 @@ function QuickLogForm() {
     }).format(today)
   );
 
+  const [logData, setLogData] = useState({
+    grant: "HS",
+    date: "",
+    site: "",
+    workPerformed: "",
+    timeIn: "",
+    timeOut: "",
+    id: userID,
+    preceptorSignature: "",
+    dateOfSign: dateOfSign,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setLogData({
+      ...logData,
+      [e.target.name]: value,
+    });
+  };
+
   const handleUploadDialog = () => {
     setOpen(true);
   };
   const handleDialogClose = () => {
     setOpen(false);
     // get trimmed signature image
-    setSignatureImage(
-      clearPad.current.getTrimmedCanvas().toDataURL("image/png")
-    );
+    logData.preceptorSignature = clearPad.current
+      .getTrimmedCanvas()
+      .toDataURL("image/png");
   };
 
   const handleClearSignPad = () => {
@@ -62,29 +76,27 @@ function QuickLogForm() {
   const handleQuickLogSubmit = (e) => {
     e.preventDefault();
 
-    const payload = {
-      grant: grant,
-      date: date,
-      site: site,
-      workPerformed: workPerformed,
-      timeIn: timeIn % 12 || 12,
-      timeOut: timeOut,
-      dateOfSign: dateOfSign,
-      preceptorSignature: signatureImage,
-      id: userID,
-    }
-
     axios
-      .post("http://localhost:4000/api/quicklog", payload )
-      .catch((err) => console.log(err));
+      .post("http://localhost:4000/api/quicklog", logData)
+      .catch((err) => {
+          if(err){
+            dispatch(quickLogFail())
+            dispatch(alertError("Your QuickLog failed!"))
+          }
+      });
 
-    resetGrant();
-    resetDate();
-    resetDateOfSign();
-    resetSite();
-    resetTimeIn();
-    resetTimeOut();
-    resetWorkPerformed();
+    
+    setLogData({
+      grant: "HS",
+      date: "",
+      site: "",
+      workPerformed: "",
+      timeIn: "",
+      timeOut: "",
+      id: userID,
+      preceptorSignature: "",
+      dateOfSign: dateOfSign,
+    });
   };
 
   return (
@@ -101,7 +113,9 @@ function QuickLogForm() {
             label="Select Grant"
             variant="outlined"
             size="small"
-            {...bindGrant}
+            onChange={handleChange}
+            name="grant"
+            value={logData.grant}
           >
             {grants.map((index, key) => (
               <MenuItem key={key} value={index.value}>
@@ -113,6 +127,9 @@ function QuickLogForm() {
             type="date"
             label="Date"
             required
+            value={logData.date}
+            name="date"
+            onChange={handleChange}
             color="primary"
             size="small"
             variant="outlined"
@@ -120,7 +137,6 @@ function QuickLogForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            {...bindDate}
           />
         </div>
 
@@ -131,8 +147,10 @@ function QuickLogForm() {
           color="primary"
           variant="outlined"
           required
+          name="site"
+          value={logData.site}
           className={styles.siteTxt}
-          {...bindSite}
+          onChange={handleChange}
         />
 
         <TextField
@@ -142,9 +160,11 @@ function QuickLogForm() {
           variant="outlined"
           multiline={true}
           required
+          value={logData.workPerformed}
+          name="workPerformed"
           size="small"
+          onChange={handleChange}
           className={styles.workTxt}
-          {...bindWorkPerformed}
         />
 
         <div className="time-in-out-container">
@@ -155,11 +175,13 @@ function QuickLogForm() {
             required
             size="small"
             variant="outlined"
+            name="timeIn"
+            value={logData.timeIn}
+            onChange={handleChange}
             InputLabelProps={{
               shrink: true,
             }}
             className={styles.time}
-            {...bindTimeIn}
           />
           <TextField
             label="Time OUT"
@@ -167,12 +189,14 @@ function QuickLogForm() {
             required
             color="primary"
             size="small"
+            name="timeOut"
+            onChange={handleChange}
+            value={logData.timeOut}
             variant="outlined"
             InputLabelProps={{
               shrink: true,
             }}
             className={styles.time}
-            {...bindTimeOut}
           />
         </div>
 
@@ -181,7 +205,11 @@ function QuickLogForm() {
           required
           size="small"
           disabled
-          label={signatureImage ? "Succesfully Signed!" : "Preceptor Signature"}
+          label={
+            logData.preceptorSignature
+              ? "Succesfully Signed!"
+              : "Preceptor Signature"
+          }
           color="primary"
           InputProps={{
             endAdornment: (
@@ -227,13 +255,13 @@ function QuickLogForm() {
           size="small"
           color="primary"
           variant="outlined"
+          disabled
           required
-          placeholder={signatureImage ? dateOfSign : ""}
+          value={logData.preceptorSignature ? dateOfSign : ""}
           InputLabelProps={{
             shrink: true,
           }}
           className={styles.dateSign}
-          {...bindDateOfSign}
         />
 
         <div className="btn-quicklog-container">

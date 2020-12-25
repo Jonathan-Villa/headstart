@@ -1,4 +1,4 @@
-import { userActionType } from "../actiontypes";
+import { userActionType } from "../Actiontypes";
 export const login = (user) => {
   return {
     type: userActionType.LOGIN_SUCCESS,

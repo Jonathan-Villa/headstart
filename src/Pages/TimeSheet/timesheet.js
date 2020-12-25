@@ -5,7 +5,7 @@ import { StudentTimeSheet } from "../../components/Student";
 import { AdminTimeSheet } from "../../components/Admin";
 
 function TimeSheet() {
-  const isAdminRole = useSelector((state) => state.loginReducer.role);
+  const isAdminRole = useSelector((state) => state.userReducer.role);
   const [user, setUser] = useState()
 
   useEffect(()=> {
