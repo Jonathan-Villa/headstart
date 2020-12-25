@@ -1,6 +1,18 @@
+## Purpose
+The purpose of this application was to help with the Head Start organization, at Dominican University, on handling their student intern timesheets and administrators reports. The timesheets and reports are handled manually, and as a way to help, this application was to virtually manipulate their data. Initially, the application was a capstone project in order to graduate college, unfortunatley, the application went unfinished as the final result. My goal when I, Jonathan Villa, after graduating, is to complete this web application for the Head Start organization, at Dominican University. 
+
+## Tools
+Front-end: ReactJS, Redux, Material-UI
+Back-end: NodeJS, ExpressJS, MongoDB
+Authenticaion: JWT-Tokens, PassportJS
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### 'yarn install || npm install'
+
+This will install any missing dependencies upon cloning the application.
 
 ### `yarn start`
 
