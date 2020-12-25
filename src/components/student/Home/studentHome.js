@@ -25,8 +25,7 @@ function StudentHome() {
       approvedBy: "",
     },
   ];
-
-  console.log(data);
+  
   useEffect(() => {
     setData({
       log: getQuickLogData,

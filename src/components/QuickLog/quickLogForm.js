@@ -62,19 +62,20 @@ function QuickLogForm() {
   const handleQuickLogSubmit = (e) => {
     e.preventDefault();
 
+    const payload = {
+      grant: grant,
+      date: date,
+      site: site,
+      workPerformed: workPerformed,
+      timeIn: timeIn % 12 || 12,
+      timeOut: timeOut,
+      dateOfSign: dateOfSign,
+      preceptorSignature: signatureImage,
+      id: userID,
+    }
+
     axios
-      .post("http://localhost:4000/api/quicklog", {
-        grant: grant,
-        date: date,
-        site: site,
-        workPerformed: workPerformed,
-        timeIn: timeIn % 12 || 12,
-        timeOut: timeOut,
-        dateOfSign: dateOfSign,
-        preceptorSignature: signatureImage,
-        id: userID,
-      })
-      .then((res) => console.log(res))
+      .post("http://localhost:4000/api/quicklog", payload )
       .catch((err) => console.log(err));
 
     resetGrant();

@@ -8,7 +8,7 @@ const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case userActionType.LOGIN_REQUEST:
       return { isLoggingIn: true };
-    case userActionType.LOGIN_SUCCESS: // type of action
+    case userActionType.LOGIN_LOADING: // type of action
       return {
         ...state,
         isAuthenticated: true,
@@ -17,7 +17,7 @@ const loginReducer = (state = initialState, action) => {
         role: action.payload.role // users submitted payload
       };
     case userActionType.LOGIN_FAILURE:
-      return {};
+      return {isLoggingIn: false};
     default:
       return state;
   }

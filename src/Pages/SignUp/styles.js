@@ -28,5 +28,13 @@ export const useFormStyles = makeStyles((theme) => ({
   submitBtn: {
     margin: theme.spacing(2, 0, 2),
   },
+  progressBar: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+
+
 }));
 

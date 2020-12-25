@@ -1,9 +1,11 @@
 import jwtDecode from "jwt-decode";
 import setAuthToken from "./setAuthToken";
-import { login, register } from "./actions";
+import { login, register } from "./";
 import { loginPost, registerPost } from "../http";
 import { alertSuccess, alertError } from "../actions/alertAction";
 import { getUser } from "./";
+import { registerFailure } from "./Register/register";
+import { loginFailure } from "./Login/login";
 
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user).then((res) => {
@@ -15,6 +17,7 @@ export const registerAuth = (user, history) => (dispatch) => {
     }
     if (res.status === 400) {
       console.log(res.data);
+      dispatch(registerFailure())
       dispatch(alertError(res.data.message, res.data.email));
     }
   });
@@ -23,25 +26,23 @@ export const registerAuth = (user, history) => (dispatch) => {
 export const loginAuth = (user, history, from) => (dispatch) => {
   loginPost(user)
     .then((res) => {
-      const { token } = res.data;
-
-      // store token in localstorage
-      localStorage.setItem("jwt-token", token);
-      setAuthToken(token);
-
-      const decodeToken = jwtDecode(token);
-      // redirect from login -> home
-      history.push(from);
-
-     
-      // store the token in redux state
-      dispatch(login(decodeToken))
-
-      dispatch(alertSuccess("Sucessfully logged in!"));
-      dispatch(getUser(decodeToken));
+      if (res) {
+        const { token } = res.data;
+        // store token in localstorage
+        localStorage.setItem("jwt-token", token);
+        setAuthToken(token);
+        const decodeToken = jwtDecode(token);
+        // redirect from login -> home
+        history.push(from);
+        // store the token in redux state
+        dispatch(login(decodeToken));
+        dispatch(alertSuccess("Sucessfully logged in!"));
+      }
     })
     .catch((res) => {
-      console.log(res);
-      dispatch(alertError(""));
+      const {data} = res.response
+      console.log(data)
+      dispatch(loginFailure())
+      dispatch(alertError(data.message));
     });
 };

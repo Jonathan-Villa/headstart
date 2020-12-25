@@ -6,7 +6,7 @@ import { alertError } from "../actions";
 const loginPost = (user) =>{
   return axios
     .post("http://localhost:4000/api/login", user)
-    .then((res) => res).catch((err)=> console.log(err.response.data)) // return response
+    .then((res) => res)
 
 };
 

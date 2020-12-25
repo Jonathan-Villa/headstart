@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
 import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { registerAuth } from "../../redux/actions";
+import { registerAuth, registerRequest } from "../../redux/actions";
 import { RadioGroup } from "../../components/RadioGroup";
-import { Snackbar } from "../../components/Alerts";
+import {LinearProgress} from "@material-ui/core"
 
 function Signup({ history }) {
   const dispatch = useDispatch();
@@ -20,6 +20,9 @@ function Signup({ history }) {
   const [email, bindEmail, resetEmail] = useUserInput("");
   const [userName, bindUserName, resetUserName] = useUserInput("");
   const [password, bindPassword, resetPassword] = useUserInput("");
+  const registerRequested = useSelector((state) => state.registerReducer.registering)
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault(); // e or "event" -> upon submitting, prevent the page from refreshing
@@ -32,8 +35,12 @@ function Signup({ history }) {
       title: title,
       password: password,
     };
+    dispatch(registerRequest())
 
-    dispatch(registerAuth(user, history)); // registers the user
+    setTimeout(()=> {
+      dispatch(registerAuth(user, history));
+    },2000)
+     // registers the user
 
     // clear the inputs when the user submits
     resetEmail();
@@ -50,8 +57,10 @@ function Signup({ history }) {
   return (
     <M.Container className={styles.root}>
       <M.Container className={styles.subroot}>
-        {alertMessage.type === "error" ? <Snackbar /> : null}
 
+        <div className={styles.progressBar}>
+        {registerRequested ? <LinearProgress color="primary" variant="indeterminate" /> : null}
+        </div>
         <form className={styles.form} method="POST" onSubmit={handleSubmit}>
           <M.Typography className={styles.heading} align="center" variant="h4">
             Sign Up
@@ -65,12 +74,7 @@ function Signup({ history }) {
               required
               autoFocus
               fullWidth
-              helperText={
-                alertMessage.email === email
-                  ? "This email is already registered"
-                  : false
-              }
-              error={alertMessage.type === "error" ? true : false}
+              error={alertMessage.type ===  "error" ? true : false}
               id="email"
               label="Email Address"
               name="email"

@@ -4,9 +4,9 @@ import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
 import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAuth, getUser } from "../../redux/actions";
+import { loginAuth, getUser, loginRequest } from "../../redux/actions";
 import { Snackbar } from "../../components/Alerts";
-
+import {LinearProgress} from "@material-ui/core"
 function Login({ history }) {
   const styles = useFormStyles();
   const location = useLocation();
@@ -19,6 +19,7 @@ function Login({ history }) {
   const isRegistered = useSelector(
     (state) => state.registerReducer.registerSuccessful
   );
+  const isLoggingIn = useSelector((state)=> state.loginReducer.isLoggingIn)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ function Login({ history }) {
       email: email,
       password: password,
     };
+    dispatch(loginRequest())
     dispatch(loginAuth(userLogin, history, from)); // login the user
     // clear the inputs when the user submits
     resetEmail();
@@ -34,7 +36,7 @@ function Login({ history }) {
   };
 
   const handleLinkClick = () => {
-    history.push('/signup')
+    history.push("/signup");
   };
 
   return (

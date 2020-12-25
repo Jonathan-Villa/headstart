@@ -20,9 +20,6 @@ function ViewCurrent() {
     });
   }, [timeSheetData]);
 
-
-
-
   return (
     <div>
       <Paper className={styles.paper} elevation={3}>

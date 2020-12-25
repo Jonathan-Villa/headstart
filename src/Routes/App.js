@@ -9,12 +9,16 @@ import {
   Redirect
 } from "react-router-dom";
 import { Navbar } from "../components/NavBar";
+import {useSelector} from "react-redux"
 
+import {Snackbar} from "../components/Alerts/snackbar"
 
 function App(props) {
-
+  const alertMessage = useSelector((state) => state.alertReducer);
   return (
     <Router>
+      {alertMessage.type  === "error" ? <Snackbar/> : null }
+      {alertMessage.type  === "success" ? <Snackbar/> : null }
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
