@@ -4,7 +4,9 @@ import {
   registerReducer,
   alertReducer,
   quickLogReducer,
-  timeSheetReducer,userReducer
+  timeSheetReducer,
+  userReducer,
+  adminTimeSheetReducer,
 } from "../../reducers";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -17,14 +19,19 @@ const rootReducer = combineReducers({
   userReducer,
   alertReducer,
   quickLogReducer,
-
+  adminTimeSheetReducer,
 });
 
 const reducer = persistReducer(
   {
     key: "root",
     storage,
-    blacklist: ["alertReducer", "registerReducer", "quickLogReducer", "loginReducer"],
+    blacklist: [
+      "alertReducer",
+      "registerReducer",
+      "quickLogReducer",
+      "loginReducer",
+    ],
 
     transforms: [
       encryptTransform({

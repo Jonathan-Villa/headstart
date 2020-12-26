@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useStyles } from "../styles";
+import { useStyles } from "./styles";
 import { Paper } from "@material-ui/core";
 import { DataTable } from "../../DataTable/datatable";
 import axios from "axios";
@@ -8,9 +8,11 @@ function AdminReports() {
   const styles = useStyles();
   const [reportsData, setReportsData] = useState([]);
 
+
   useEffect(() => {
     const getData = () => {
-      axios.get("http://localhost:4000/api/request-user-logs").then((res) =>
+      setTimeout(()=> {
+        axios.get("http://localhost:4000/api/request-user-logs").then((res) =>
         setReportsData(
           res.data.map((m, key) => ({
             id: key,
@@ -23,8 +25,8 @@ function AdminReports() {
             preceptorSignature: m["preceptorSignature"],
             dateOfSign: m["dateOfSign"],
           }))
-        )
-      );
+        ));
+      },[2000])
     };
 
     getData();
@@ -53,11 +55,12 @@ function AdminReports() {
 
   return (
     <div className={styles.root} >
-      <Paper  elevation={2}>
+      <Paper  elevation={0} className={styles.paper}>
         <DataTable
           rows={reportsData || defaultRows}
           columns={columns}
           size={20}
+          isLoading={reportsData !== [] ? true : false}
         />
       </Paper>
     </div>
