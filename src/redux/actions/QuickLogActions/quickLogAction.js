@@ -15,9 +15,9 @@ export const quickLogLoading = () => {
   };
 };
 
-export const quickLogFail = () => {
+export const quickLogError = () => {
   return {
-    type: userActionType.QUICK_LOG_POST_FAIL,
+    type: userActionType.QUICK_LOG_POST_ERROR,
     isQuickLogLoading: false,
   };
 };

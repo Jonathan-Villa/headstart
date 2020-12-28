@@ -20,7 +20,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import {useDispatch} from "react-redux"
-import { quickLogFail, alertError } from "../../redux/actions";
+import { quickLogError, alertError } from "../../redux/actions";
 
 
 function QuickLogForm() {
@@ -30,13 +30,12 @@ function QuickLogForm() {
   const styles = useStyles();
   const clearPad = useRef();
   const dispatch = useDispatch()
-  const [dateOfSign, bindDateOfSign, resetDateOfSign] = useUserInput(
-    new Intl.DateTimeFormat("en-US", {
+  const dateOfSign = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
     }).format(today)
-  );
+
 
   const [logData, setLogData] = useState({
     grant: "HS",
@@ -80,7 +79,7 @@ function QuickLogForm() {
       .post("http://localhost:4000/api/quicklog", logData)
       .catch((err) => {
           if(err){
-            dispatch(quickLogFail())
+            dispatch(quickLogError())
             dispatch(alertError("Your QuickLog failed!"))
           }
       });

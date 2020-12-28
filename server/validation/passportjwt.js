@@ -11,8 +11,6 @@ options.secretOrKey = process.env.SECRET_ID_JWT;
 module.exports = (passport) => {
   passport.use(
     new JWTStrategy(options, (jwt_payload, done) => {
-      console.log(jwt_payload);
-
       // validates users token
       User.findById(jwt_payload.id)
         .then((user) => {

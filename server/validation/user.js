@@ -51,8 +51,13 @@ router.post("/signup", async (req, res) => {
         });
       });
     });
-  }else{
-    res.status(400).json({error:"error", message:"An error has occured with registering!"})
+  } else {
+    res
+      .status(400)
+      .json({
+        error: "error",
+        message: "An error has occured with registering!",
+      });
   }
 });
 
@@ -81,6 +86,9 @@ router.post("/login", async (req, res) => {
       }
       return {
         id: user.id,
+        name: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
         username: user.username,
         role: user.title,
       };
@@ -119,7 +127,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/quicklog", async (req, res) => {
   const { id } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const {
     grant,
     date,
@@ -161,7 +169,7 @@ router.get("/timesheet", async (req, res) => {
 });
 
 router.get("/request-user-logs", async (req, res) => {
-  const userLogs = await TimeSheet.find({});
+  const userLogs = await TimeSheet.find({})
 
   res.status(200).json(userLogs);
 });

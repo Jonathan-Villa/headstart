@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { AdminHome } from "../../components/Admin";
 import { StudentHome } from "../../components/Student";
-import { withRouter,useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Paper } from "@material-ui/core";
 import { ImCalendar } from "react-icons/im";
 import { useStyles } from "./styles";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import {  timeSheet, timeSheetFailure } from "../../redux/actions";
+import { useSelector } from "react-redux";
 
 function Home() {
   const styles = useStyles();
   const role = useSelector((state) => state.userReducer.role);
-  const userID = useSelector((state) => state.userReducer.id);
   const today = Date.now();
   const [user, setUser] = useState();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const getRole = () => {
@@ -25,33 +21,6 @@ function Home() {
     getRole();
   }, [role]);
 
-
-  useEffect(() => {
-    const fetchQuickLogs = () => {
-      axios
-        .get("http://localhost:4000/api/timesheet")
-        .then(({ data }) => data.filter((index) =>  role === "admin" ?  true  :  index.user === userID))
-        .then((res) =>
-          dispatch(
-            timeSheet(
-              res.map((m, key) => ({
-                id: key,
-                grant: m["grant"],
-                date: m["date"],
-                site: m["site"],
-                workPerformed: m["workPerformed"],
-                timeIn: m["timeIn"],
-                timeOut: m["timeOut"],
-                preceptorSignature: m["preceptorSignature"],
-                dateOfSign: m["dateOfSign"],
-              }))
-            )
-          )
-        )
-        .catch((err) => dispatch(timeSheetFailure()));
-    };
-    fetchQuickLogs();
-  }, [dispatch, userID,role]);
 
   return (
     <div className="main-container">
@@ -70,6 +39,7 @@ function Home() {
           <h3 className="today-h3">Today</h3>
         </div>
       </Paper>
+
 
       {user === "admin" ? <AdminHome /> : <StudentHome />}
     </div>

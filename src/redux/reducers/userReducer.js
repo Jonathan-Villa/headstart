@@ -17,13 +17,14 @@ export const userReducer = (state = initialState, action) => {
     case userActionType.GET_USER_SUCCESS: {
       return {
         ...state,
+        isUserLoading: false,
         isAuthenticated: true,
         payload: action.payload,
         id: action.payload.id,
         role: action.payload.role,
       };
     }
-    case userActionType.GET_USER_FAILURE: {
+    case userActionType.GET_USER_ERROR: {
       return {
         isAuthenticated: false,
       };

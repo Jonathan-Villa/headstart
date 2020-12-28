@@ -1,15 +1,17 @@
 import {makeStyles} from "@material-ui/core"
 
 
-export const useStyles = makeStyles(()=> ({
+export const useStyles = makeStyles((theme)=> ({
     root: { 
         backgroundColor: "#ffff",
-        position:"fixed",
+        position:"static",
         height : "100%",
         width: "100%",
     },
     paper:{
         position:"static",
-        width:"80%",
+        width:"100%",
+        height:"100%",
+        padding:"20px"
     }
 }))

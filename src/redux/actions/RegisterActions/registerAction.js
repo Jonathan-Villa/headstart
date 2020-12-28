@@ -10,6 +10,6 @@ export const registerRequest = () => {
   return { type: userActionType.REGISTER_LOADING, registering: true };
 };
 
-export const registerFailure = ()=> {
-    return { type: userActionType.REGISTER_FAILURE, registering: false}
+export const registerError = ()=> {
+    return { type: userActionType.REGISTER_ERROR, registering: false}
 }

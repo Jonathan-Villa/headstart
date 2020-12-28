@@ -1,4 +1,9 @@
 import { userActionType } from "../Actiontypes";
+
+export const loginLoading = () => {
+  return { type: userActionType.LOGIN_LOADING, isLoggingIn: true };
+};
+
 export const login = (user) => {
   return {
     type: userActionType.LOGIN_SUCCESS,
@@ -6,10 +11,6 @@ export const login = (user) => {
   };
 };
 
-export const loginFailure = ()=> {
-    return { type: userActionType.LOGIN_FAILURE, isLoggingIn:false}
-}
-
-export const loginRequest = () => {
-  return { type: userActionType.LOGIN_LOADING, isLoggingIn: true };
+export const loginError = () => {
+  return { type: userActionType.LOGIN_ERROR, isLoggingIn: false };
 };

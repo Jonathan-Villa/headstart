@@ -2,35 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { Paper } from "@material-ui/core";
 import { DataTable } from "../../DataTable/datatable";
-import axios from "axios";
+import {useSelector} from "react-redux"
 
 function AdminReports() {
   const styles = useStyles();
-  const [reportsData, setReportsData] = useState([]);
-
-
-  useEffect(() => {
-    const getData = () => {
-      setTimeout(()=> {
-        axios.get("http://localhost:4000/api/request-user-logs").then((res) =>
-        setReportsData(
-          res.data.map((m, key) => ({
-            id: key,
-            grant: m["grant"],
-            date: m["date"],
-            site: m["site"],
-            workPerformed: m["workPerformed"],
-            timeIn: m["timeIn"],
-            timeOut: m["timeOut"],
-            preceptorSignature: m["preceptorSignature"],
-            dateOfSign: m["dateOfSign"],
-          }))
-        ));
-      },[2000])
-    };
-
-    getData();
-  }, []);
+  const rows = useSelector((state)=> state.adminTimeSheetReducer.payload)
+  const isLoading = useSelector((state)=> state.adminTimeSheetReducer.adminLogsIsLoading)
+  const error = useSelector((state)=> state.adminTimeSheetReducer.adminLogsError)
 
   const columns = [
     { field: "grant", headerName: "Grant", width: 90 },
@@ -43,24 +21,15 @@ function AdminReports() {
     { field: "dateOfSign", headerName: "Date of Sign", width: 115 },
   ];
 
-  const defaultRows = [
-    {
-      id: 1,
-      date: "",
-      firstName: "",
-      hours: "",
-      grant: "",
-    },
-  ];
-
   return (
     <div className={styles.root} >
       <Paper  elevation={0} className={styles.paper}>
         <DataTable
-          rows={reportsData || defaultRows}
+          rows={rows? rows : []}
           columns={columns}
-          size={20}
-          isLoading={reportsData !== [] ? true : false}
+          size={10}
+          error={error}
+          isLoading={isLoading}
         />
       </Paper>
     </div>

@@ -6,6 +6,8 @@ import {rows, columns} from "./tableAttributes"
 
 function ViewAll() {
   const styles = useStylesViewAll()
+
+
   return (
     <div>
       <Paper className={styles.paper} elevation={3}>

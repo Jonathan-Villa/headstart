@@ -11,7 +11,7 @@ const quickLogReducer = (state = {}, action) => {
       return {
         isQuickLogLoading: true
       };
-    case userActionType.QUICK_LOG_POST_FAIL:
+    case userActionType.QUICK_LOG_POST_ERROR:
       return {
         isQuickLogLoading: false
       }

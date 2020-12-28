@@ -11,7 +11,7 @@ const loginReducer = (state = {}, action) => {
         isLoggingInLoading:false, 
 
       };
-    case userActionType.LOGIN_FAILURE:
+    case userActionType.LOGIN_ERROR:
       return {};
     default:
       return state;

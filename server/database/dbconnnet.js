@@ -19,11 +19,12 @@ const timesheetSchema = new Schema({
   workPerformed: { type: String, required: true },
   timeIn: { type: String, required: true },
   timeOut: { type: String, required: true },
-
   preceptorSignature: { type: String, required: true },
   dateOfSign: { type: String, required: true },
-  user:{type: mongoose.Schema.Types.ObjectId, ref: 'users'} 
+  user:{type: mongoose.Schema.Types.ObjectId, ref: 'users'}
 });
+
+
 
 const dbURL = process.env.DATEBASE_URL;
 const User = new mongoose.model("users", userSchema);

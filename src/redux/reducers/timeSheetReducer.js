@@ -16,8 +16,8 @@ export const timeSheetReducer = (state = {}, action) => {
       };
     }
    
-    case userActionType.TIME_SHEET_FAILURE: {
-      return { isTimeSheetLoading: false };
+    case userActionType.TIME_SHEET_ERROR: {
+      return { isTimeSheetError: true };
     }
     default: {
       return {};

@@ -4,7 +4,7 @@ import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
 import { useUserInput } from "../../customTools/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAuth, loginRequest, getUserLoading } from "../../redux/actions";
+import { loginAuth, loginLoading, userAuthLoading } from "../../redux/actions";
 import { Snackbar } from "../../components/Alerts";
 import { LinearProgressBar } from "../../components";
 function Login({ history }) {
@@ -30,8 +30,8 @@ function Login({ history }) {
       email: email,
       password: password,
     };
-    dispatch(loginRequest());
-    dispatch(getUserLoading());
+    dispatch(loginLoading());
+    dispatch(userAuthLoading());
     dispatch(loginAuth(userLogin, history, from)); // login the user
     // clear the inputs when the user submits
     resetEmail();

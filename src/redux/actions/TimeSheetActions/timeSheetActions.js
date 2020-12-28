@@ -14,9 +14,9 @@ export const timeSheet = (data) => {
   };
 };
 
-export const timeSheetFailure = () => {
+export const timeSheetError = () => {
   return {
-    type:userActionType.TIME_SHEET_FAILURE,
-    isTimeSheetLoading: false,
+    type:userActionType.TIME_SHEET_ERROR,
+    isTimeSheetError: true,
   };
 };

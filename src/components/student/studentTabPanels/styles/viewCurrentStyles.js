@@ -1,9 +1,15 @@
 import {makeStyles} from "@material-ui/core"
 
 export const useStylesCurrent = makeStyles(()=> ({
-
+    root:{
+        width:"100%",
+        height:"100%",
+        backgroundColor:"#ffff"
+    },
     paper:{
-        width:"90%"
+        width:"90%",
+        height:"100%",
+        backgroundColor:"#ffff"
     }
 
 }))

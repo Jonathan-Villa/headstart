@@ -20,7 +20,7 @@ body{
   height: 100vh;
   width: auto;
   position: static;
-
+  background-color: #ffff;
   display: flex;
   flex-direction: column;
 

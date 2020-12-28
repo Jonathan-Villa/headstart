@@ -3,9 +3,9 @@ import setAuthToken from "./setAuthToken";
 import { login, register } from "./";
 import { loginPost, registerPost } from "../http";
 import { alertSuccess, alertError } from "./AlertActions/alertAction";
-import { registerFailure } from "./RegisterActions/registerAction";
-import { loginFailure } from "./LoginActions/loginAction";
-import { getUserFailure, getUserSucess } from "./GetUserAction/getUserAction";
+import { registerError } from "./RegisterActions/registerAction";
+import { loginError } from "./LoginActions/loginAction";
+import { userAuthError, userAuth } from "./GetUserAction/getUserAction";
 
 export const registerAuth = (user, history) => (dispatch) => {
   registerPost(user).then((res) => {
@@ -17,7 +17,7 @@ export const registerAuth = (user, history) => (dispatch) => {
     }
     if (res.status === 400) {
       console.log(res.data);
-      dispatch(registerFailure());
+      dispatch(registerError());
       dispatch(alertError(res.data.message, res.data.email));
     }
   });
@@ -34,7 +34,7 @@ export const loginAuth = (user, history, from) => (dispatch) => {
         const decodeToken = jwtDecode(token);
         // redirect from login -> home
         history.push(from);
-        dispatch(getUserSucess(decodeToken));
+        dispatch(userAuth(decodeToken));
         dispatch(login(decodeToken));
 
         dispatch(alertSuccess("Sucessfully logged in!"));
@@ -42,8 +42,8 @@ export const loginAuth = (user, history, from) => (dispatch) => {
     })
     .catch((res) => {
       const { data } = res.response;
-      dispatch(loginFailure());
-      dispatch(getUserFailure());
+      dispatch(loginError());
+      dispatch(userAuthError());
       dispatch(alertError(data.message));
     });
 };

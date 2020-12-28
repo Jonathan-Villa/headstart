@@ -42,7 +42,7 @@ export const useNavStyles = makeStyles((theme) => ({
   listItem: {
     "&:hover": {
       
-      backgroundColor: "#adb5bd",
+      backgroundColor: "#495057",
     },
   },
   links: {

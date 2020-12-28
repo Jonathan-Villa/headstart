@@ -4,17 +4,19 @@ export const adminTimeSheetReducer = (state = {}, action) => {
   switch (action.type) {
     case userActionType.ADMIN_TIMESHEET_LOADING: {
       return {
-        adminTimeSheetIsLoading: true,
+        adminLogsIsLoading: true,
+        payload: []
       };
     }
     case userActionType.ADMIN_TIMESHEET_SUCCESS: {
       return {
         ...state,
         payload: action.payload,
+        adminLogsIsLoading: false
       };
     }
-    case userActionType.ADMIN_TIMESHEET_FAILURE: {
-      return { adminTimeSheetFailure: true };
+    case userActionType.ADMIN_TIMESHEET_ERROR: {
+      return { adminLogsError: true };
     }
 
     default: {
