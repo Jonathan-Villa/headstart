@@ -2,20 +2,18 @@
 // To run the server with automatic updates use --- nodemon server.js
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 const passport = require("passport");
 const bodyparser = require("body-parser"); // allows to parse any incoming request
 const mongoose = require("mongoose");
 const { dbURL } = require("./Database/dbconnnet");
 const user = require("./Validation/user");
 const app = express();
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-const PORT = 4000;
-require('dotenv').config();
+require("dotenv").config();
 
 let corsOptions = {
   // middleware
-  Origin: process.env.PORT ,
+  Origin: process.env.PORT,
   optionsSuccessStatus: 200,
 };
 
@@ -26,22 +24,17 @@ mongoose.connect(dbURL, {
   useFindAndModify: false,
 });
 
- // app will take instance of express// instead of 'express.get || express.send'
+// app will take instance of express// instead of 'express.get || express.send'
 require("./validation/passportjwt")(passport);
+const buildPath = path.join(__dirname, '..', 'build');
+app.use(express.static(buildPath));
+
 
 app.use(cors(corsOptions));
 app.use(passport.initialize()); // Initailize
 app.use(bodyparser.urlencoded({ extended: false })); // middleware
 app.use(bodyparser.json()); // parses any request to JSON from client
 app.use("/api", user);
-
-io.on('connect', (socket)=>{
-  socket.on("/signup", ({name, room})=> {
-    console.log(room)
-  })
-
-
-})
 
 app.get("/api", (req, res) => {
   // home path
@@ -52,13 +45,6 @@ app.get("/api/login", (req, res) => {
   res.send(`${req.body}`);
 });
 
-
-http.listen(PORT, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log("Server is up!");
 });
-
-
-
-io.on('connection', (socket)=> {
-  console.log("connected")
-})

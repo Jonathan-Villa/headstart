@@ -11,7 +11,6 @@ import { GrView } from "react-icons/gr";
 import { useStyles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { DataTable } from "../../DataTable/datatable";
-import { ColDef } from "@material-ui/data-grid/";
 import axios from "axios";
 import {
   adminTimeSheetError,
@@ -23,7 +22,6 @@ import {
 function AdminHome() {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const studentName = useSelector((state)=> state.userReducer.name)
   const rows = useSelector((state) => state.adminTimeSheetReducer.payload);
   const [click, setClick] = useState(false);
   const [displaySign, setDisplaySign] = useState();

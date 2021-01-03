@@ -52,12 +52,10 @@ router.post("/signup", async (req, res) => {
       });
     });
   } else {
-    res
-      .status(400)
-      .json({
-        error: "error",
-        message: "An error has occured with registering!",
-      });
+    res.status(400).json({
+      error: "error",
+      message: "An error has occured with registering!",
+    });
   }
 });
 
@@ -169,9 +167,13 @@ router.get("/timesheet", async (req, res) => {
 });
 
 router.get("/request-user-logs", async (req, res) => {
-  const userLogs = await TimeSheet.find({})
 
-  res.status(200).json(userLogs);
+  const userLogs = await TimeSheet.find({});
+
+  if(userLogs){
+    res.status(200).json(userLogs); 
+  }
+  
 });
 
 module.exports = router;
