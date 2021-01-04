@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import { Navbar } from "../components/NavBar";
 import { useSelector } from "react-redux";
-import { Snackbar } from "../components/Alerts/snackbar";
+import { Snackbar } from "../components";
 
 function App(props) {
   const alertMessage = useSelector((state) => state.alertReducer);

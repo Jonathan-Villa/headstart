@@ -28,7 +28,7 @@ mongoose.connect(dbURL, {
 // app will take instance of express// instead of 'express.get || express.send'
 require("./validation/passportjwt")(passport);
 
-app.use(express.static(buildPath));
+app.use(app.static(buildPath));
 
 
 app.use(cors(corsOptions));
