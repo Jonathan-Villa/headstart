@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd headstart && yarn install && yarn run build"
+    "build": "webpack"
   },
-
+  "heroku-run-build-script": true,
   "author": "Jonathan Villa, Bob Barr, Robert Oliver, Joseph Nelson",
   "license": "ISC",
   "dependencies": {
