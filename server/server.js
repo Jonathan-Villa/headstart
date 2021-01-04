@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const { dbURL } = require("./Database/dbconnnet");
 const user = require("./Validation/user");
 const app = express();
+const buildPath = path.join(__dirname, '..', 'build');
 require("dotenv").config();
 
 let corsOptions = {
@@ -26,7 +27,7 @@ mongoose.connect(dbURL, {
 
 // app will take instance of express// instead of 'express.get || express.send'
 require("./validation/passportjwt")(passport);
-const buildPath = path.join(__dirname, '..', 'build');
+
 app.use(express.static(buildPath));
 
 

@@ -7,6 +7,9 @@
     "start": "node server.js",
     "heroku-postbuild": "cd headstart && yarn install && yarn run build"
   },
+  "engines": {
+    "node": "14.15.3"
+  },
   "author": "Jonathan Villa, Bob Barr, Robert Oliver, Joseph Nelson",
   "license": "ISC",
   "dependencies": {
