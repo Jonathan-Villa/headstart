@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "run-p server start"
+    "heroku-postbuild": "cd headstart && yarn install && yarn run build"
   },
   "author": "Jonathan Villa, Bob Barr, Robert Oliver, Joseph Nelson",
   "license": "ISC",
