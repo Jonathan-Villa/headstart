@@ -5,7 +5,7 @@ const User = mongoose.model("users");
 require('dotenv').config();
 const options = {};
 
-options.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+options.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken('jwt');
 options.secretOrKey = process.env.SECRET_ID_JWT;
 
 module.exports = (passport) => {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DataTable } from "../../DataTable";
 import { QuickLogForm } from "../../QuickLog";
 import { useStyles } from "./styles";
 import { Paper } from "@material-ui/core";
-import axios from "axios";
 import {
   timeSheet,
   timeSheetError,
@@ -29,34 +28,36 @@ function StudentHome() {
     { field: "approvedBy", headerName: "Approved By", width: 130 },
   ];
   useEffect(() => {
-    const fetchQuickLogs = () => {
+    const fetchQuickLogs = async () => {
       dispatch(timeSheetLoading());
-      axios
-        .get("http://localhost:4000/api/timesheet")
-        .then(({ data }) =>
-          data.filter((index) =>
-            role === "admin" ? true : index.user === userID
-          )
+
+      const fetchAPI = await fetch(
+        "http://localhost:4000/api/timesheet"
+      ).catch((err) => dispatch(timeSheetError()));
+
+      const data = await fetchAPI.json();
+
+      const filterID = data.filter((index) =>
+        role === "admin" ? true : index.user === userID
+      );
+
+      dispatch(
+        timeSheet(
+          filterID.map((m, key) => ({
+            id: key,
+            grant: m["grant"],
+            date: m["date"],
+            site: m["site"],
+            workPerformed: m["workPerformed"],
+            timeIn: m["timeIn"],
+            timeOut: m["timeOut"],
+            preceptorSignature: m["preceptorSignature"],
+            dateOfSign: m["dateOfSign"],
+          }))
         )
-        .then((res) =>
-          dispatch(
-            timeSheet(
-              res.map((m, key) => ({
-                id: key,
-                grant: m["grant"],
-                date: m["date"],
-                site: m["site"],
-                workPerformed: m["workPerformed"],
-                timeIn: m["timeIn"],
-                timeOut: m["timeOut"],
-                preceptorSignature: m["preceptorSignature"],
-                dateOfSign: m["dateOfSign"],
-              }))
-            )
-          )
-        )
-        .catch((err) => dispatch(timeSheetError()));
+      );
     };
+
     fetchQuickLogs();
   }, [dispatch, userID, role]);
 

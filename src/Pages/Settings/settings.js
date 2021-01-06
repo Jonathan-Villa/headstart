@@ -5,6 +5,7 @@ import { StudentSettings } from "../../components/Student";
 import { AdminSettings } from "../../components/Admin";
 import { Paper } from "@material-ui/core";
 import { useStyles } from "./styles";
+import { withRouter } from "react-router-dom";
 
 function Settings() {
   const isAdminRole = useSelector((state) => state.userReducer.role);
@@ -26,5 +27,5 @@ function Settings() {
     </div>
   );
 }
-
+export default withRouter(Settings);
 export { Settings };

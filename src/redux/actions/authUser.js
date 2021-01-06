@@ -8,7 +8,9 @@ import { loginError } from "./LoginActions/loginAction";
 import { userAuthError, userAuth } from "./GetUserAction/getUserAction";
 
 export const registerAuth = (user, history) => (dispatch) => {
-  registerPost(user).then((res) => {
+  registerPost(user).then(async (res) => {
+    const data = await res.json();
+
     // registered successfully
     if (res.status === 200) {
       dispatch(register());
@@ -25,9 +27,12 @@ export const registerAuth = (user, history) => (dispatch) => {
 
 export const loginAuth = (user, history, from) => (dispatch) => {
   loginPost(user)
-    .then((res) => {
+    .then(async (res) => {
       if (res) {
-        const { token } = res.data;
+        const data = await res.json();
+
+        const token = data.token;
+
         // store token in localstorage
         localStorage.setItem("jwt-token", token);
         setAuthToken(token);
@@ -41,9 +46,10 @@ export const loginAuth = (user, history, from) => (dispatch) => {
       }
     })
     .catch((res) => {
-      const { data } = res.response;
+      const data = res.response;
       dispatch(loginError());
       dispatch(userAuthError());
-      dispatch(alertError(data.message));
+      dispatch(alertError(data));
     });
 };
+

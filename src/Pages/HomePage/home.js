@@ -21,7 +21,6 @@ function Home() {
     getRole();
   }, [role]);
 
-
   return (
     <div className="main-container">
       <Paper className={styles.paper}>
@@ -40,11 +39,10 @@ function Home() {
         </div>
       </Paper>
 
-
       {user === "admin" ? <AdminHome /> : <StudentHome />}
     </div>
   );
 }
 
+export default withRouter(Home)
 export { Home };
-export default withRouter(Home);

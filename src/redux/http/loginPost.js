@@ -1,8 +1,13 @@
-import axios from "axios";
 
 // post request for user login
 const loginPost = (user) => {
-  return axios.post("http://localhost:4000/api/login", user).then((res) => res);
+  console.log()
+  return fetch(
+    "api/login",
+    { method: "POST" ,   headers: {
+      'Content-Type': 'application/json',
+    }, body:JSON.stringify(user)}
+  ).then((res) => res);
 };
 
 export { loginPost };

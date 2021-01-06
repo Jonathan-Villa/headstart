@@ -11,7 +11,6 @@ import { GrView } from "react-icons/gr";
 import { useStyles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { DataTable } from "../../DataTable/datatable";
-import axios from "axios";
 import {
   adminTimeSheetError,
   adminTimeSheetLoading,
@@ -32,33 +31,32 @@ function AdminHome() {
     (state) => state.adminTimeSheetReducer.adminLogsError
   );
   useEffect(() => {
-    const getData = () => {
+    const getData = async () => {
       dispatch(adminTimeSheetLoading());
-      axios
-        .get("http://localhost:4000/api/request-user-logs")
-        .then((res) =>
-          dispatch(
-            adminTimeSheet(
-              res.data.map((m, key) => ({
-                id: key,
-                name: m["name"],
-                grant: m["grant"],
-                date: m["date"],
-                site: m["site"],
-                workPerformed: m["workPerformed"],
-                timeIn: m["timeIn"],
-                timeOut: m["timeOut"],
-                preceptorSignature: m["preceptorSignature"],
-                dateOfSign: m["dateOfSign"],
-              }))
-            )
-          )
+      const fetchAPI = await fetch(
+        "http://localhost:4000/api/request-user-logs"
+      ).catch(
+        (err) =>
+          dispatch(adminTimeSheetError()) &&
+          dispatch(alertError("Error loading logs "))
+      );
+      const data = await fetchAPI.json();
+      dispatch(
+        adminTimeSheet(
+          data.map((m, key) => ({
+            id: key,
+            name: m["name"],
+            grant: m["grant"],
+            date: m["date"],
+            site: m["site"],
+            workPerformed: m["workPerformed"],
+            timeIn: m["timeIn"],
+            timeOut: m["timeOut"],
+            preceptorSignature: m["preceptorSignature"],
+            dateOfSign: m["dateOfSign"],
+          }))
         )
-        .catch(
-          (err) =>
-            dispatch(adminTimeSheetError()) &&
-            dispatch(alertError("Error loading logs "))
-        );
+      );
     };
     getData();
   }, [dispatch]);
@@ -117,3 +115,4 @@ function AdminHome() {
 }
 
 export { AdminHome };
+

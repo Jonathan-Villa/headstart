@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withRouter, useLocation } from "react-router-dom";
 import * as M from "@material-ui/core";
 import { useFormStyles } from "./styles";
@@ -33,7 +33,7 @@ function Login({ history }) {
     dispatch(loginLoading());
     dispatch(userAuthLoading());
     dispatch(loginAuth(userLogin, history, from)); // login the user
-    // clear the inputs when the user submits
+    // clear the inputs when the user submit
     resetEmail();
     resetPassword();
   };
@@ -113,5 +113,6 @@ function Login({ history }) {
     </M.Container>
   );
 }
-export { Login };
-export default withRouter(Login);
+
+export default withRouter(Login)
+export {Login} 

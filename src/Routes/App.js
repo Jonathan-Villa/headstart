@@ -1,5 +1,10 @@
 import React from "react";
-import { Home, TimeSheet, Reports, Settings, Login, Signup } from "../Pages";
+import { Home } from "../Pages/HomePage/home";
+import { TimeSheet } from "../Pages/TimeSheet/timesheet";
+import { Login } from "../Pages/Login/login";
+import { Signup } from "../Pages/SignUp/signup";
+import { Reports } from "../Pages/Reports/reports";
+import { Settings } from "../Pages/Settings/settings";
 import PrivateRoute from "./privateroute";
 import "./App.css";
 import {

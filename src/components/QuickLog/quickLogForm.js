@@ -15,13 +15,10 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { grants } from "./grants";
 import { useStyles } from "./styles";
 import "./styles.css";
-import { useUserInput } from "../../customTools/customHooks";
 import SignatureCanvas from "react-signature-canvas";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import { quickLogError, alertError } from "../../redux/actions";
-
 
 function QuickLogForm() {
   const [open, setOpen] = useState(false);
@@ -29,13 +26,12 @@ function QuickLogForm() {
   const today = Date.now();
   const styles = useStyles();
   const clearPad = useRef();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const dateOfSign = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(today)
-
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(today);
 
   const [logData, setLogData] = useState({
     grant: "HS",
@@ -74,17 +70,20 @@ function QuickLogForm() {
 
   const handleQuickLogSubmit = (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(logData));
+    fetch("http://localhost:4000/api/quicklog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(logData),
+    }).catch((err) => {
+      if (err) {
+        dispatch(quickLogError());
+        dispatch(alertError("Your QuickLog failed!"));
+      }
+    });
 
-    axios
-      .post("http://localhost:4000/api/quicklog", logData)
-      .catch((err) => {
-          if(err){
-            dispatch(quickLogError())
-            dispatch(alertError("Your QuickLog failed!"))
-          }
-      });
-
-    
     setLogData({
       grant: "HS",
       date: "",

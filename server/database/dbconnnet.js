@@ -26,7 +26,7 @@ const timesheetSchema = new Schema({
 
 
 
-const dbURL = process.env.DATEBASE_URL;
+const dbURL = process.env.MONGODB_URI;
 const User = new mongoose.model(process.env.DB_USER_COLLECTION, userSchema);
 const TimeSheet = new mongoose.model(process.env.DB_TIMESHEET_COLLECTION, timesheetSchema);
 
@@ -35,3 +35,4 @@ module.exports = {
   User,
   TimeSheet,
 };
+

@@ -1,9 +1,12 @@
-import axios from "axios";
-
 // register post request
 const registerPost = (user) => {
-  return axios
-    .post("http://localhost:4000/api/signup", user)
+  return fetch("http://localhost:4000/api/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
     .then((res) => res)
     .catch((err) => err.response);
 };

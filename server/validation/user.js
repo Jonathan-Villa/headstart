@@ -8,6 +8,8 @@ const { User, TimeSheet } = require("../Database/dbconnnet");
 router.post("/signup", async (req, res) => {
   const { firstName, lastName, email, username, title, password } = req.body;
 
+  console.log(req.body);
+
   const newUser = await User.findOne({
     $or: [{ email: email }, { username: username }],
   }).then(async (user) => {
@@ -92,6 +94,7 @@ router.post("/login", async (req, res) => {
       };
     });
 
+  console.log(payLoad);
   if (payLoad) {
     await jwt.sign(
       payLoad,
@@ -105,14 +108,15 @@ router.post("/login", async (req, res) => {
           });
         }
         if (payLoad.role === "admin") {
-          return res.json({
+          console.log(payLoad, token);
+          return res.status(200).send({
             success: true,
             token: `Bearer ${token}`,
             user: admin,
             id: user.id,
           });
         }
-        return res.json({
+        return res.status(200).send({
           success: true,
           token: `Bearer ${token}`,
           user: student,
@@ -125,7 +129,6 @@ router.post("/login", async (req, res) => {
 
 router.post("/quicklog", async (req, res) => {
   const { id } = req.body;
-  console.log(req.body);
   const {
     grant,
     date,
@@ -167,13 +170,11 @@ router.get("/timesheet", async (req, res) => {
 });
 
 router.get("/request-user-logs", async (req, res) => {
-
   const userLogs = await TimeSheet.find({});
 
-  if(userLogs){
-    res.status(200).json(userLogs); 
+  if (userLogs) {
+    res.status(200).json(userLogs);
   }
-  
 });
 
 module.exports = router;

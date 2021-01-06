@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { DataTable } from "../../DataTable";
-import { Paper } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { useStylesCurrent } from "./styles";
-import { rows, columns } from "./tableAttributes";
+import { columns } from "./tableAttributes";
 
 function ViewCurrent({ isLoading, error, payload }) {
   const styles = useStylesCurrent();
